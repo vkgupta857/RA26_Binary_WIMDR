@@ -1,0 +1,14 @@
+# ignore vscode files
+.vscode
+
+# ignore python dump
+__pycache__
+venv
+
+# ignore other files
+*.log
+*.pdf
+*.docx
+*.odt
+*.pptx
+*.ppt
