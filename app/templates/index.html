@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Welcome - Waste Management</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-md-8">
+            <h3>Welcome to Geo Tracking Software</h3>
+            <p>This app is the developed by <a href="/about" title="Know more about Vinod">Vinod Kumar Gupta</a> to
+                complete the assignment requirement asked by Kloudspot Inc.</p>
+            <p>The app demonstrates user authentication through <b>Google Maps API</b>.</p>
+        </div>
+        <div class="col-md-4">
+            <br>
+            <a href="/" title="Go to Login Page" class="btn btn-block btn-large btn-secondary">Go to
+                Login</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Technology Stack</h5>
+            <ul>
+                <li>MySQL</li>
+                <li>Python with Flask</li>
+                <li>Bootstrap 4.4</li>
+                <li>Passport.js</li>
+                <li>Google+ API (OAuth 2.0)</li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <h5>Requirements (must) for running the app</h5>
+            <ul>
+                <li><b>clientID</b> and <b>clientSecret</b> should be added in <code>/config/keys.js</code> at
+                    appropriate
+                    place.</li>
+                <li>App is running on at <b>http://localhost:3000</b>, as </li>
+                <li>MongoDB should be installed and running (at port <b>27017</b>) in the system.</li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <!-- <div class="col-md-4">
+            <img src="/static/images/column.jpg" class="img-fluid img-circle mb-2" height="50" width="200">
+        </div> -->
+        <div class="col-md-8">
+            <p class="text-center">
+                At 773kg per head, the country generates 12% of global MSW, approximately 239 million tonnes,
+                while only accounting for 4% of the world's population.
+                Availability of drone helps the municipal coorporation to keep track of waste.Automatic report
+                and waste management within 24 hours.
+            </p>
+        </div>
+        <div class="alert alert-secondary">
+            <b>"The only way to discover the limits of the possible is to go beyond them into the
+                impossible."</b>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

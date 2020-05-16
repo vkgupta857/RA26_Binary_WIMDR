@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Welcome - Waste Management</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class=jumbotron>
+        <form action="/confrim" method="post">
+            <p>Enter Report No.</p>
+            <input type="number" name="report">
+            <br>
+            <p>Enter Your Id</p>
+            <input type="number" name="id">
+            <br><br>
+            <input type="submit" value="Submit">
+
+        </form>
+    </div>
+</div>
+{% endblock %}

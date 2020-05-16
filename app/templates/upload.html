@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Upload - Waste Management</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    
+    <div class="jumbotron">
+        <div class="block">
+            <center>
+                <form action="/submit" method="post" enctype="multipart/form-data">
+                    <h3><b>Choose Your Current Location</b></h3>
+
+                    <button onclick="getLocation(event)">Click Here</button>
+
+
+                    <br>
+                    <h4>Select Location</h4>
+
+                    <select name="menu" id="state">
+
+                        <option>SELECT</option>
+                        <option value="Ranjhi">Ranjhi</option>
+
+                        <option value="Gol Bazar">Gol Bazar</option>
+
+                        <option value="Sadar">Sadar</option>
+                        <option value="Ghamapur">Ghamapur</option>
+
+                    </select>
+
+                    <h3> <b> Select image to upload:</b></h3>
+                    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+                    <input type="submit" onclick="return myFunction()" value="Submit">
+                </form>
+
+                <script>
+                    var x;
+                    var y;
+
+                    function getLocation(event) {
+                        event.preventDefault();
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition);
+                        }
+                    }
+
+                    function showPosition(position) {
+                        x = position.coords.latitude;
+                        y = position.coords.longitude;
+                        alert(x + "," + y);
+                    }
+                </script>
+                <br><br>
+
+
+
+                <script>
+                    function myFunction() {
+
+                        alert("Image Uploaded successfully!");
+                    }
+
+                </script>
+
+
+
+
+
+
+            </center>
+        </div>
+    </div>
+
+    <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+</div>
+
+{% endblock %}
