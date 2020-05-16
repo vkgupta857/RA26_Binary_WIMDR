@@ -7,77 +7,60 @@
 {% block body %}
 
 <div class="container">
-    
-    <div class="jumbotron">
-        <div class="block">
-            <center>
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header text-center text-primary"><b>Upload</b></div>
+            <div class="card-body">
                 <form action="/submit" method="post" enctype="multipart/form-data">
-                    <h3><b>Choose Your Current Location</b></h3>
-
-                    <button onclick="getLocation(event)">Click Here</button>
-
-
-                    <br>
-                    <h4>Select Location</h4>
-
-                    <select name="menu" id="state">
-
-                        <option>SELECT</option>
-                        <option value="Ranjhi">Ranjhi</option>
-
-                        <option value="Gol Bazar">Gol Bazar</option>
-
-                        <option value="Sadar">Sadar</option>
-                        <option value="Ghamapur">Ghamapur</option>
-
-                    </select>
-
-                    <h3> <b> Select image to upload:</b></h3>
-                    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
-                    <input type="submit" onclick="return myFunction()" value="Submit">
+                    <div class="form-group">
+                        <label for="location">Click the button to allow location.</label>
+                        <button class="btn btn-sm btn-light" onclick="getLocation(event)">Click Here</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Select Location</label>
+                        <select class="form-control form-control-sm" name="menu" id="state">
+                            <option>SELECT</option>
+                            <option value="Ranjhi">Ranjhi</option>
+                            <option value="Gol Bazar">Gol Bazar</option>
+                            <option value="Sadar">Sadar</option>
+                            <option value="Ghamapur">Ghamapur</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileToUpload">Upload image</label>
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button class="btn btn-sm btn-primary" onclick="return myFunction()">Submit</button>
+                    </div>
                 </form>
-
-                <script>
-                    var x;
-                    var y;
-
-                    function getLocation(event) {
-                        event.preventDefault();
-                        if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(showPosition);
-                        }
-                    }
-
-                    function showPosition(position) {
-                        x = position.coords.latitude;
-                        y = position.coords.longitude;
-                        alert(x + "," + y);
-                    }
-                </script>
-                <br><br>
-
-
-
-                <script>
-                    function myFunction() {
-
-                        alert("Image Uploaded successfully!");
-                    }
-
-                </script>
-
-
-
-
-
-
-            </center>
+            </div>
         </div>
     </div>
-
-    <script type=text/javascript>
-    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-  </script>
 </div>
+
+<script>
+    var x;
+    var y;
+
+    function getLocation(event) {
+        event.preventDefault();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+    }
+
+    function showPosition(position) {
+        x = position.coords.latitude;
+        y = position.coords.longitude;
+        alert(x + "," + y);
+    }
+
+    function myFunction() {
+        alert("Image Uploaded successfully!");
+    }
+    
+  </script>
 
 {% endblock %}
