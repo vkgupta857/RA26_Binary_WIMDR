@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Welcome - Waste Management</title>
+<title>Piechart - Waste Management</title>
 <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
 {% endblock %}
@@ -9,100 +9,100 @@
 {% block body %}
 
 <div class="container">
-  <div id="leftbar">
-    <br><br>
-    <form action="/piee" method="post" enctype="multipart/form-data">
-      <h4>Select Location</h4>
-      <select name="menu" id="state">
+    <div id="leftbar">
+        <br><br>
+        <form action="/pie" method="post" enctype="multipart/form-data">
+            <h4>Select Location</h4>
+            <select name="menu" id="state">
 
-        <option>-----SELECT------</option>
-        <option value="Ranjhi">Ranjhi</option>
+                <option>-----SELECT------</option>
+                <option value="Ranjhi">Ranjhi</option>
 
-        <option value="Gol Bazar">Gol Bazar</option>
+                <option value="Gol Bazar">Gol Bazar</option>
 
-        <option value="Sadar">Sadar</option>
-        <option value="Ghamapur">Ghamapur</option>
+                <option value="Sadar">Sadar</option>
+                <option value="Ghamapur">Ghamapur</option>
 
-      </select>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-
-  <div class="block">
-
-
-    <br>
-    <div id="container">
-      <b>
-        <center>
-          <h4>Percentage Of Waste today</h4>
-        </center>
-      </b>
-    </div>
-    <div id="container1">
-      <b>
-        <center>
-          <h4>Percentage Of Resolved Reports today</h4>
-        </center>
-      </b>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 
+    <div class="block">
 
-  </div>
-  <script type="text/javascript">
-    anychart.onDocumentReady(function () {
 
-      // set the data
-      var data = [
-        { x: "Low", value: {{ per_l }}},
-      { x: "Medium", value: {{ per_m }}},
-      { x: "High", value: {{ per_h }}},
+        <br>
+        <div id="container">
+            <b>
+                <center>
+                    <h4>Percentage Of Waste today</h4>
+                </center>
+            </b>
+        </div>
+        <div id="container1">
+            <b>
+                <center>
+                    <h4>Percentage Of Resolved Reports today</h4>
+                </center>
+            </b>
+        </div>
+
+
+    </div>
+    <script type="text/javascript">
+        anychart.onDocumentReady(function () {
+
+            // set the data
+            var data = [
+                { x: "Low", value: {{ per_l }}},
+            { x: "Medium", value: {{ per_m }}},
+            { x: "High", value: {{ per_h }}},
     ];
 
-    // create the chart
-    var chart = anychart.pie();
+        // create the chart
+        var chart = anychart.pie();
 
-    // set the chart title
+        // set the chart title
 
-    // add the data
-    chart.data(data);
-    chart.legend().position("right");
-    // set items layout
-    chart.legend().itemsLayout("vertical");
+        // add the data
+        chart.data(data);
+        chart.legend().position("right");
+        // set items layout
+        chart.legend().itemsLayout("vertical");
 
-    // display the chart in the container
-    chart.container('container');
-    chart.draw();
+        // display the chart in the container
+        chart.container('container');
+        chart.draw();
 
 });
-  </script>
+    </script>
 
-  <script type="text/javascript">
-    anychart.onDocumentReady(function () {
+    <script type="text/javascript">
+        anychart.onDocumentReady(function () {
 
-      // set the data
-      var data = [
-        { x: "Resolved", value: {{ per_r }}},
-      { x: "Not Resolved", value: {{ per_nr }}},
+            // set the data
+            var data = [
+                { x: "Resolved", value: {{ per_r }}},
+            { x: "Not Resolved", value: {{ per_nr }}},
     ];
 
-    // create the chart
-    var chart = anychart.pie();
+        // create the chart
+        var chart = anychart.pie();
 
-    // set the chart title
+        // set the chart title
 
-    // add the data
-    chart.data(data);
-    chart.legend().position("right");
-    // set items layout
-    chart.legend().itemsLayout("vertical");
+        // add the data
+        chart.data(data);
+        chart.legend().position("right");
+        // set items layout
+        chart.legend().itemsLayout("vertical");
 
-    // display the chart in the container
-    chart.container('container1');
-    chart.draw();
+        // display the chart in the container
+        chart.container('container1');
+        chart.draw();
 
 });
-  </script>
+    </script>
 
 </div>
 
