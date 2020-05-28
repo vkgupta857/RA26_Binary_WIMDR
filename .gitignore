@@ -4,6 +4,7 @@
 # ignore python dump
 __pycache__
 venv
+*.pyc
 
 # ignore other files
 *.log
