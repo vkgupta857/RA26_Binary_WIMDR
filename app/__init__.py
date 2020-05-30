@@ -13,4 +13,4 @@ migrate = Migrate(app,db)
 # import required at this place
 from app import routes
 
-app.run(debug=True)
+app.run(debug=True,port=80)
