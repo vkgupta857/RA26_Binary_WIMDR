@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+    <!-- Step 1 - Include the fusioncharts core library -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!-- Step 2 - Include the fusion theme -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+  <script type="text/javascript">
+    
+  const dataSource = {
+  chart: {
+    caption: "Waste query generated and resolved over the week",
+    xaxisname: "Days",
+    yaxisname: "Queries",
+    formatnumberscale: "1",
+    plottooltext:
+      "<b>$dataValue</b> <b>$seriesName</b> on $label",
+    theme: "fusion",
+    drawcrossline: "1"
+  },
+  categories: [
+    {
+      category: [
+
+        {
+          label: "Monday"
+        },
+        {
+          label: "Tuesday"
+        },
+               {
+          label: "Wednesday"
+        },
+        {
+          label: "Thursday"
+        },
+               {
+          label: "Friday"
+        }
+        ,
+               {
+          label: "Saturday"
+        }
+        ,
+               {
+          label: "Sunday"
+        }
+      ]
+    }
+  ],
+  dataset: [
+
+    {
+      seriesname: "Waste Queries reported",
+      data: [
+        {
+          value: "2]"
+        },
+        {
+          value: "53"
+        },
+        {
+          value: "8"
+        },
+        {
+          value: "70"
+        },
+        {
+          value: "29"
+        },
+        {
+          value: "57"
+        },
+        {
+          value: "34"
+        }
+        
+      ]
+    },
+    {
+      seriesname: "Queries resolved",
+      data: [
+        {
+          value: "20"
+        },
+        {
+          value: "31"
+        },
+        {
+          value: "10"
+        },
+        {
+          value: "51"
+        },
+        {
+          value: "12"
+        },
+        {
+          value: "20"
+        },
+        {
+          value: "34"
+        }
+      ]
+    }
+  ]
+};
+
+FusionCharts.ready(function() {
+  var myChart = new FusionCharts({
+    type: "mscolumn3d",
+    width: "80%",
+    height: "2000%",
+    renderAt: "chart-container",
+    dataFormat: "json",
+    dataSource
+  }).render();
+});
+
+  </script>
+</head>
+<body>
+<div id="chart-container" ></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
