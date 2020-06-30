@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title>Waste Management</title>
+        <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static',filename='css/home.css')}}" rel="stylesheet" type="text/css">
+        <script src="{{url_for('static',filename='js/jquerry-3.3.1.min.js')}}" type="text/javascript"></script>
+        <script src="{{url_for('static',filename='js/bootstrap.min.js')}}" type="text/javascript"></script>
+				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+<center><div id="header">
+
+</div></center>
+
+
+<center><div id="navbar">
+<ul>
+<li><a href="index">Home</a></li>
+<li><a href="upload">Upload</a></li>
+<li><a href="view">View</a></li>
+<li><a href="update">Update</a></li>
+</ul>
+</div></center>
+
+<div class="jumbotron">
+<div class="block">
+<center>
+<form action="/submit" method="post" enctype="multipart/form-data">
+<h3><b>Choose Your Current Location</b></h3>
+
+<button onclick="getLocation(event)">Click Here</button>
+
+
+		<br>
+    <h4>Select Location</h4>
+
+    <select   name="menu" id="state">
+
+<option >SELECT</option>
+<option value="Ranjhi">Ranjhi</option>
+
+<option value="Gol Bazar">Gol Bazar</option>
+
+<option value="Sadar">Sadar</option>
+<option value="Ghamapur">Ghamapur</option>
+
+</select>
+
+  <h3> <b> Select image to upload:</b></h3>
+    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+    <input type="submit" onclick="return myFunction()" value="Submit">
+</form>
+
+<script>
+var x;
+var y;
+
+function getLocation(event) {
+	event.preventDefault();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+}
+
+function showPosition(position) {
+  x=position.coords.latitude;
+y=position.coords.longitude;
+alert(x+","+y);
+}
+</script>
+<br><br>
+
+
+
+<script>
+function myFunction() {
+
+    alert("Image Uploaded successfully!");
+}
+
+</script>
+
+
+
+
+
+
+</center>
+</div>
+</div>
+
+
+
+<div id="footer">
+
+</div>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+</body>
+</html>
