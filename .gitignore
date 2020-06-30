@@ -13,3 +13,6 @@ venv
 *.odt
 *.pptx
 *.ppt
+
+#ignore uploads
+uploads

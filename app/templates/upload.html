@@ -2,6 +2,7 @@
 
 {% block head %}
 <title>Upload - Waste Management</title>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -11,15 +12,15 @@
         <div class="card">
             <div class="card-header text-center text-primary"><b>Upload</b></div>
             <div class="card-body">
-                <form action="/submit" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="location">Click the button to allow location.</label>
-                        <button class="btn btn-sm btn-light" onclick="getLocation(event)">Click Here</button>
+                        <label for="location">Click the button to allow location -></label>
+                        <button type="button" class="btn btn-sm btn-secondary">Click Here</button>
                     </div>
                     <div class="form-group">
-                        <label for="location">Select Location</label>
-                        <select class="form-control form-control-sm" name="menu" id="state">
-                            <option>SELECT</option>
+                        <label for="place">Select Location</label>
+                        <select class="form-control form-control-sm" name="place" id="place">
+                            <option>-SELECT-</option>
                             <option value="Ranjhi">Ranjhi</option>
                             <option value="Gol Bazar">Gol Bazar</option>
                             <option value="Sadar">Sadar</option>
@@ -27,40 +28,31 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="fileToUpload">Upload image</label>
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file">
+                        <label for="image">Upload image of waste</label>
+                        <input type="file" name="image" id="image" class="form-control-file" onchange="validateImage()">
                     </div>
                     <hr>
                     <div class="form-group">
-                        <button class="btn btn-sm btn-primary" onclick="return myFunction()">Submit</button>
+                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
                     </div>
                 </form>
+                <div id="ajaxElement"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    var x;
-    var y;
-
-    function getLocation(event) {
-        event.preventDefault();
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+    $.get(
+        url= "/api/json",
+        success = function(jsonRes) {
+            console.log(jsonRes)
+            var response = JSON.parse(jsonRes);
+            var data = response.data;
+            console.log(response,data);
+            var ajaxEle = document.getElementById('ajaxElement');
+            ajaxEle.innerHTML = data;
         }
-    }
-
-    function showPosition(position) {
-        x = position.coords.latitude;
-        y = position.coords.longitude;
-        alert(x + "," + y);
-    }
-
-    function myFunction() {
-        alert("Image Uploaded successfully!");
-    }
-    
-  </script>
-
+    )
+</script>
 {% endblock %}
