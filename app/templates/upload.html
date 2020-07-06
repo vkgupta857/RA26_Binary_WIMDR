@@ -12,15 +12,35 @@
         <div class="card">
             <div class="card-header text-center text-primary"><b>Upload</b></div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    <div class="form-group">
+                <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="form-group text-center">
                         <label for="location">Click the button to allow location -></label>
-                        <button type="button" class="btn btn-sm btn-secondary">Click Here</button>
+                        <button type="button" class="btn btn-sm btn-light" onclick="getLocation()">Click
+                            Here</button>
+                        <br>
+                        <p class="small text-danger" id="location-info"></p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="longitude">Longitude</label>
+                                <input type="text" id="longitude" name="longitude" class="form-control form-control-sm" readonly
+                                    placeholder="Click on button to record location">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" id="latitude" name="latitude" class="form-control form-control-sm" readonly
+                                    placeholder="Click on button to record location">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="place">Select Location</label>
                         <select class="form-control form-control-sm" name="place" id="place">
-                            <option>-SELECT-</option>
+                            <option value="">-SELECT-</option>
                             <option value="Ranjhi">Ranjhi</option>
                             <option value="Gol Bazar">Gol Bazar</option>
                             <option value="Sadar">Sadar</option>
@@ -36,23 +56,63 @@
                         <button class="btn btn-sm btn-primary" type="submit">Submit</button>
                     </div>
                 </form>
-                <div id="ajaxElement"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    $.get(
-        url= "/api/json",
-        success = function(jsonRes) {
-            console.log(jsonRes)
-            var response = JSON.parse(jsonRes);
-            var data = response.data;
-            console.log(response,data);
-            var ajaxEle = document.getElementById('ajaxElement');
-            ajaxEle.innerHTML = data;
+
+    var msg=document.getElementById("location-info");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
         }
-    )
+        else { msg.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+
+    function showPosition(position) {
+        console.log("Show position");
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+
+        document.getElementById("longitude").value = "position.coords.longitude";
+        document.getElementById("latitude").value = position.coords.latitude;
+
+        // var latlon = new google.maps.LatLng(lat, lon)
+        // var mapholder = document.getElementById('mapholder')
+        // mapholder.style.height = '250pmsg';
+        // mapholder.style.width = '100%';
+
+        // var mapOptions = {
+        //     center: latlon, zoom: 14,
+        //     mapTypeId: google.maps.MapTypeId.ROADMAP,
+        //     mapTypeControl: false,
+        //     navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+        // };
+
+        // var map = new google.maps.Map(document.getElementById("mapholder"), mapOptions);
+        // var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+
+        // msg.innerHTML = "Map location updated!!!";
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                msg.innerHTML = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                msg.innerHTML = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                msg.innerHTML = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                msg.innerHTML = "An unknown error occurred."
+                break;
+        }
+    }
 </script>
 {% endblock %}

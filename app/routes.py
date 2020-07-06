@@ -14,6 +14,9 @@ def index():
 def upload():
     if request.method == 'POST':
         place = request.form['place']
+        print(place)
+        lat = request.form['latitude']
+        lng = request.form['longitude']
         # check if the post request has the image
         if 'image' not in request.files:
             flash('No file uploaded')
@@ -28,8 +31,13 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash(place+lat+lng, category="primary")
             return render_template('uploaded_file.html',filename=filename)
 
+        else:
+            flash("Invalid file type", category="danger")
+            return redirect(request.url)
+    # for GET request
     return render_template('upload.html')
 
 @app.route('/update')
@@ -72,6 +80,8 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return render_template('uploaded_file.html',filename=filename)
+        else:
+            flash("Invalid file")
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -91,6 +101,12 @@ def upload_file():
 
 @app.route('/api/json')
 def api_json():
+    response = {}
+    response['data'] = ['1','2','3']
+    return json.dumps(response)
+
+@app.route('/api/report/weekly')
+def api_report_weekly():
     response = {}
     response['data'] = ['1','2','3']
     return json.dumps(response)
