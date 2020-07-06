@@ -2,18 +2,8 @@
 
 {% block head %}
 <title>View - Waste Management</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
 
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-<style type="text/css">
-    #mapid {
-        height: 500px;
-    }
-</style>
 {% endblock %}
 
 {% block body %}
@@ -43,55 +33,117 @@
     <a href="/week" class="btn btn-link">Previous week map</a>
     <a href="/piechart" class="btn btn-link">View PieChart</a>
 
-    <div id="mapid" style="height: 600px; width:80%;"></div>
-    
-    
+    <br>
+
+    <div id="mapHolder" class="border-primary"></div>
 
 </div>
-<script type="text/javascript">
-    const mymap = L.map('mapid').setView([23.1815, 79.9864], 10);
-    const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    const tiles = L.tileLayer(tileUrl, { attribution });
-    tiles.addTo(mymap);
 
-    var LeafIcon = L.Icon.extend({
-        options: {
-            iconSize: [20, 40],
-            iconAnchor: [22, 94],
-            popupAnchor: [-3, -76]
-        }
-    });
-    var greenIcon = new LeafIcon({ iconUrl: "{{url_for('static',filename='images / green.png')}}" });
-    redIcon = new LeafIcon({ iconUrl: "{{url_for('static',filename='images / red.png')}}" });
-    orangeIcon = new LeafIcon({ iconUrl: "{{url_for('static',filename='images / orange.png')}}" });
-    blueIcon = new LeafIcon({ iconUrl: "{{url_for('static',filename='images / blue.png')}}" });
-    purpleIcon = new LeafIcon({ iconUrl: "{{url_for('static',filename='images / purple.png')}}" });
-    L.icon = function (options) {
-        return new L.Icon(options);
+<script>
+
+    var mapholder = document.getElementById('mapHolder');
+
+    var lat = 23.112575;
+    var lon = 79.983259;
+    var latlon = new google.maps.LatLng(lat, lon)
+
+    mapholder.style.height = '400px';
+    mapholder.style.width = '100%';
+    var myOptions = {
+        center: latlon, zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
     };
 
-    var r = {{ a }};
-    var p = {{ b }};
-    var g = {{ c }};
-    var bl = {{ d }};
-    var o = {{ e }};
-    for (var i = 0; i < r.length; i++) {
-        L.marker([r[i][0], r[i][1]], { icon: redIcon }).addTo(mymap);
-    }
-    for (var i = 0; i < p.length; i++) {
-        L.marker([p[i][0], p[i][1]], { icon: purpleIcon }).addTo(mymap);
-    }
-    for (var i = 0; i < g.length; i++) {
-        L.marker([g[i][0], g[i][1]], { icon: greenIcon }).addTo(mymap);
-    }
-    for (var i = 0; i < bl.length; i++) {
-        L.marker([bl[i][0], bl[i][1]], { icon: blueIcon }).addTo(mymap);
-    }
-    for (var i = 0; i < o.length; i++) {
-        L.marker([o[i][0], o[i][1]], { icon: orangeIcon }).addTo(mymap);
-    }
+    var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+    var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+
+    var iconBase =
+        'http://maps.google.com/mapfiles/ms/icons/';
+
+    var icons = {
+        parking: {
+            icon: iconBase + 'green-dot.png'
+        },
+        library: {
+            icon: iconBase + 'library_maps.png'
+        },
+        info: {
+            icon: iconBase + 'info-i_maps.png'
+        }
+    };
+
+    var features = [
+        {
+            position: new google.maps.LatLng(23.91721, 79.98630),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11539, 79.98820),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11747, 79.98912),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11910, 79.98907),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11725, 79.23011),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11872, 79.23089),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11784, 79.23094),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11682, 79.23149),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11790, 79.23463),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11666, 79.23468),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.116988, 79.983640),
+            type: 'info'
+        }, {
+            position: new google.maps.LatLng(23.11662347903106, 79.98879464019775),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.116365282092855, 79.98937399734496),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.11665018901448, 79.9882474695587),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.119543720969806, 79.98112279762267),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.11608037421864, 79.98288982673644),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.11851096311805, 79.9844058214569),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.11818154739766, 79.9846203981781),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.11727341958453, 79.98348314155578),
+            type: 'library'
+        }
+    ];
+
+    // Create markers.
+    for (var i = 0; i < features.length; i++) {
+        var marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+        });
+    };
 
 </script>
-</div>
+
 {% endblock %}
