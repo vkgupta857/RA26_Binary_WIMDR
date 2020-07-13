@@ -35,12 +35,19 @@ def upload():
     if request.method == 'POST':
         lat = request.form['latitude']
         lng = request.form['longitude']
+
+        # Check if location is missing
+        if lat == "" and lng == "":
+            flash("Location missing! Image cannot be uploaded without location.", category="danger")
+            return redirect(request.url)
+
         # check if the post request has the image
         if 'image' not in request.files:
             flash('No file uploaded')
             return redirect(request.url)
 
         file = request.files['image']
+
         # if request with no file
         if file.filename == '':
             flash('No image attached. Please attach an image of waste.',category="danger")

@@ -15,8 +15,7 @@
                 <form method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="form-group text-center">
                         <label for="location">Click the button to allow location -></label>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="getLocation()">Click
-                            Here</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="getLocation()">Allow Location Access</button>
                         <br>
                         <p class="small text-danger" id="location-info"></p>
                     </div>
@@ -26,20 +25,20 @@
                             <div class="form-group">
                                 <label for="longitude">Longitude</label>
                                 <input type="text" id="longitude" name="longitude" class="form-control form-control-sm" readonly
-                                    placeholder="Click on button to record location">
+                                    placeholder="Click on 'Allow' button above">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
                                 <input type="text" id="latitude" name="latitude" class="form-control form-control-sm" readonly
-                                    placeholder="Click on button to record location">
+                                    placeholder="Click on 'Allow' button above">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="image">Upload image of waste</label>
-                        <input type="file" name="image" id="image" class="form-control-file" onchange="validateImage()">
+                        <input type="file" name="image" id="image" class="form-control-file" onchange="validateImage()" required>
                     </div>
                     <hr>
                     <div class="form-group">
@@ -64,10 +63,8 @@
 
     function showPosition(position) {
         console.log("Show position");
-        var lat = position.coords.latitude;
-        var lon = position.coords.longitude;
 
-        document.getElementById("longitude").value = "position.coords.longitude";
+        document.getElementById("longitude").value = position.coords.longitude;
         document.getElementById("latitude").value = position.coords.latitude;
 
         // var latlon = new google.maps.LatLng(lat, lon)
@@ -91,7 +88,7 @@
     function showError(error) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
-                msg.innerHTML = "User denied the request for Geolocation."
+                msg.innerHTML = "You denied the request for Geolocation. Please allow it!"
                 break;
             case error.POSITION_UNAVAILABLE:
                 msg.innerHTML = "Location information is unavailable.";
