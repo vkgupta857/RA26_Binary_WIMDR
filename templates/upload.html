@@ -56,7 +56,7 @@
 
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
+            navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true });
         }
         else { msg.innerHTML = "Geolocation is not supported by this browser."; }
     }
@@ -100,6 +100,10 @@
                 msg.innerHTML = "An unknown error occurred."
                 break;
         }
+    }
+
+    function validateImage() {
+        console.log("Invoked validateImage()");
     }
 </script>
 {% endblock %}
