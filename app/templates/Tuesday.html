@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>piechart</title>
+      <!-- Step 1 - Include the fusioncharts core library -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!-- Step 2 - Include the fusion theme -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+<script type="text/javascript">
+ 
+const dataSource = {
+  chart: {
+    caption: "Queries reported on Tuesday",
+    plottooltext: "<b>$percentValue</b> of $label reported",
+    showlegend: "1",
+    showpercentvalues: "1",
+    legendposition: "bottom",
+    usedataplotcolorforlabels: "1",
+    theme: "fusion"
+  },
+  data: [
+    {
+      label: "high waste",
+      value: "34"
+    },
+    {
+      label: "medium waste",
+      value: "53"
+    },
+    {
+      label: "low waste",
+      value: "13"
+    }
+  ]
+};
+
+FusionCharts.ready(function() {
+  var myChart = new FusionCharts({
+    type: "pie3d",
+    renderAt: "chart-container",
+    width: "80%",
+    height: "2000%",
+    dataFormat: "json",
+    dataSource
+  }).render();
+});
+
+</script>
+</head>
+<body>
+<div id="chart-container" ></div>
+</body>
+</html>
+
+
+
+
