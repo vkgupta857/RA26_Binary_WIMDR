@@ -11,3 +11,4 @@ tensorflow==2.2.0
 firebase_admin==4.3.0
 numpy==1.19.0
 pillow==7.2.0
+reverse-geocoder==1.5.1
