@@ -74,14 +74,6 @@ def update():
 def view():
     return render_template('view.html')
 
-@app.route('/week')
-def week():
-    return render_template('week.html')
-
-@app.route('/piechart')
-def piechart():
-    return render_template('piechart.html')
-
 ###############################################
 # API Routes Section for Android app and AJAX requests
 ###############################################
