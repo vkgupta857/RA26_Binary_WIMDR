@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
+import waste_classification as wc
 
 app = Flask(__name__)
 
@@ -57,7 +58,9 @@ def upload():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash("Image uploaded successfully", category="success")
-            return render_template('uploaded_file.html',filename=filename)
+            #classification
+            label = wc.predict(filename)
+            return render_template('uploaded_file.html',filename=filename, label=label)
 
         else:
             flash("Invalid file type", category="danger")
