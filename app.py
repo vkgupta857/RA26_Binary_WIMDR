@@ -77,6 +77,10 @@ def update():
 def view():
     return render_template('view.html')
 
+@app.route('/statistics')
+def view():
+    return render_template('statistics.html')
+
 ###############################################
 # API Routes Section for Android app and AJAX requests
 ###############################################
