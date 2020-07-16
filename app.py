@@ -59,7 +59,7 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash("Image uploaded successfully", category="success")
             #classification
-            label = wc.predict(filename)
+            label = wc.predict('static/uploads/'+filename)
             return render_template('uploaded_file.html',filename=filename, label=label)
 
         else:
