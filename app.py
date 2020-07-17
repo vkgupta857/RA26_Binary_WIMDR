@@ -36,7 +36,7 @@ def get_date_time():
     d = d.split('-')
     d = d[2]+'/'+d[1]+'/'+d[0]
     t = t.split(':')
-    t = t[0]+':'+t[1]
+    t = t[0]+':'+t[1]+':'+t[2][0:2]
     return d,t
 
 
@@ -107,7 +107,7 @@ def upload():
                 emp_id = 0
             
             # adding report to the database
-            data = {'Report No' : str(random.randint(10**4,10**5)),
+            data = {'Report_No' : str(random.randint(10**4,10**5)),
                     'State' : str(state),
                     'District' : str(district),
                     'Lattitude' : str(lat),
