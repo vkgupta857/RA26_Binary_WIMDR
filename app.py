@@ -121,7 +121,7 @@ def upload():
                     'Emp_ID' : str(emp_id),
                     'Image' : str(filename)}
             
-            ref = db.reference('New_Reports')
+            ref = db.reference('Pending_Reports')
             ref.push(data)
             
             return render_template('uploaded_file.html',filename=filename, label=label)
