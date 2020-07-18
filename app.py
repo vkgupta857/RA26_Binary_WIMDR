@@ -2,7 +2,7 @@ import os
 import json
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
-import waste_classification as wc
+#import waste_classification as wc
 from datetime import datetime
 # for getting state and district
 import reverse_geocoder as rg
@@ -90,7 +90,8 @@ def upload():
             flash("Image uploaded successfully", category="success")
             
             #classification
-            label = wc.predict('static/uploads/'+filename)
+            #label = wc.predict('static/uploads/'+filename)
+            label = 0
             # getting waste status
             status = ['Low','Medium','High'][label]
             
