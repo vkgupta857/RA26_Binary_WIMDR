@@ -10,9 +10,11 @@ import reverse_geocoder as rg
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-
+import urllib.request
 import random
 import employee_id
+import requests as req
+
 
 app = Flask(__name__)
 
@@ -90,10 +92,8 @@ def upload():
             flash("Image uploaded successfully", category="success")
             
             #classification
-            #label = wc.predict('static/uploads/'+filename)
-            label = 0
-            # getting waste status
-            status = ['Low','Medium','High'][label]
+            url = 'http://860a07b8c8bf.ngrok.io/' + filename
+            status = req.get(url).text
             
             # getting date and time
             d,t = get_date_time()
@@ -125,7 +125,7 @@ def upload():
             ref = db.reference('Pending_Reports')
             ref.push(data)
             
-            return render_template('uploaded_file.html',filename=filename, label=label)
+            return render_template('uploaded_file.html',filename=filename, label=status)
 
         else:
             flash("Invalid file type", category="danger")

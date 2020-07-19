@@ -1,4 +1,4 @@
-from tensorflow.keras.models import load_model
+#from tensorflow.keras.models import load_model
 from PIL import Image, ImageOps
 import numpy as np
 
@@ -21,7 +21,7 @@ def img_preprocessing(path_to_img):
     image = np.array([image])
     return(image)
 
-
+'''
 # Load the model
 model = load_model('keras_model.h5')
 
@@ -30,7 +30,7 @@ def predict(path_to_img):
     img = img_preprocessing(path_to_img)
     return(np.argmax(model.predict(img)))
 
-
+'''
 
 
 '''
