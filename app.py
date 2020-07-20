@@ -134,10 +134,6 @@ def upload():
     # If request method is other than POST e.g. GET
     return render_template('upload.html')
 
-@app.route('/update')
-def update():
-    return render_template('update.html')
-
 @app.route('/view')
 def view():
     return render_template('view.html')
