@@ -92,7 +92,7 @@ def upload():
             flash("Image uploaded successfully", category="success")
             
             #classification
-            url = 'http://860a07b8c8bf.ngrok.io/' + filename
+            url = 'https://waste-classification-api.el.r.appspot.com/' + filename
             status = req.get(url).text
             
             # getting date and time
