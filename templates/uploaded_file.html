@@ -12,7 +12,13 @@
             <div class="card-header text-center text-primary"><b>Upload</b></div>
             <div class="card-body">
                 {% if filename %}
-                    <img src="/static/uploads/{{ filename }}" alt="Image" class="img-fluid">
+                <img src="/static/uploads/{{ filename }}" alt="Image" class="img-fluid">
+                {% endif %}
+                {% if label %}
+                <div class="alert alert-dark">
+                    <b>Image Waste Type</b>: {{ label }}
+                </div>
+                <p><small>Image waste type represents the type of waste image contains. It can be "Low", "Medium" or "High".</small></p>
                 {% endif %}
             </div>
         </div>
