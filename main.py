@@ -16,6 +16,8 @@ import employee_id
 import requests as req
 # for database connectivity
 import sqlalchemy
+#for connecting with firestorage
+import pyrebase
 
 
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
@@ -82,6 +84,20 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 cred = credentials.Certificate('SIH-Realtime-DB.json')
 firebase_admin.initialize_app(cred, {'databaseURL':'https://sih-db-3b091.firebaseio.com/'})
 
+config={
+    "apiKey": "AIzaSyBumH3t0dgqUQfNRx0lhZdrp4UcA0s6r7o",
+    "authDomain": "sih-db-3b091.firebaseapp.com",
+    "databaseURL": "https://sih-db-3b091.firebaseio.com",
+    "projectId": "sih-db-3b091",
+    "storageBucket": "sih-db-3b091.appspot.com",
+    "messagingSenderId": "826516287205",
+    "appId": "1:826516287205:web:7421a9ecfb7ac8e7b02e0c"
+
+}
+
+firebase=pyrebase.initialize_app(config)
+storage= firebase.storage()
+
 
 ######################
 # App Routes Section
@@ -141,7 +157,10 @@ def upload():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            pathoncloud='images/'+filename
+            pathlocal=filename
+            storage.child(pathoncloud).put(pathlocal)
+
             flash("Image uploaded successfully", category="success")
 
             #classification
