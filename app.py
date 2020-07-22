@@ -142,6 +142,10 @@ def view():
 def admin_panel():
     return render_template('admin_panel.html')
 
+@app.route('/slider')
+def slider():
+    return render_template('slider.html')
+
 ###############################################
 # API Routes Section for Android app and AJAX requests
 ###############################################
