@@ -138,9 +138,9 @@ def upload():
 def view():
     return render_template('view.html')
 
-@app.route('/statistics')
-def statistics():
-    return render_template('statistics.html')
+@app.route('/admin_panel')
+def admin_panel():
+    return render_template('admin_panel.html')
 
 ###############################################
 # API Routes Section for Android app and AJAX requests
