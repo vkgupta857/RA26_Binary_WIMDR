@@ -20,4 +20,4 @@ env_variables:
   CLOUD_SQL_CONNECTION_NAME: sih-db-283920:asia-south1:sih-database
   DB_USER: root
   DB_PASS: sihjeetnahai
-  DB_NAME: demo
+  DB_NAME: waste_management

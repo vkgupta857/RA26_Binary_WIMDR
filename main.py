@@ -226,6 +226,42 @@ def statistics():
 # API Routes Section for Android app and AJAX requests
 ###############################################
 
+
+# api for adding report data to database from android
+@app.route('/add',methods=['GET','POST'])
+def add():
+    if request.method == 'POST':
+        row = request.json
+        
+        filename = row['filename']
+        report_date = row['report_date']
+        state = row['state']
+        district = row['district']
+        lattitude = row['lattitude']
+        longitude = row['longitude']
+        label = row['label']
+        resolved = row['resolved']
+        emp_Id = employee_id.emp_id[state][district]
+        pick_date = str(datetime.now()).split('.')[0]
+        
+        stmt = sqlalchemy.text(
+        "INSERT INTO reports"
+        "(state, district, lattitude, longitude, report_time, label, pick_time, resolved, emp_ID, filename)"
+        "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
+    )
+        try:
+            with rdb.connect() as conn:
+                conn.execute(stmt, state=state, district=district, 
+                             lattitude=lattitude, longitude=longitude, 
+                             report_time=report_time, label=label, pick_time=pick_time, 
+                             resolved=resolved, emp_Id=emp_Id, filename=filename)
+        except:
+            return("Something went wrong")
+        
+        return("Database Updated")
+        
+    
+
 @app.route('/api/json')
 def api_json():
     response = {}
