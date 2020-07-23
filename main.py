@@ -1,25 +1,24 @@
 import os
 import json
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
 # import waste_classification as wc
 from datetime import datetime
 # for getting state and district
 import reverse_geocoder as rg
 # for accessing database
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
-import urllib.request
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import db
 import random
 import employee_id
 import requests as req
 # for database connectivity
 import sqlalchemy
-#for connecting with firestorage
+# for connecting with firestorage
 import pyrebase
 
-
+"""
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
 # something like https://cloud.google.com/kms/ to help keep secrets secret.
 db_user = os.environ.get("DB_USER")
@@ -30,7 +29,7 @@ cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
 # [START cloud_sql_mysql_sqlalchemy_create]
 # The SQLAlchemy engine will help manage interactions, including automatically
 # managing a pool of connections to your database
-db = sqlalchemy.create_engine(
+rdb = sqlalchemy.create_engine(
     # Equivalent URL:
     # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
     sqlalchemy.engine.url.URL(
@@ -69,7 +68,7 @@ db = sqlalchemy.create_engine(
     # [END_EXCLUDE]
 )
 # [END cloud_sql_mysql_sqlalchemy_create]
-
+"""
 
 app = Flask(__name__)
 
@@ -78,11 +77,15 @@ app = Flask(__name__)
 ##################
 
 app.config['SECRET_KEY'] = "MySecretKeyDontCopy"
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+# Temporarily file can be uploaded in '/tmp' folder in GCP
+app.config['UPLOAD_FOLDER'] = '/tmp/'
+
+# for local
+# app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 
-cred = credentials.Certificate('SIH-Realtime-DB.json')
-firebase_admin.initialize_app(cred, {'databaseURL':'https://sih-db-3b091.firebaseio.com/'})
+# cred = credentials.Certificate('SIH-Realtime-DB.json')
+# firebase_admin.initialize_app(cred, {'databaseURL':'https://sih-db-3b091.firebaseio.com/'})
 
 config={
     "apiKey": "AIzaSyBumH3t0dgqUQfNRx0lhZdrp4UcA0s6r7o",
@@ -97,6 +100,7 @@ config={
 
 firebase=pyrebase.initialize_app(config)
 storage= firebase.storage()
+ndb = firebase.database()
 
 
 ######################
@@ -157,9 +161,11 @@ def upload():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg'))
             pathoncloud='images/'+filename
-            pathlocal= 'static/uploads/'+filename
+            #pathlocal= 'static/uploads/'+filename
+            pathlocal = '/tmp/image.jpg'
+
             storage.child(pathoncloud).put(pathlocal)
 
             flash("Image uploaded successfully", category="success")
@@ -195,8 +201,9 @@ def upload():
                     'Emp_ID' : str(emp_id),
                     'Image' : str(filename)}
 
-            ref = db.reference('Pending_Reports')
-            ref.push(data)
+            # ref = db.reference('Pending_Reports')
+            # ref.push(data)
+            ndb.child('Pending_Reports').push(data)
 
             return render_template('uploaded_file.html',filename=filename, label=status)
 
