@@ -249,14 +249,13 @@ def add():
         "(state, district, lattitude, longitude, report_time, label, pick_time, resolved, emp_ID, filename)"
         "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
     )
-        try:
-            with rdb.connect() as conn:
-                conn.execute(stmt, state=state, district=district, 
-                             lattitude=lattitude, longitude=longitude, 
-                             report_time=report_time, label=label, pick_time=pick_time, 
-                             resolved=resolved, emp_Id=emp_Id, filename=filename)
-        except:
-            return("Something went wrong")
+        
+        with rdb.connect() as conn:
+            conn.execute(stmt, state=state, district=district, 
+                         lattitude=lattitude, longitude=longitude, 
+                         report_time=report_time, label=label, pick_time=pick_time, 
+                         resolved=resolved, emp_Id=emp_Id, filename=filename)
+
         
         return("Database Updated")
         
