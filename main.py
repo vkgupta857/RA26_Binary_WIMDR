@@ -18,7 +18,7 @@ import sqlalchemy
 # for connecting with firestorage
 import pyrebase
 
-"""
+
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
 # something like https://cloud.google.com/kms/ to help keep secrets secret.
 db_user = os.environ.get("DB_USER")
@@ -68,7 +68,7 @@ rdb = sqlalchemy.create_engine(
     # [END_EXCLUDE]
 )
 # [END cloud_sql_mysql_sqlalchemy_create]
-"""
+
 
 app = Flask(__name__)
 
