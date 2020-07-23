@@ -234,28 +234,29 @@ def add():
         row = request.json
         
         filename = row['filename']
-        report_date = row['report_date']
+        report_time = row['report_time']
         state = row['state']
         district = row['district']
         lattitude = row['lattitude']
         longitude = row['longitude']
         label = row['label']
         resolved = row['resolved']
-        emp_Id = employee_id.emp_id[state][district]
-        pick_date = str(datetime.now()).split('.')[0]
+        emp_ID = employee_id.emp_id[state][district]
+        pick_time = str(datetime.now()).split('.')[0]
         
         stmt = sqlalchemy.text(
         "INSERT INTO reports"
         "(state, district, lattitude, longitude, report_time, label, pick_time, resolved, emp_ID, filename)"
         "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
     )
-        
-        with rdb.connect() as conn:
-            conn.execute(stmt, state=state, district=district, 
-                         lattitude=lattitude, longitude=longitude, 
-                         report_time=report_time, label=label, pick_time=pick_time, 
-                         resolved=resolved, emp_Id=emp_Id, filename=filename)
-
+        try:
+            with rdb.connect() as conn:
+                conn.execute(stmt, state=state, district=district, 
+                             lattitude=lattitude, longitude=longitude, 
+                             report_time=report_time, label=label, pick_time=pick_time, 
+                             resolved=resolved, emp_ID=emp_ID, filename=filename)
+        except:
+            return("Error")
         
         return("Database Updated")
         
