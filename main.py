@@ -17,8 +17,9 @@ import requests as req
 import sqlalchemy
 # for connecting with firestorage
 import pyrebase
+import the_database as thedb
 
-
+"""
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
 # something like https://cloud.google.com/kms/ to help keep secrets secret.
 db_user = os.environ.get("DB_USER")
@@ -68,7 +69,7 @@ rdb = sqlalchemy.create_engine(
     # [END_EXCLUDE]
 )
 # [END cloud_sql_mysql_sqlalchemy_create]
-
+"""
 
 app = Flask(__name__)
 
@@ -232,7 +233,9 @@ def statistics():
 def add():
     if request.method == 'POST':
         row = request.json
+        return(thedb.add_row(row))
         
+        """
         filename = row['filename']
         report_time = row['report_time']
         state = row['state']
@@ -259,7 +262,7 @@ def add():
             return("Error")
         
         return("Database Updated")
-        
+        """
     
 
 @app.route('/api/json')
