@@ -3,7 +3,6 @@ import json
 from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
 # import waste_classification as wc
-from datetime import datetime
 # for getting state and district
 import reverse_geocoder as rg
 # for accessing database
@@ -12,12 +11,14 @@ import reverse_geocoder as rg
 # from firebase_admin import db
 import random
 import employee_id
-import requests as req
 # for database connectivity
 import sqlalchemy
 # for connecting with firestorage
 import pyrebase
 import the_database as thedb
+import requests as req
+import json
+import string
 
 """
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
@@ -107,13 +108,11 @@ ndb = firebase.database()
 ######################
 # App Routes Section
 ######################
-def get_date_time():
-    d,t = str(datetime.now()).split(' ')
-    d = d.split('-')
-    d = d[2]+'/'+d[1]+'/'+d[0]
-    t = t.split(':')
-    t = t[0]+':'+t[1]+':'+t[2][0:2]
-    return d,t
+def get_filename():
+    length = 5
+    letters = string.ascii_letters
+    result =  'image_'+''.join(random.choice(letters) for i in range(length))+'.jpg'
+    return(result)
 
 
 def get_place(lat,lng):
@@ -161,7 +160,7 @@ def upload():
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = get_filename()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg'))
             pathoncloud='images/'+filename
             #pathlocal= 'static/uploads/'+filename
@@ -176,31 +175,29 @@ def upload():
             status = req.get(url).text
 
             # getting date and time
-            d,t = get_date_time()
+            dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+            dt = dt.replace('T',' ').split('.')[0]
 
             # getting state and district
             district, state = get_place(lat, lng)
 
             # gettig emp_id
             try:
-                emp_id = employee_id.emp_id[state][district]
+                emp_ID = employee_id.emp_id[state][district]
             except:
-                emp_id = 0
+                emp_ID = 0
 
             # adding report to the database
-            data = {'Report_No' : str(random.randint(10**4,10**5)),
-                    'State' : str(state),
-                    'District' : str(district),
-                    'Lattitude' : str(lat),
-                    'Longitude' : str(lng),
-                    'Report_Date' : str(d),
-                    'Report_Time' : str(t),
-                    'Status' : str(status),
-                    'Pick_Date' : str(0),
-                    'Pick_Time' : str(0),
-                    'Resolved' : str(0),
-                    'Emp_ID' : str(emp_id),
-                    'Image' : str(filename)}
+            data = {'state' : str(state),
+                    'district' : str(district),
+                    'lattitude' : str(lat),
+                    'longitude' : str(lng),
+                    'report_time' : str(dt),
+                    'status' : str(status),
+                    'pick_Time' : str(0),
+                    'resolved' : str(0),
+                    'emp_ID' : str(emp_ID),
+                    'filename' : str(filename)}
 
             # ref = db.reference('Pending_Reports')
             # ref.push(data)
@@ -233,6 +230,10 @@ def statistics():
 def add():
     if request.method == 'POST':
         row = request.json
+        state = row['state']
+        district = row['district']
+        emp_ID = employee_id.emp_id[state][district]
+        row['emp_ID'] = emp_ID
         return(thedb.add_row(row))
         
         """

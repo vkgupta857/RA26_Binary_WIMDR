@@ -1,6 +1,8 @@
 import sqlalchemy
 # for connecting with firestorage
 import pyrebase
+import os
+# import employee_id
 
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
 # something like https://cloud.google.com/kms/ to help keep secrets secret.
@@ -62,8 +64,8 @@ def add_row(row):
     longitude = row['longitude']
     label = row['label']
     resolved = row['resolved']
-    emp_ID = employee_id.emp_id[state][district]
-    pick_time = str(datetime.now()).split('.')[0]
+    emp_ID = row['emp_ID']
+    pick_time = row['pick_time']
     
     stmt = sqlalchemy.text(
         "INSERT INTO reports"
