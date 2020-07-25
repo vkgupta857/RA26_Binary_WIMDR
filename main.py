@@ -169,6 +169,13 @@ def view():
 def statistics():
     return render_template('statistics.html')
 
+@app.route('/admin',methods=['GET','POST'])
+def admin():
+    if request.method == 'POST':
+        phone = request.form['phone']
+        password = request.form['password']
+    return render_template('admin.html')
+
 ###############################################
 # API Routes Section for Android app and AJAX requests
 ###############################################
