@@ -169,12 +169,48 @@ def view():
 def statistics():
     return render_template('statistics.html')
 
+global logged_in = 'n'
 @app.route('/admin',methods=['GET','POST'])
 def admin():
     if request.method == 'POST':
-        phone = request.form['phone']
-        password = request.form['password']
+            phone = request.form['phone']
+            password = request.form['password']
+            data=ndb.child('Managers').get()
+            try:
+               p= data.val()([phone]['Password'])
+               if password==p:
+                   global logged_in='a'
+                   return render_template('admin_login.html')
+               flash('Invalid Password',category="danger")
+               return redirect(request.url)
+
+            except:
+                flash('Invalid Phone Number',category="danger")
+                return redirect(request.url)
+
     return render_template('admin.html')
+
+@app.route('/manager',methods=['GET','POST'])
+def manager():
+
+    if request.method == 'POST':
+            phone = request.form['phone']
+            password = request.form['password']
+            data=ndb.child('Managers').get()
+            try:
+               p= data.val()([phone]['Password'])
+               if password==p:
+                   global logged_in='m'
+                   return render_template('manager_login.html')
+               flash('Invalid Password',category="danger")
+               return redirect(request.url)
+
+            except:
+                flash('Invalid Phone Number',category="danger")
+                return redirect(request.url)
+
+    return render_template('manager.html')
+
 
 ###############################################
 # API Routes Section for Android app and AJAX requests
