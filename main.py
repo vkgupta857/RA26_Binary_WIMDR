@@ -121,7 +121,7 @@ def upload():
 
             #classification
             url = 'https://waste-classification-api.el.r.appspot.com/' + filename
-            status = req.get(url).text
+            status = req.get(url).text[0]
 
             # getting date and time
             dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']

@@ -55,6 +55,7 @@ rdb = sqlalchemy.create_engine(
 # [END cloud_sql_mysql_sqlalchemy_create]
 
 
+# function to add row in the reports table
 def add_row(row):
     filename = row['filename']
     report_time = row['report_time']
@@ -83,3 +84,11 @@ def add_row(row):
         return("Error")
     
     return("Database Updated")
+
+
+class MainQuery:
+    def __init__(self, state='all', district='all', time='all'):
+        self.state = state
+        self.district = district
+        self.time = time
+        
