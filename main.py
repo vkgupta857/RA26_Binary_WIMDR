@@ -169,7 +169,10 @@ def view():
 def statistics():
     return render_template('statistics.html')
 
-global logged_in = 'n'
+
+
+logged_in = 'n'
+
 @app.route('/admin',methods=['GET','POST'])
 def admin():
     if request.method == 'POST':
@@ -179,9 +182,10 @@ def admin():
             try:
                p= data.val()([phone]['Password'])
                if password==p:
-                   global logged_in='a'
+                   global logged_in
+                   logged_in = 'a'
                    return render_template('admin_login.html')
-                else:
+               else:
                    flash('Invalid Password',category="danger")
                    return redirect(request.url)
 
@@ -201,9 +205,10 @@ def manager():
             try:
                p= data.val()([phone]['Password'])
                if password==p:
-                   global logged_in='m'
+                   global logged_in
+                   logged_in='m'
                    return render_template('manager_login.html')
-                else:
+               else:
                    flash('Invalid Password',category="danger")
                    return redirect(request.url)
 

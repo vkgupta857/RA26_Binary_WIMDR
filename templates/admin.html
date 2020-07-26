@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
 {% block body %}
-    <!-- /.container -->
-     
-      <div class="row" style="padding-left: 30%; margin-top: 2%;">
+<div class="container">
+    <div class="row" style="padding-left: 30%; margin-top: 2%;">
         <div class="col-lg-8 mb-4 contact-left">
-          <h3>Login as Admin</h3>
-          <form name="sentMessage" id="contactForm" novalidate  action="/admin" method="post">
-              <div class="control-group form-group">
-              <div class="controls">
-                <label>Phone Number:</label>
-                <input name="phone" type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
-              </div>
-            </div>
-              <div class="control-group form-group">
-              <div class="controls">
-                <label>Password:</label>
-                <input name="password" type="Password" class="form-control" id="Password" required data-validation-required-message="Please enter you password.">
-                <p class="help-block"></p>
-              </div>
-            </div>
+            <h3>Login as Admin</h3>
+            <form name="sentMessage" id="contactForm" novalidate action="/admin" method="post">
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Phone Number:</label>
+                        <input name="phone" type="tel" class="form-control" id="phone" required
+                            data-validation-required-message="Please enter your phone number.">
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Password:</label>
+                        <input name="password" type="Password" class="form-control" id="Password" required
+                            data-validation-required-message="Please enter you password.">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
 
-          
-            <div id="success"></div>
-            <!-- For success/fail messages -->
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
-          </form>
+
+                <div id="success"></div>
+                <!-- For success/fail messages -->
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
+            </form>
         </div>
 
-      </div>
-      <!-- Contact Form -->
-      <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+    </div>
+</div>
+<!-- Contact Form -->
+<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 {% endblock %}

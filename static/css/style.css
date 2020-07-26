@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800');
  
 body {
-  padding-top: 54px;
+  margin-top: 70px;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   color: #4e3914;
@@ -14,7 +14,7 @@ body {
 
 @media (min-width: 992px) {
   body {
-    padding-top: 80px;
+    margin-top: 80px;
   }
 }
 
