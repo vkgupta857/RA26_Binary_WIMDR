@@ -181,8 +181,9 @@ def admin():
                if password==p:
                    global logged_in='a'
                    return render_template('admin_login.html')
-               flash('Invalid Password',category="danger")
-               return redirect(request.url)
+                else:
+                   flash('Invalid Password',category="danger")
+                   return redirect(request.url)
 
             except:
                 flash('Invalid Phone Number',category="danger")
@@ -202,8 +203,9 @@ def manager():
                if password==p:
                    global logged_in='m'
                    return render_template('manager_login.html')
-               flash('Invalid Password',category="danger")
-               return redirect(request.url)
+                else:
+                   flash('Invalid Password',category="danger")
+                   return redirect(request.url)
 
             except:
                 flash('Invalid Phone Number',category="danger")
