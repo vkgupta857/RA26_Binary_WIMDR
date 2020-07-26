@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Statistics - Waste Management</title>
+<title>Admin Panel - Waste Management</title>
 <style>
     .chart-container {
         max-height: 400px;
@@ -10,46 +10,121 @@
 </style>
 {% endblock %}
 
-
 {% block body %}
-<div class="container">
+<div class="container-fluid">
+    <!-- <div class="row my-4 text-center align-self-center align-items-center"> -->
+        <h3 class="text-center position-sticky">Dashboard</h3>
+        <hr>
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="week-chart-container" class="chart-container"></div>
+        <div class="col-md-3">
+            <div id="list-example" class="list-group position-sticky">
+                <a class="list-group-item list-group-item-action" href="{{ url_for('view') }}" target="_blank" rel="noopener noreferrer">Open Map View <i class="fa fa-"></i></a>
+            </div>
+            <br>
+            <div id="list-example" class="list-group position-sticky">
+                <a class="list-group-item list-group-item-action" href="#list-item-1">Item 1</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-2">Item 2</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <p class="text-primary"><b>Last 24 Hours</b></p>
+                            <p class="small font-weight-bold">
+                                High Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Medium Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Low Waste: <span class="text-secondary">100000+</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <p class="text-primary"><b>Last 24 Hours</b></p>
+                            <p class="small font-weight-bold">
+                                High Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Medium Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Low Waste: <span class="text-secondary">100000+</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <p class="text-primary"><b>Last 24 Hours</b></p>
+                            <p class="small font-weight-bold">
+                                High Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Medium Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Low Waste: <span class="text-secondary">100000+</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <div class="card text-center bg-light">
+                        <div class="card-body">
+                            <p class="text-primary"><b>Last Week</b></p>
+                            <p class="small font-weight-bold">
+                                High Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Medium Waste: <span class="text-secondary">100000+</span>
+                                <br>
+                                Low Waste: <span class="text-secondary">100000+</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h4 id="charts">Charts</h4>
+            <hr class="bg-dark">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="week-chart-container" class="chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="query-stats-chart-container" class="chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="monday-chart-container" class="chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="tuesday-chart-container" class="chart-container"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div id="monday-chart-container" class="chart-container"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div id="tuesday-chart-container" class="chart-container"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div id="query-stats-chart-container" class="chart-container"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <!-- Step 1 - Include the fusioncharts core library -->
@@ -251,7 +326,6 @@
         categories: [
             {
                 category: [
-
                     {
                         label: "Monday"
                     },

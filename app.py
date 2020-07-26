@@ -142,6 +142,10 @@ def view():
 def admin_panel():
     return render_template('admin_panel.html')
 
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    return render_template('admin_dashboard.html')
+
 @app.route('/slider')
 def slider():
     return render_template('slider.html')
