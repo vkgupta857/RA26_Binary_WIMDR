@@ -19,7 +19,7 @@ import the_database as thedb
 import requests as req
 import json
 import string
-
+import time
 
 app = Flask(__name__)
 
@@ -180,7 +180,7 @@ def admin():
             password = request.form['password']
             data=ndb.child('Managers').get()
             try:
-               p= data.val()([phone]['Password'])
+               p= data.val()[phone]['Password']
                if password==p:
                    global logged_in
                    logged_in = 'a'
@@ -203,7 +203,7 @@ def manager():
             password = request.form['password']
             data=ndb.child('Managers').get()
             try:
-               p= data.val()([phone]['Password'])
+               p=data.val()[phone]['Password']
                if password==p:
                    global logged_in
                    logged_in='m'
@@ -231,6 +231,16 @@ def add():
         row = request.json
         return(thedb.add_row(row))
 
+
+# api for adding data from csv to database
+@app.route('/csvtodb',mehods=['GET'])
+def cdvtodb():
+    start = time.time()
+    res = thedb.add_csv_data()
+    if res:
+        return(time.time()-start)
+    else:
+        return('Dikkat hai')
 
 @app.route('/api/json')
 def api_json():

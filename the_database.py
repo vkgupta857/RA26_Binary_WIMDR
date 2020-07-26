@@ -3,6 +3,7 @@ import sqlalchemy
 import pyrebase
 import os
 # import employee_id
+import pandas as pd
 
 # Remember - storing secrets in plaintext is potentially unsafe. Consider using
 # something like https://cloud.google.com/kms/ to help keep secrets secret.
@@ -84,6 +85,30 @@ def add_row(row):
         return("Error")
     
     return("Database Updated")
+
+
+
+def add_csv_data():
+    df = pd.read_csv('new_reports.csv')
+    
+    try:
+        for i in range(15000,15999):
+            stmt = sqlalchemy.text(
+            "INSERT INTO reports"
+            "(state, district, lattitude, longitude, report_time, label, pick_time, resolved, emp_ID, filename)"
+            "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
+        )
+            
+            
+            with rdb.connect() as conn:
+                conn.execute(stmt, state=df['state'][i], district=df['district'][i], 
+                             lattitude=df['lattitude'][i], longitude=df['longitude'][i], 
+                             report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i], 
+                             resolved=df['resolved'][i], emp_ID=df['emp_ID'][i], filename=df['filename'][i])
+    except:
+        return(False)
+    
+    return(True)
 
 
 class MainQuery:
