@@ -16,7 +16,7 @@ This is an AI based drone software for geo tracking of wastes. The solution soft
 
 ## Data Flow
 
-![Data flow diagram](app/static/images/dfd.png)
+![Data flow diagram](static/images/dfd.png)
 
 
 ## Team Members
