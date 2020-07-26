@@ -171,7 +171,6 @@ def statistics():
 
 
 
-
 logged_in = 'n'
 
 @app.route('/admin',methods=['GET','POST'])
@@ -231,7 +230,7 @@ def add():
     if request.method == 'POST':
         row = request.json
         return(thedb.add_row(row))
-    
+
 
 @app.route('/api/json')
 def api_json():
