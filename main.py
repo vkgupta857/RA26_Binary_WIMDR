@@ -205,9 +205,10 @@ def login():
                    if password==p:
                        logged_in = 'm'
                        type="Manager"
+                       name=data.val()[phone]['Name']
                        id=data.val()[phone]['Emp_ID']
                        rating=3
-                       return render_template('Mlogin.html',type=type,id=id,rating=rating)
+                       return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
