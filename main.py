@@ -239,9 +239,18 @@ def csvtodb():
     r = thedb.add_csv_data()
     return(r)
 
+@app.route('/check',methods=['GET'])
+def check():
+    r = thedb.check()
+    d = {'label':[], 'count':[]}
+    for row in r:
+        d['label'].append(row[0])
+        d['count'].append(row[1])
+    return(d)
+
 # Route for reports
 @app.route('/reports', methods= ['GET', 'POST'])
-def api_report_weekly():
+def reports():
     if request.method == 'POST':
         state = request.form['state']
         city = request.form['city']
@@ -249,10 +258,41 @@ def api_report_weekly():
 
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
+        if duration == 'date':
+            start_date = request.form['startDate']
+            end_date = request.form['endDate']
+        else:
+            if duration == 'week':
+                end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime'].split('T')[0]
+                start_date = date_before_n_days(7)
+            elif duration == 'month':
+                end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime'].split('T')[0]
+                start_date = date_before_n_days(30)
+            elif duration == '3_months':
+                end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime'].split('T')[0]
+                start_date = date_before_n_days(90)
+            elif duration == 'year':
+                end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime'].split('T')[0]
+                start_date = date_before_n_days(365)
+        # here we got the pair of dates to run queries
 
-        start_date = request.form['startDate']
-        end_date = request.form['endDate']
-        # start_date and end_date will have values only when duration == "date"
+        if state == 'all':
+            # when no state is chosen
+            # call function to select all records between start_date and end_date
+            m = thedb.MainQuery(state='all', district='all', start_date=start_date, end_date=end_date)
+        else:
+            # when a state is chosen
+            if district == 'all':
+                # when no district is chosen
+                m = thedb.MainQuery(state=state, district='all', start_date=start_date, end_date=end_date)
+                # call function to select all records in mentioned state
+                # and between start_date and end_date
+            else:
+                # when district is chosen
+                m = thedb.MainQuery(state=state, district=district, start_date=start_date, end_date=end_date)
+                # call function to select all records in mentioned state and district
+                # and between start_date and end_date
+
         response = {}
         response['state'] = state
         response['city'] = city
