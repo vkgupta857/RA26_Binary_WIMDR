@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block head%}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style type="text/css">
+    .checked {
+  color: orange;
+}
+  </style>
+{% endblock %}
+{% block body %}
+<body>
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top" style="box-shadow: 10px 10px 5px grey;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;"><h3>Waste Management</h3></a>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link active" href="/index">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/login">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/reports">
+                     Reports
+                     </a>
+                  </li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+	<br>
+	<h4 class="text-center">Welcome "Name" </h4>
+  <div class="row" style="padding-left: 30%; margin-top: 2%;">
+        <div class="col-lg-8 mb-4 contact-left">
+ <form name="sentMessage" id="contactForm" action="">
+            <div class="control-group form-group">
+              <div class="controls">
+                <label><h6>Employee type:</h6></label>
+                {{type}}
+              </div>
+            </div>
+              <div class="control-group form-group">
+              <div class="controls">
+                <label><h6>Employee Id:</h6></label>
+                 {{id}}
+                <p class="help-block"></p>
+              </div>
+            </div><hr><br>
+                <div class="control-group form-group">
+              <div class="controls">
+                <label><h6>Your Rating:</h6></label>
+               <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+                <p class="help-block"></p>
+              </div>
+            </div>
+            <hr><br>
+            <div id="success"></div>
+            <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Sign Out</button>
+          </form>
+ 
+</div></div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top" style="box-shadow: 10px 10px 5px grey;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;"><h3>Waste Management</h3></a>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link active" href="/index">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/login">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/upload">
+                     Upload
+                     </a>
+                  </li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+      <div class="row" style="padding-left: 30%; margin-top: 2%;">
+        <div class="col-lg-8 mb-4 contact-left">
+          <h3>Login</h3>
+          <hr><br>
+          <form name="sentMessage" id="contactForm" action="/login" method="post">
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Phone Number:</label>
+                <input type="text" pattern="[1-9]{1}[0-9]{9}" class="form-control" id="phone" name="phone" required data-validation-required-message="Please enter your phone number.">
+              </div>
+            </div>
+              <div class="control-group form-group">
+              <div class="controls">
+                <label>Password:</label>
+                <input type="Password" class="form-control" id="Password" name="password" required data-validation-required-message="Please enter you password.">
+                <p class="help-block"></p>
+              </div>
+            </div><hr><br>
+                <div class="control-group form-group">
+              <div class="controls">
+                <label>Login as:</label>
+                <select class="form-control" id="Password" name="login" required>
+                  <option>Manager</option>
+                  <option>Admin</option>
+                </select>
+                <p class="help-block"></p>
+              </div>
+            </div>
+            <hr><br>
+            <div id="success"></div>
+            <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- Contact Form -->
+      <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+{% endblock %}

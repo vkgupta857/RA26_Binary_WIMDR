@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% block head%}
+<title>Welcome to Waste management</title>
+{% endblock %}
+{% block body %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top" style="box-shadow: 10px 10px 5px grey;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;"><h3>Waste Management</h3></a>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link active" href="/index">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/login">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/upload">
+                     Upload
+                     </a>
+                  </li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+<header class="slider-main">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style="background-image: url('static/images/swach1.png')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>"Clean India, Green India!"</h3>
+                    <h4>The only way to discover the limits of the possible is to go beyond them into the impossible.
+                    </h4>
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('static/images/pck.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+
+                    <h5>At 773kg per head, the country generates 12% of global MSW, approximately 239 million tonnes,
+                        while
+                        only accounting for 4% of the world's population. The unprivileged often indulge in rag picking
+                        for
+                        negligible amount hiking rates of child labour, illiteracy, unemployment and poor health.</h5>
+                    <h4>"Let's be the change!""</h4>
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+<!-- Page Content -->
+<div class="container" id="about">
+
+    <!-- About Section -->
+    <div class="about-main">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Welcome to Geo Tracking Software</h2>
+                <p>This is an AI based drone software for geo tracking of wastes. With the availability of drone the
+                    municipal coorporation can keep track of waste and get automatic generated report and implement
+                    waste
+                    management within 24 hours.</p>
+                <h5>Our smart approach</h5>
+                <ul>
+                    <li>Detect if there is waste in the image and classify if its high waste, medium waste or low waste.
+                    </li>
+                    <li>Tag the image with its location and update the database with waste quality, location, date and
+                        timing
+                        of the image.</li>
+                    <li>Send an alert to the nearest waste management Government officer for quick action.</li>
+                    <li>Create a map visualization for detecting areas with high waste. The visualisation varied with
+                        time
+                        would also be provided.</li>
+                    <li>Provide statistical graphs depicting waste management reports over the week.</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <br><br><br><br>
+                <img class="img-fluid rounded" src="{{ url_for('static', filename='images/wastemanagement.jpeg')}}" alt="" />
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- Portfolio Section -->
+
+    <hr>
+    <!-- Get In Touch Now Section -->
+    <div class="services-bar">
+        <h1 class="my-4">Our Services </h1>
+        <!-- Services Section -->
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Upload a waste Query</h4>
+                    <div class="card-img">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/cleancity.jpg')}}" alt="" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Apart from the waste reported by our drone service you as a citizen can
+                            also
+                            upload a complain if you find wastes dumped in your vicinity.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Get Updates</h4>
+                    <div class="card-img">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/poster1.jpg')}}" alt="" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Get updated about all the waste reported and cleaned up by the municipality
+                            within specified time through our reports.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Do your bit!</h4>
+                    <div class="card-img">
+                        <img class="img-fluid" src="{{ url_for('static', filename='images/bins.jpg')}}" alt="" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">It is a duty of each one of us to keep our cities clean by not dumping
+                            wastes
+                            anywhere but in bins and reporting litter found around us.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+<!-- /.container -->
+<hr>
+    <div class="container">
+  <div class="team-members-box" id="contact">
+      <h2>Our Team</h2>
+      <div class="row">
+        <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/pj.jpg')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Prashant Jha</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/anjali.jpeg')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Anjali Nayak</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/harshika.jpeg')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Harshika Urkude</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+
+            <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/mansee.jpeg')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Mansee Agrawal</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+
+            <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/vinod.png')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Vinod Gupta</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+
+            <div class="col-lg-2 mb-2">
+          <div class="card text-center">
+          <img class="card-img-top" src="{{ url_for('static', filename='images/vini.jpeg')}}" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Snigdha Singh</h5>
+
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    </div>
+{% endblock %}
