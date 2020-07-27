@@ -1,53 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css')}} " rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link href="{{ url_for('static', filename='css/all.css')}} " rel="stylesheet">
+    <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='css/style.css')}} " rel="stylesheet">
+
     {% block head %}
     {% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="myNav">
-        <div class="container">
-            <a href="/" class="navbar-brand">Waste Management</a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-labelledby="navbar toggler"
-                aria-expanded="false">
-                <i class="navbar-toggler-icon"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><b>Home</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/upload"><b>Upload</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin_panel"><b> Admin Panel </b></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=True) %}
         <!-- flash() should contain category in "primary", "danger", "warning" -->
-            {% if messages %}
-                {% for category,message in messages%}
-                    <div class="alert alert-{{ category }} alert-dismissible text-center">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category,message in messages%}
+        <div class="alert alert-{{ category }} alert-dismissible text-center">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
     </div>
 
@@ -55,15 +39,36 @@
     <!--Main contents-->
     {% endblock %}
 
-    <hr>
-    <footer class="container my-2">
-            <p class=" text-center">
-                &copy; 2020 Binary. All rights reserved. This website is responsive for mobile devices.
+    <!--footer starts from here-->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <a href="#"><img src="{{ url_for('static', filename='images/footer-logo.png')}}" alt="" /></a>
+            </div>
+            <!--foote_bottom_ul_amrc ends here-->
+            <p class="copyright text-center">All Rights Reserved. &copy; 2020 <a href="#">Team Binary</a>
             </p>
+            <ul class="social_footer_ul">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            <!--social_footer_ul ends here-->
+        </div>
     </footer>
-    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
+    <!-- Bootstrap core JavaScript -->
+
+    <!-- Added by ## Snigdha ## -->
+
+    <!-- <script src="{{ url_for('static', filename='vendor/jquery/js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> -->
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <!-- Contact form JavaScript -->
+    <!-- <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js')}}"></script> -->
+    <!-- <script src="{{ url_for('static', filename='js/contact_me.js')}}"></script> -->
 </body>
 
 </html>
