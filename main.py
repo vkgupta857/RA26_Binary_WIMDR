@@ -239,17 +239,29 @@ def csvtodb():
     r = thedb.add_csv_data()
     return(r)
 
-@app.route('/api/json')
-def api_json():
-    response = {}
-    response['data'] = ['1','2','3']
-    return json.dumps(response)
-
-@app.route('/api/report/weekly')
+# Route for reports
+@app.route('/reports', methods= ['GET', 'POST'])
 def api_report_weekly():
-    response = {}
-    response['data'] = ['1','2','3']
-    return json.dumps(response)
+    if request.method == 'POST':
+        state = request.form['state']
+        city = request.form['city']
+        duration = request.form['duration']
+
+        # duration can be "week", "month", "3_months", "year" or "date"
+        # if duration == "date" then start_date and end_date will have values
+
+        start_date = request.form['startDate']
+        end_date = request.form['endDate']
+        # start_date and end_date will have values only when duration == "date"
+        response = {}
+        response['state'] = state
+        response['city'] = city
+        response['duration'] = duration
+        response['startDate'] = start_date
+        response['endDate'] = end_date
+        return json.dumps(response)
+
+    return render_template('reports.html')
 
 ###########
 # Run App

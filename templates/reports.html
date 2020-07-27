@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Reports - Waste Management</title>
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript">
+
+    var countries = Object();
+
+    countries['Madhya Pradesh'] = 'Agar Malwa| Alirajpur| Anuppur | Ashok Nagar| Balaghat| Barwani|Betul|Bhind| Bhopal| Burhanpur|Chachaura-Binaganj|Chhatarpur|Chhindwara|Damoh|Datia|Dewas|Dhar|Dindori|Guna|Gwalior|Harda|Hoshangabad|Indore|Jabalpur|Jhabua|Katni|Khandwa|Khargone|Maihar|Mandla|Mandsaur|Morena|Narsinghpur|Nagda|Neemuch|Niwari|Panna|Raisen|Rajgarh|Ratlam|Rewa|Sagar|Satna|Sehore|Seon|Shahdol|Shajapur|Sheopur|Shivpuri|Sidhi|Singrauli|Tikamgarh|Ujjain|Umaria|Vidisha';
+
+    countries['Rajasthan'] = 'Ajmer|Alwar|Bikaner|Barmer|Banswara|Bharatpur|Baran|Bundi|Bhilwara|Churu| Chittorgarh|Dausa|Dholpur|Dungarpur|Ganganagar|Hanumangarh|Jhunjhunu|Jalore| Jodhpur|Jaipur|Jaisalmer|Jhalawar|Karauli|Kota|Nagaur|Pali|Pratapgarh|Rajsamand|Sikar|Sawai Madhopur|Sirohi|Tonk|Udaipur';
+
+    countries['Maharashtra'] = 'Ahmednagar|Akola|Amravati|Aurangabad|Beed|Bhandara|Buldhana|Chandrapur|Dhule| Gadchiroli|Gondia|Hingoli|Jalgaon|Jalna|Kolhapur|Latur|Mumbai City|Mumbai suburban|Nanded|Nandurbar| Nagpur|Nashik|Osmanabad|Palghar|Parbhani|Pune|Raigad|Ratnagiri|Sangli|Satara|Sindhudurg| Solapur|Thane|Wardha|Washim|Yavatmal';
+
+    countries['Gujarat'] = 'Ahmedabad|Amreli|Anand|Aravalli|Banaskantha|Bharuch|Bhavnagar|Botad|Chhota Udepur|Dahod|Dang|Devbhoomi Dwarka|Gandhinagar|Gir Somnath|Jamnagar|Junagadh|Kheda|Kutch|Mahisagar |Mehsana|Morbi|Narmada|Navsari|Panchmahal|Patan|Porbandar|Rajkot|Sabarkantha|Surat|Surendranagar|Tapi| Vadodara|Valsad';
+
+    countries['Uttar Pradesh'] = 'Agra|Aligarh|Prayagraj|Ambedkar Nagar|Amethi|Amroha|Auraiya|Azamgarh|Bagpat|Bahraich|Ballia|Balrampur|Banda|Barabanki|Bareilly|Basti|Bhadohi|Bijnor|Budaun|Bulandshahr|Chandauli|Chitrakoot|Deoria|Etah|Etawah|Ayodhya|Farrukhabad|Fatehpur|Firozabad|Gautam Buddh Nagar|Ghaziabad|Ghazipur|Gonda|Gorakhpur|Hamirpur|Hapur|Hardoi|Hathras|Jalaun|Jaunpur|Jhansi|Kannauj|Kanpur Dehat|Kanpur Nagar|Kasganj|Kaushambi|Kushinagar|Lakhimpur Kheri|Lalitpur|Lucknow|Maharajganj| Mahoba|Mainpuri|Mathura|Mau|Meerut|Mirzapur|Moradabad|Muzaffarnagar|Pilibhit|Pratapgarh|Raebareli|Rampur|Saharanpur|Sambhal| Sant Kabir Nagar|Shahjahanpur|Shamli|Shravasti|Siddharthnagar|Sitapur|Sonbhadra|Sultanpur|Unnao|Varanasi';
+
+
+    function setRegions() {
+        for (region in countries)
+            document.write('<option value="' + region + '">' + region + '</option>');
+    }
+
+    function set_country(oRegionSel, oCountrySel) {
+        var countryArr;
+        oCountrySel.length = 0;
+        var region = oRegionSel.options[oRegionSel.selectedIndex].text;
+        if (countries[region]) {
+            oCountrySel.disabled = false;
+            oCountrySel.options[0] = new Option('Select city', '');
+            countryArr = countries[region].split('|');
+            for (var i = 0; i < countryArr.length; i++)
+                oCountrySel.options[i + 1] = new Option(countryArr[i], countryArr[i]);
+        }
+        else oCountrySel.disabled = true;
+    }
+
+    function enable(dd, custom, end) {
+        if (dd.value == "date") {
+            custom.disabled = false;
+            end.disabled = false;
+        }
+    }
+</script>
+<style>
+    form {
+        margin: 2%;
+        padding: 10px;
+
+    }
+
+    select {
+        padding: 10px;
+        width: 190px;
+        background-color: rgb(250, 250, 250);
+
+    }
+
+    #play-button {
+        position: absolute;
+        background: green;
+        opacity: 0.8;
+        border-radius: 3px;
+        border: none;
+        color: white;
+        margin: 0;
+        padding: 0 12px;
+        width: 60px;
+        cursor: pointer;
+        height: 30px;
+    }
+
+    #play-button:hover {
+        background-color: grey;
+    }
+
+    .ticks {
+        font-size: 10px;
+    }
+
+    .track,
+    .track-inset,
+    .track-overlay {
+        stroke-linecap: round;
+    }
+
+    .track {
+        stroke: #000;
+        stroke-opacity: 0.3;
+        stroke-width: 10px;
+    }
+
+    .track-inset {
+        stroke: #dcdcdc;
+        stroke-width: 8px;
+    }
+
+    .track-overlay {
+        pointer-events: stroke;
+        stroke-width: 50px;
+        stroke: transparent;
+        cursor: crosshair;
+    }
+
+    .handle {
+        fill: #fff;
+        stroke: #000;
+        stroke-opacity: 0.5;
+        stroke-width: 1.25px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form onsubmit="addFilters()">
+            STATE&raquo; <select class="btn btn-default dropdown-toggle" onchange="set_country(this,country)" size="1"
+                name="region" id="stateId">
+                <option value="" selected="selected">Select state</option>
+                <script type="text/javascript">
+                    setRegions(this);
+                </script>
+            </select>
+            CITY&raquo; <select class="btn btn-default dropdown-toggle" name="country" size="1" disabled="disabled"
+                onchange="" id="city"></select>
+
+            DURATION&raquo; <select class="btn btn-default dropdown-toggle" name="duration" size="1"
+                onchange="enable(this,custom,end)" id="duration">
+                <option selected="selected" value="">Add date</option>
+                <option value="week">Last Week</option>
+                <option value="month">Last Month</option>
+                <option value="3_months">Last 3 Months</option>
+                <option value="year">Last 1 Year</option>
+                <option value="date">Add custom date</option>
+            </select>
+            START DATE&raquo;
+
+            <input type="date" id="custom" value="start" disabled="disabled" />
+
+            END DATE&raquo;
+            <input type="date" id="end" value="end" disabled="disabled" />
+
+            <button class="btn btn-sm btn-primary" onclick="addFilters()">Apply Filters</button>
+
+        </form>
+
+    </div>
+    <br>
+    <div class="row">
+        <div id="mapHolder" style="margin-left:25%; " class="border-primary"></div>
+        <br>
+        <div id="vis" style="margin-left: 15%;">
+            <button id="play-button">Play</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function addFilters(){
+        event.preventDefault();
+        var state = document.getElementById('stateId').value;
+        var city = document.getElementById('city').value;
+        var duration = document.getElementById('duration').value;
+        var startDate = document.getElementById('custom').value;
+        var endDate = document.getElementById('end').value;
+        if(duration != "date"){
+            startDate = null;
+            endDate =null;
+        }
+        console.log(state,city);
+        $.ajax({
+            url: '/reports',
+            type: 'POST',
+            data: {
+                state: state,
+                city: city,
+                duration: duration,
+                startDate: startDate,
+                endDate: endDate
+            },
+            success: function(data){
+                console.log(data);
+            },
+            error: function(xhr){
+                console.log("Error occured:",xhr.status, xhr.statusText);
+            }
+        })
+    }
+
+
+    var mapholder = document.getElementById('mapHolder');
+
+    var lat = 23.1865125479351;
+    var lon = 79.9222097271876;
+    var latlon = new google.maps.LatLng(lat, lon)
+
+    mapholder.style.height = '400px';
+    mapholder.style.width = '50%';
+    var myOptions = {
+        center: latlon, zoom: 11,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+    };
+
+    var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+    var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+
+
+    var iconBase =
+        'http://maps.google.com/mapfiles/ms/icons/';
+
+    var icons = {
+        parking: {
+            icon: iconBase + 'green-dot.png'
+        },
+        library: {
+            icon: iconBase + 'library_maps.png'
+        },
+        info: {
+            icon: iconBase + 'info-i_maps.png'
+        }
+    };
+
+    var features = [
+        {
+            position: new google.maps.LatLng(23.1347137792272, 79.9275922311487),
+            type: 'parking'
+        },
+        {
+            position: new google.maps.LatLng(23.1343797088188, 79.9523614706786),
+            type: 'parking'
+        },
+        {
+            position: new google.maps.LatLng(23.1489899880513, 79.9578763369043),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1856789349634, 79.9340803804423),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1559404833981, 79.9602806472936),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1456874101371, 79.9302366208966),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.148635476047, 79.939527523307),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1968509446193, 79.9208526115602),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2301784279883, 80.0016139567814),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1865125471443, 79.9222097271876),
+            type: 'parking'
+        },
+        {
+            position: new google.maps.LatLng(23.1316495394136, 79.9445355747984),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1895486440379, 79.9221158828296),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1573365912971, 79.9484623891406),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.136163906154, 23.136163906154),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1369307508016, 79.9414282743248),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1727464960143, 79.9910974486153),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1486192051069, 80.0026714942545),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1531149888702, 79.9342859487367),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1167438348741, 79.9520082160492),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1889701697534, 79.9194404400441),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2318370186875, 80.0006429944103),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1673166117458, 79.9199472512678),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1598206580546, 79.9530009019027),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.148966713523, 79.9250629976011),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1489922123079, 79.9328874032764),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2229221110266, 79.9558788702489),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1661369836167, 79.9500098381075),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1283838180702, 79.9264675404524),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2042085836174, 80.0025683375299),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1742523566202, 79.9447690548094),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.153330023633, 79.9438465709483),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1674633776567, 79.9536677910141),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1450205168197, 80.0009106016124),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1096112723544, 79.9425511192861),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2367835590909, 79.9914443150981),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.23686437111, 79.9974876425087),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.140904673967, 79.95300835849),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2367182306954, 79.9927946721153),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1462246582193, 79.9559089841399),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1473733250387, 79.9384294053473),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1399169112467, 79.9923572955649),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1540975688393, 79.9322843439685),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1752194209085, 79.9474869306355),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.2522608955174, 80.0017156942687),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1785151643536, 79.9240567189027),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1826048168109, 79.9280192920823),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1113590946941, 79.9452423275064),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.163086522606, 79.9462291467891),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.1501613232353, 79.9454819352444),
+            type: 'parking'
+        }, {
+            position: new google.maps.LatLng(23.187380568543, 80.0008778100509),
+            type: 'parking'
+        }
+    ];
+
+    var formatDateIntoYear = d3.timeFormat("%d %b");
+    var formatDate = d3.timeFormat("%d %b %Y");
+    var parseDate = d3.timeParse("%m/%d/%y");
+
+    var startDate = new Date("2020-01-08"),
+        endDate = new Date("2020-02-26");
+
+    var margin = { top: 50, right: 50, bottom: 0, left: 50 },
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select("#vis")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+
+    ////////// slider //////////
+
+    var moving = false;
+    var currentValue = 0;
+    var targetValue = width;
+
+    var playButton = d3.select("#play-button");
+
+    var x = d3.scaleTime()
+        .domain([startDate, endDate])
+        .range([0, targetValue])
+        .clamp(true);
+
+    var slider = svg.append("g")
+        .attr("class", "slider")
+        .attr("transform", "translate(" + margin.left + "," + height / 5 + ")");
+
+    slider.append("line")
+        .attr("class", "track")
+        .attr("x1", x.range()[0])
+        .attr("x2", x.range()[1])
+        .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-inset")
+        .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+            .on("start.interrupt", function () { slider.interrupt(); })
+            .on("start drag", function () {
+                currentValue = d3.event.x;
+                update(x.invert(currentValue));
+            })
+        );
+
+    slider.insert("g", ".track-overlay")
+        .attr("class", "ticks")
+        .attr("transform", "translate(0," + 18 + ")")
+        .selectAll("text")
+        .data(x.ticks(10))
+        .enter()
+        .append("text")
+        .attr("x", x)
+        .attr("y", 10)
+        .attr("text-anchor", "middle")
+        .text(function (d) { return formatDateIntoYear(d); });
+
+    var handle = slider.insert("circle", ".track-overlay")
+        .attr("class", "handle")
+        .attr("r", 9);
+
+    var label = slider.append("text")
+        .attr("class", "label")
+        .attr("text-anchor", "middle")
+        .text(formatDate(startDate))
+        .attr("transform", "translate(0," + (-25) + ")")
+
+
+    ////////// plot //////////
+
+    var dataset;
+
+    var plot = svg.append("g")
+        .attr("class", "plot")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var i = 0;
+
+    d3.csv("https://raw.githubusercontent.com/vkgupta857/cdk-binary/snigdha73/data.csv?token=AKIEOUETYJE645RPT67Q6SC7EVG6G", prepare, function (data) {
+        dataset = data;
+        drawPlot(dataset);
+
+        playButton
+            .on("click", function () {
+                var button = d3.select(this);
+                if (button.text() == "Pause") {
+                    moving = false;
+                    clearInterval(timer);
+                    // timer = 0;
+                    button.text("Play");
+                } else {
+
+                    moving = true;
+                    timer = setInterval(step, 500);
+                    button.text("Pause");
+                }
+                console.log("Slider moving: " + moving);
+            })
+    })
+
+    function prepare(d) {
+
+
+        d.id = d.id;
+        d.date = parseDate(d.date);
+        return d;
+    }
+
+    function step() {
+        update(x.invert(currentValue));
+
+        currentValue = currentValue + (targetValue / 50);
+
+        if (currentValue > targetValue) {
+
+
+            moving = false;
+            currentValue = 0;
+            clearInterval(timer);
+
+
+            // timer = 0;
+            playButton.text("Play");
+            console.log("Slider moving: " + moving);
+        }
+        var marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+        });
+
+        i = i + 1;
+
+    }
+
+
+    function drawPlot(data) {
+        var locations = plot.selectAll(".location")
+            .data(data);
+
+        locations.exit()
+            .remove();
+    }
+
+    function update(h) {
+
+
+        // update position and text of label according to slider scale
+        handle.attr("cx", x(h));
+        label
+            .attr("x", x(h))
+            .text(formatDate(h));
+
+
+        // filter data set and redraw plot
+        var newData = dataset.filter(function (d) {
+            return d.date < h;
+        })
+        drawPlot(newData);
+    }
+
+
+
+</script>
+<!-- Bootstrap core JavaScript -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Contact form JavaScript -->
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/contact_me.js"></script>
+
+{% endblock %}
