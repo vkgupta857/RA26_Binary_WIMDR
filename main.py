@@ -20,6 +20,8 @@ import requests as req
 import json
 import string
 import time
+import datetime
+
 
 app = Flask(__name__)
 
@@ -57,6 +59,12 @@ ndb = firebase.database()
 ######################
 # App Routes Section
 ######################
+def date_before_n_days(n):
+    tod = datetime.datetime.now()
+    d = datetime.timedelta(days = n)
+    a = str(tod - d).split('.')[0]
+    return(a)
+
 def get_filename():
     length = 5
     letters = string.ascii_letters
@@ -121,7 +129,7 @@ def upload():
 
             #classification
             url = 'https://waste-classification-api.el.r.appspot.com/' + filename
-            status = req.get(url).text[0]
+            status = req.get(url).text[1]
 
             # getting date and time
             dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
@@ -233,14 +241,10 @@ def add():
 
 
 # api for adding data from csv to database
-@app.route('/csvtodb',mehods=['GET'])
-def cdvtodb():
-    start = time.time()
-    res = thedb.add_csv_data()
-    if res:
-        return(time.time()-start)
-    else:
-        return('Dikkat hai')
+@app.route('/csvtodb',methods=['GET'])
+def csvtodb():
+    r = thedb.add_csv_data()
+    return(r)
 
 @app.route('/api/json')
 def api_json():

@@ -91,24 +91,22 @@ def add_row(row):
 def add_csv_data():
     df = pd.read_csv('new_reports.csv')
     
-    try:
-        for i in range(15000,15999):
-            stmt = sqlalchemy.text(
+    
+    stmt = sqlalchemy.text(
             "INSERT INTO reports"
             "(state, district, lattitude, longitude, report_time, label, pick_time, resolved, emp_ID, filename)"
             "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
         )
-            
-            
+    for i in range(df.shape[0]):
+        try:
             with rdb.connect() as conn:
                 conn.execute(stmt, state=df['state'][i], district=df['district'][i], 
-                             lattitude=df['lattitude'][i], longitude=df['longitude'][i], 
-                             report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i], 
-                             resolved=df['resolved'][i], emp_ID=df['emp_ID'][i], filename=df['filename'][i])
-    except:
-        return(False)
-    
-    return(True)
+                         lattitude=str(df['lattitude'][i]), longitude=str(df['longitude'][i]), 
+                         report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i], 
+                         resolved=str(df['resolved'][i]), emp_ID=df['emp_ID'][i], filename=df['filename'][i])
+        except:
+            pass
+    return('Yess')
 
 
 class MainQuery:
