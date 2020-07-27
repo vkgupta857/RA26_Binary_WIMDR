@@ -169,62 +169,54 @@ def upload():
     # If request method is other than POST e.g. GET
     return render_template('upload.html')
 
-@app.route('/view')
-def view():
-    return render_template('view.html')
 
-@app.route('/statistics')
-def statistics():
-    return render_template('statistics.html')
-
-
-
+global logged_in
 logged_in = 'n'
 
-@app.route('/admin',methods=['GET','POST'])
-def admin():
+@app.route('/login',methods=['GET','POST'])
+def login():
     if request.method == 'POST':
             phone = request.form['phone']
             password = request.form['password']
-            data=ndb.child('Managers').get()
-            try:
-               p= data.val()[phone]['Password']
-               if password==p:
-                   global logged_in
-                   logged_in = 'a'
-                   return render_template('admin_login.html')
-               else:
-                   flash('Invalid Password',category="danger")
-                   return redirect(request.url)
+            login_as=request.form['login']
+            if login_as=="Admin":
 
-            except:
-                flash('Invalid Phone Number',category="danger")
-                return redirect(request.url)
+                data=ndb.child('Managers').get()
+                try:
+                   p= data.val()[phone]['Password']
+                   if password==p:
+                       logged_in = 'a'
+                       type="Admin"
+                       id=data.val()[phone]['Emp_ID']
+                       return render_template('Alogin.html',type=type,id=id)
+                   else:
+                       flash('Invalid Password',category="danger")
+                       return redirect(request.url)
 
-    return render_template('admin.html')
+                except:
+                    flash('Invalid Phone Number',category="danger")
+                    return redirect(request.url)
 
-@app.route('/manager',methods=['GET','POST'])
-def manager():
+            if login_as=="Manager":
 
-    if request.method == 'POST':
-            phone = request.form['phone']
-            password = request.form['password']
-            data=ndb.child('Managers').get()
-            try:
-               p=data.val()[phone]['Password']
-               if password==p:
-                   global logged_in
-                   logged_in='m'
-                   return render_template('manager_login.html')
-               else:
-                   flash('Invalid Password',category="danger")
-                   return redirect(request.url)
+                data=ndb.child('Managers').get()
+                try:
+                   p= data.val()[phone]['Password']
+                   if password==p:
+                       logged_in = 'm'
+                       type="Manager"
+                       id=data.val()[phone]['Emp_ID']
+                       rating=3
+                       return render_template('Mlogin.html',type=type,id=id,rating=rating)
+                   else:
+                       flash('Invalid Password',category="danger")
+                       return redirect(request.url)
 
-            except:
-                flash('Invalid Phone Number',category="danger")
-                return redirect(request.url)
+                except:
+                    flash('Invalid Phone Number',category="danger")
+                    return redirect(request.url)
 
-    return render_template('manager.html')
+    return render_template('login.html')
 
 
 ###############################################
