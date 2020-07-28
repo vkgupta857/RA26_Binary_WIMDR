@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
 {% block head%}
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style type="text/css">
-    .checked {
-  color: orange;
+
+
+table {
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #d4d4d4;
+  font-size: 20px;
+  background: #fff;
 }
+
+table th, 
+table tr:nth-child(2n+2) {
+  background: #e7e7e7;
+}
+ 
+table th, 
+table td {
+  padding: 20px 50px;
+}
+ 
+table th {
+  border-bottom: 1px solid #d4d4d4;
+}
+
   </style>
 {% endblock %}
 {% block body %}
-<body>
+    <!-- Navigation -->
+      <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top" style="box-shadow: 10px 10px 5px grey;">
         <div class="container">
             <a class="navbar-brand" href="/index">
@@ -26,36 +48,48 @@
                      <a class="nav-link" href="/login">Login</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/reports">
-                     Reports
+                      <a class="nav-link" href="/upload">
+                     Upload
                      </a>
                   </li>
                </ul>
             </div>
         </div>
     </nav>
-	<br>
-	<h4 class="text-center">Welcome "Name" </h4>
-  <div class="row" style="padding-left: 30%; margin-top: 2%;">
+	<br><br>
+	<h4 class="text-center">WELCOME TO THE PORTAL</h4><hr width="50%">
+  <div class="row" style="padding-left: 25%; margin-top: 2%;">
+
         <div class="col-lg-8 mb-4 contact-left">
+
  <form name="sentMessage" id="contactForm" action="">
-            <div class="control-group form-group">
-              <div class="controls">
-                <label><h6>Employee type:</h6></label>
-                {{type}}
-              </div>
-            </div>
-              <div class="control-group form-group">
-              <div class="controls">
-                <label><h6>Employee Id:</h6></label>
-                 {{id}}
-                <p class="help-block"></p>
-              </div>
-            </div><hr><br>
+
+ 	   <table>
+  <tbody>
+  	<tr class="">
+      <td>Employee Name: </td>
+    <td>{{name}}</td>
+    </tr>
+    <tr class="">
+      <td>Employee Type:</td>
+      <td>
+      {{type}}
+      </td>
+    </tr>
+       <tr class="">
+      <td>Employee Id</td>
+      <td>
+      {{id}}
+      </td>
+    </tr>
+  
+  </tbody>
+</table>
+
             <hr><br>
             <div id="success"></div>
             <!-- For success/fail messages -->
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Sign Out</button>
+            <button type="submit" class="btn btn-primary" id="sendMessageButton" onclick="">Sign Out</button>
           </form>
  
 </div></div>
