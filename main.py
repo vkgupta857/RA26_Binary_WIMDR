@@ -219,6 +219,68 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/graphs', methods= ['GET', 'POST'])
+def graphs():
+    if request.method == 'GET':
+        p_l=20
+        p_m=20
+        p_h=60
+        p_resolve_on_time=70
+        p_resolve_late=30
+
+    if request.method == 'POST':
+        state = request.form['state']
+        city = request.form['city']
+        duration = request.form['duration']
+
+        # duration can be "week", "month", "3_months", "year" or "date"
+        # if duration == "date" then start_date and end_date will have values
+        if duration == 'custom date':
+            start_date = request.form['start date']
+            end_date = request.form['end date']
+            p_l=20
+            p_m=20
+            p_h=60
+            p_resolve_on_time=70
+            p_resolve_late=30
+
+        else:
+            if duration == 'week':
+                    p_l=20
+                    p_m=20
+                    p_h=60
+                    p_resolve_on_time=70
+                    p_resolve_late=30
+
+            elif duration == 'month':
+                    p_l=20
+                    p_m=20
+                    p_h=60
+                    p_resolve_on_time=70
+                    p_resolve_late=30
+
+
+            elif duration == '3 months':
+                    p_l=20
+                    p_m=20
+                    p_h=60
+                    p_resolve_on_time=70
+                    p_resolve_late=30
+
+            elif duration == 'year':
+                    p_l=20
+                    p_m=20
+                    p_h=60
+                    p_resolve_on_time=70
+                    p_resolve_late=30
+
+        # here we got the pair of dates to run queries
+
+        return render_template('graph.html',p_l=p_l,p_m=p_m,p_h=p_h,p_resolve_on_time=p_resolve_on_time,p_resolve_late=p_resolve_late)
+    return render_template('graph.html',p_l=p_l,p_m=p_m,p_h=p_h,p_resolve_on_time=p_resolve_on_time,p_resolve_late=p_resolve_late)
+
+
+
 
 ###############################################
 # API Routes Section for Android app and AJAX requests
