@@ -253,8 +253,10 @@ def check():
 def reports():
     if request.method == 'POST':
         state = request.form['state']
-        city = request.form['city']
+        district = request.form['city']
         duration = request.form['duration']
+        start_date = None
+        end_date = None
 
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
@@ -293,9 +295,11 @@ def reports():
                 # call function to select all records in mentioned state and district
                 # and between start_date and end_date
 
+        print(m)
+
         response = {}
         response['state'] = state
-        response['city'] = city
+        response['city'] = district
         response['duration'] = duration
         response['startDate'] = start_date
         response['endDate'] = end_date

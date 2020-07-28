@@ -29,7 +29,7 @@
         var region = oRegionSel.options[oRegionSel.selectedIndex].text;
         if (countries[region]) {
             oCountrySel.disabled = false;
-            oCountrySel.options[0] = new Option('Select city', '');
+            oCountrySel.options[0] = new Option('All Cities', 'selected');
             countryArr = countries[region].split('|');
             for (var i = 0; i < countryArr.length; i++)
                 oCountrySel.options[i + 1] = new Option(countryArr[i], countryArr[i]);
@@ -114,27 +114,59 @@
 {% endblock %}
 
 {% block body %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
+    style="box-shadow: 10px 10px 5px grey;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reports">
+                        Reports
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
     <div class="row">
         <form onsubmit="addFilters()">
             STATE&raquo; <select class="btn btn-default dropdown-toggle" onchange="set_country(this,country)" size="1"
                 name="region" id="stateId">
-                <option value="" selected="selected">Select state</option>
+                <option value="all" selected="selected">All States</option>
                 <script type="text/javascript">
                     setRegions(this);
                 </script>
             </select>
             CITY&raquo; <select class="btn btn-default dropdown-toggle" name="country" size="1" disabled="disabled"
-                onchange="" id="city"></select>
+                onchange="" id="city">
+                <option selected="selected" value="all">All Cities</option>
+            </select>
 
             DURATION&raquo; <select class="btn btn-default dropdown-toggle" name="duration" size="1"
                 onchange="enable(this,custom,end)" id="duration">
-                <option selected="selected" value="">Add date</option>
+                <option selected="selected" value="all">All Time</option>
                 <option value="week">Last Week</option>
                 <option value="month">Last Month</option>
                 <option value="3_months">Last 3 Months</option>
                 <option value="year">Last 1 Year</option>
-                <option value="date">Add custom date</option>
+                <option value="date">Custom date range</option>
             </select>
             START DATE&raquo;
 
@@ -160,18 +192,27 @@
 
 <script>
 
-    function addFilters(){
+    function addFilters() {
         event.preventDefault();
         var state = document.getElementById('stateId').value;
         var city = document.getElementById('city').value;
         var duration = document.getElementById('duration').value;
         var startDate = document.getElementById('custom').value;
         var endDate = document.getElementById('end').value;
-        if(duration != "date"){
-            startDate = null;
-            endDate =null;
+        if(state == ""){
+            state = "all";
         }
-        console.log(state,city);
+        if(city == ""){
+            city = "all";
+        }
+        if(duration == ""){
+            duration = "all";
+        }
+        if (duration != "date") {
+            startDate = null;
+            endDate = null;
+        }
+        console.log(state, city);
         $.ajax({
             url: '/reports',
             type: 'POST',
@@ -182,11 +223,11 @@
                 startDate: startDate,
                 endDate: endDate
             },
-            success: function(data){
+            success: function (data) {
                 console.log(data);
             },
-            error: function(xhr){
-                console.log("Error occured:",xhr.status, xhr.statusText);
+            error: function (xhr) {
+                console.log("Error occured:", xhr.status, xhr.statusText);
             }
         })
     }
