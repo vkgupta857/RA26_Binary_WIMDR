@@ -188,15 +188,15 @@ END DATE&raquo;
         data: [
             {
                 label: "High Waste",
-                value: {{p_h}}
+                value: "{{params['p_h']}}"
             },
             {
                 label: "Medium Waste",
-                value: {{p_m}}
+                value: "{{params['p_m']}}"
             },
             {
                 label: "Low Waste",
-                value: {{p_l}}
+                value: "{{params['p_l']}}"
             }
         ]
     };
@@ -214,11 +214,11 @@ END DATE&raquo;
  data: [
             {
                 label: "Resolved in time",
-                value: {{p_resolve_on_time}}
+                value: "{{params['p_resolve_on_time']}}"
             },
             {
                 label: "Resolved late",
-                value: {{p_resolve_late}}
+                value: "{{params['p_resolve_late']}}"
             }
        
         ]
