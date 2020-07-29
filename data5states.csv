@@ -1,233 +1,230 @@
-MUNICIPALITY,STATE
-Agar Malwa,Madhya Pradesh
-Alirajpur,Madhya Pradesh
-Anuppur,Madhya Pradesh
-Ashok Nagar,Madhya Pradesh
-Balaghat,Madhya Pradesh
-Barwani,Madhya Pradesh
-Betul,Madhya Pradesh
-Bhind,Madhya Pradesh
-Bhopal,Madhya Pradesh
-Burhanpur,Madhya Pradesh
-Chachaura-Binaganj,Madhya Pradesh
-Chhatarpur,Madhya Pradesh
-Chhindwara,Madhya Pradesh
-Damoh,Madhya Pradesh
-Datia,Madhya Pradesh
-Dewas,Madhya Pradesh
-Dhar,Madhya Pradesh
-Dindori,Madhya Pradesh
-Guna,Madhya Pradesh
-Gwalior,Madhya Pradesh
-Harda,Madhya Pradesh
-Hoshangabad,Madhya Pradesh
-Indore,Madhya Pradesh
-Jabalpur,Madhya Pradesh
-Jhabua ,Madhya Pradesh
-Katni,Madhya Pradesh
-Khandwa,Madhya Pradesh
-Khargone,Madhya Pradesh
-Maihar,Madhya Pradesh
-Mandla,Madhya Pradesh
-Mandsaur,Madhya Pradesh
-Morena,Madhya Pradesh
-Narsinghpur,Madhya Pradesh
-Nagda,Madhya Pradesh
-Neemuch,Madhya Pradesh
-Niwari,Madhya Pradesh
-Panna,Madhya Pradesh
-Raisen,Madhya Pradesh
-Rajgarh,Madhya Pradesh
-Ratlam,Madhya Pradesh
-Rewa,Madhya Pradesh
-Sagar,Madhya Pradesh
-Satna,Madhya Pradesh
-Sehore,Madhya Pradesh
-Seoni,Madhya Pradesh
-Shahdol,Madhya Pradesh
-Shajapur,Madhya Pradesh
-Sheopur,Madhya Pradesh
-Shivpuri,Madhya Pradesh
-Sidhi,Madhya Pradesh
-Singrauli,Madhya Pradesh
-Tikamgarh,Madhya Pradesh
-Ujjain,Madhya Pradesh
-Umaria,Madhya Pradesh
-Vidisha,Madhya Pradesh
-Ahmednagar,Maharashtra
-Akola,Maharashtra
-Amravati,Maharashtra
-Aurangabad,Maharashtra
-Beed,Maharashtra
-Bhandara,Maharashtra
-Buldhana,Maharashtra
-Chandrapur,Maharashtra
-Dhule,Maharashtra
-Gadchiroli,Maharashtra
-Gondia,Maharashtra
-Hingoli,Maharashtra
-Jalgaon,Maharashtra
-Jalna,Maharashtra
-Kolhapur,Maharashtra
-Latur,Maharashtra
-Mumbai City,Maharashtra
-Mumbai suburban,Maharashtra
-Nanded,Maharashtra
-Nandurbar,Maharashtra
-Nagpur,Maharashtra
-Nashik,Maharashtra
-Osmanabad,Maharashtra
-Palghar,Maharashtra
-Parbhani,Maharashtra
-Pune,Maharashtra
-Raigad,Maharashtra
-Ratnagiri,Maharashtra
-Sangli,Maharashtra
-Satara,Maharashtra
-Sindhudurg,Maharashtra
-Solapur,Maharashtra
-Thane,Maharashtra
-Wardha,Maharashtra
-Washim,Maharashtra
-Yavatmal,Maharashtra
-Ajmer,Rajasthan
-Alwar ,Rajasthan
-Bikaner,Rajasthan
-Barmer,Rajasthan
-Banswara,Rajasthan
-Bharatpur,Rajasthan
-Baran,Rajasthan
-Bundi,Rajasthan
-Bhilwara,Rajasthan
-Churu,Rajasthan
-Chittorgarh,Rajasthan
-Dausa,Rajasthan
-Dholpur,Rajasthan
-Dungarpur,Rajasthan
-Ganganagar,Rajasthan
-Ganganagar,Rajasthan
-Hanumangarh,Rajasthan
-Jhunjhunu,Rajasthan
-Jalore,Rajasthan
-Jodhpur,Rajasthan
-Jaipur,Rajasthan
-Jaisalmer,Rajasthan
-Jhalawar,Rajasthan
-Karauli,Rajasthan
-Kota,Rajasthan
-Nagaur,Rajasthan
-'Pali,Rajasthan
-Pratapgarh,Rajasthan
-Rajsamand,Rajasthan
-Sikar,Rajasthan
-Sawai Madhopur,Rajasthan
-Sirohi,Rajasthan
-Tonk,Rajasthan
-Udaipur,Rajasthan
-Agra,Uttar Pradesh
-Aligarh,Uttar Pradesh
-Prayagraj,Uttar Pradesh
-Ambedkar Nagar,Uttar Pradesh
-Amethi,Uttar Pradesh
-Amroha,Uttar Pradesh
-Auraiya,Uttar Pradesh
-Azamgarh,Uttar Pradesh
-Bagpat,Uttar Pradesh
-Bahraich,Uttar Pradesh
-Ballia,Uttar Pradesh
-Balrampur,Uttar Pradesh
-Banda,Uttar Pradesh
-Barabanki,Uttar Pradesh
-Bareilly,Uttar Pradesh
- Basti,Uttar Pradesh
-Bhadohi,Uttar Pradesh
-Bijnor,Uttar Pradesh
-Budaun,Uttar Pradesh
-Bulandshahr,Uttar Pradesh
-Chandauli,Uttar Pradesh
-Chitrakoot,Uttar Pradesh
-Deoria,Uttar Pradesh
-Etah,Uttar Pradesh
-Etawah,Uttar Pradesh
-Ayodhya,Uttar Pradesh
-Farrukhabad,Uttar Pradesh
-Fatehpur,Uttar Pradesh
-Firozabad,Uttar Pradesh
-Gautam Buddh Nagar,Uttar Pradesh
-Ghaziabad,Uttar Pradesh
-Ghazipur,Uttar Pradesh
-Gonda,Uttar Pradesh
-Gorakhpur,Uttar Pradesh
-Hamirpur,Uttar Pradesh
-Hardoi,Uttar Pradesh
-Hathras,Uttar Pradesh
-Jalaun,Uttar Pradesh
-Jaunpur,Uttar Pradesh
-Jhansi,Uttar Pradesh
-Kannauj,Uttar Pradesh
-Kanpur Dehat,Uttar Pradesh
-Kanpur Nagar,Uttar Pradesh
-Kasganj,Uttar Pradesh
-Kaushambi,Uttar Pradesh
-Kushinagar,Uttar Pradesh
-Lakhimpur Kheri,Uttar Pradesh
-Lalitpur,Uttar Pradesh
-Lucknow,Uttar Pradesh
-Maharajganj,Uttar Pradesh
-Mahoba,Uttar Pradesh
-Mainpuri,Uttar Pradesh
-Mathura,Uttar Pradesh
-Mau,Uttar Pradesh
-Meerut,Uttar Pradesh
-Mirzapur,Uttar Pradesh
-Moradabad,Uttar Pradesh
-Muzaffarnagar,Uttar Pradesh
-Pilibhit,Uttar Pradesh
-Pratapgarh,Uttar Pradesh
-Raebareli,Uttar Pradesh
-Rampur,Uttar Pradesh
-Saharanpur,Uttar Pradesh
-Sambhal,Uttar Pradesh
-Sant Kabir Nagar,Uttar Pradesh
-Shahjahanpur,Uttar Pradesh
-Shamli,Uttar Pradesh
-Shravasti,Uttar Pradesh
-Siddharthnagar,Uttar Pradesh
-Sitapur,Uttar Pradesh
-Sonbhadra,Uttar Pradesh
-Sultanpur,Uttar Pradesh
-Unnao,Uttar Pradesh
-Varanasi,Uttar Pradesh
-Ahmedabad,Gujarat
-Amreli,Gujarat
-Anand,Gujarat
-Aravalli,Gujarat
-Banaskantha,Gujarat
-Bharuch,Gujarat
-Bharuch,Gujarat
-Botad,Gujarat
-Varanasi,Gujarat
-Chhota Udepur,Gujarat
-Dang,Gujarat
-Devbhoomi Dwarka,Gujarat
-Gandhinagar,Gujarat
-Gir Somnath,Gujarat
-Jamnagar,Gujarat
-Junagadh,Gujarat
-Kheda,Gujarat
-Kutch,Gujarat
-Mahisagar,Gujarat
-Mehsana,Gujarat
-Morbi,Gujarat
-Narmada,Gujarat
-Navsari,Gujarat
-Panchmahal,Gujarat
-Patan,Gujarat
-Porbandar,Gujarat
-Rajkot,Gujarat
-Sabarkantha,Gujarat
-Surat,Gujarat
-Surendranagar,Gujarat
-Tapi,Gujarat
-Vadodara,Gujarat
-Valsad,Gujarat
+MUNICIPALITY,STATE,RATING
+Agar Malwa,Madhya Pradesh,5
+Alirajpur,Madhya Pradesh,4
+Anuppur,Madhya Pradesh,3
+Ashok Nagar,Madhya Pradesh,3.6
+Balaghat,Madhya Pradesh,2.5
+Barwani,Madhya Pradesh,4.8
+Betul,Madhya Pradesh,1.8
+Bhind,Madhya Pradesh,2.7
+Bhopal,Madhya Pradesh,5
+Burhanpur,Madhya PradesH,3
+Chachaura-Binaganj,Madhya Pradesh,2
+Chhatarpur,Madhya Pradesh,3
+Chhindwara,Madhya Pradesh,3.2
+Damoh,Madhya Pradesh,3
+Datia,Madhya Pradesh,2.9
+Dewas,Madhya Pradesh,4
+Dhar,Madhya Pradesh,3
+Dindori,Madhya Pradesh,2.4
+Guna,Madhya Pradesh,4
+Gwalior,Madhya Pradesh,5
+Harda,Madhya Pradesh,4
+Hoshangabad,Madhya Pradesh,4
+Indore,Madhya Pradesh,5
+Jabalpur,Madhya Pradesh,4
+Jhabua ,Madhya Pradesh,4.8
+Katni,Madhya Pradesh,4
+Khandwa,Madhya Pradesh,3
+Khargone,Madhya Pradesh,4
+Maihar,Madhya Pradesh,3.5
+Mandla,Madhya Pradesh,2
+Mandsaur,Madhya Pradesh,3
+Morena,Madhya Pradesh,4
+Narsinghpur,Madhya Pradesh,2.9
+Nagda,Madhya Pradesh,3.7
+Neemuch,Madhya Pradesh,4
+Niwari,Madhya Pradesh,3
+Panna,Madhya Pradesh,2
+Raisen,Madhya Pradesh,2
+Rajgarh,Madhya Pradesh,3
+Ratlam,Madhya Pradesh,3.1
+Rewa,Madhya Pradesh,4
+Sagar,Madhya Pradesh,3
+Satna,Madhya Pradesh,2
+Sehore,Madhya Pradesh,2.6
+Seoni,Madhya Pradesh,4.2
+Shahdol,Madhya Pradesh,4.4
+Shajapur,Madhya Pradesh,4
+Sheopur,Madhya Pradesh,2
+Shivpuri,Madhya Pradesh,4
+Sidhi,Madhya Pradesh,3
+Singrauli,Madhya Pradesh,2
+Tikamgarh,Madhya Pradesh,3
+Ujjain,Madhya Pradesh,4
+Umaria,Madhya Pradesh,2
+Vidisha,Madhya Pradesh,4
+Ahmednagar,Maharashtra,2
+Akola,Maharashtra,3
+Amravati,Maharashtra,3.6
+Aurangabad,Maharashtra,2.8
+Beed,Maharashtra,1.5
+Bhandara,Maharashtra,2
+Buldhana,Maharashtra,3
+Chandrapur,Maharashtra,3.2
+Dhule,Maharashtra,3
+Gadchiroli,Maharashtra,4
+Gondia,Maharashtra,4
+Hingoli,Maharashtra,3
+Jalgaon,Maharashtra,2
+Jalna,Maharashtra,3
+Kolhapur,Maharashtra,3
+Latur,Maharashtra,3
+Mumbai City,Maharashtra,4
+Mumbai suburban,Maharashtra,4.5
+Nanded,Maharashtra,4
+Nandurbar,Maharashtra,4.2
+Nagpur,Maharashtra,4.9
+Nashik,Maharashtra,4
+Osmanabad,Maharashtra,2.7
+Palghar,Maharashtra,4
+Parbhani,Maharashtra,4.1
+Pune,Maharashtra,5
+Raigad,Maharashtra,4
+Ratnagiri,Maharashtra,3.1
+Sangli,Maharashtra,4
+Satara,Maharashtra,3.4
+Sindhudurg,Maharashtra,4
+Solapur,Maharashtra,2
+Thane,Maharashtra,3
+Wardha,Maharashtra,3.6
+Washim,Maharashtra,4
+Yavatmal,Maharashtra,4.2
+Ajmer,Rajasthan,4
+Alwar ,Rajasthan,3
+Bikaner,Rajasthan,2
+Barmer,Rajasthan,1.4
+Banswara,Rajasthan,2
+Bharatpur,Rajasthan,2.3
+Baran,Rajasthan,3
+Bundi,Rajasthan,3
+Bhilwara,Rajasthan,4
+Churu,Rajasthan,2
+Chittorgarh,Rajasthan,3.5
+Dausa,Rajasthan,2
+Dholpur,Rajasthan,2.8
+Dungarpur,Rajasthan,3
+Ganganagar,Rajasthan,2
+Hanumangarh,Rajasthan,2.1
+Jhunjhunu,Rajasthan,1.9
+Jalore,Rajasthan,2.8
+Jodhpur,Rajasthan,4
+Jaipur,Rajasthan,5
+Jaisalmer,Rajasthan,3
+Jhalawar,Rajasthan,2
+Karauli,Rajasthan,1.6
+Kota,Rajasthan,4.8
+Nagaur,Rajasthan,4
+Pali,Rajasthan,3
+Pratapgarh,Rajasthan,3
+Rajsamand,Rajasthan,3
+Sikar,Rajasthan,4
+Sawai Madhopur,Rajasthan,4.3
+Sirohi,Rajasthan,4.5
+Tonk,Rajasthan,3
+Udaipur,Rajasthan,5
+Agra,Uttar Pradesh,4
+Aligarh,Uttar Pradesh,3
+Prayagraj,Uttar Pradesh,4.7
+Ambedkar Nagar,Uttar Pradesh,2
+Amethi,Uttar Pradesh,2.9
+Amroha,Uttar Pradesh,3
+Auraiya,Uttar Pradesh,3.3
+Azamgarh,Uttar Pradesh,2
+Bagpat,Uttar Pradesh,2.3
+Bahraich,Uttar Pradesh,1.6
+Ballia,Uttar Pradesh,2
+Balrampur,Uttar Pradesh,1
+Banda,Uttar Pradesh,2
+Barabanki,Uttar Pradesh,3
+Bareilly,Uttar Pradesh,4
+ Basti,Uttar Pradesh,2
+Bhadohi,Uttar Pradesh,1
+Bijnor,Uttar Pradesh,2
+Budaun,Uttar Pradesh,3.1
+Bulandshahr,Uttar Pradesh,2.7
+Chandauli,Uttar Pradesh,2.1
+Chitrakoot,Uttar Pradesh,3
+Deoria,Uttar Pradesh,3
+Etah,Uttar Pradesh,2
+Etawah,Uttar Pradesh,2.5
+Ayodhya,Uttar Pradesh,4
+Farrukhabad,Uttar Pradesh,3.4
+Fatehpur,Uttar Pradesh,3
+Firozabad,Uttar Pradesh,2
+Gautam Buddh Nagar,Uttar Pradesh,2.5
+Ghaziabad,Uttar Pradesh,3
+Ghazipur,Uttar Pradesh,2.7
+Gonda,Uttar Pradesh,2
+Gorakhpur,Uttar Pradesh,3
+Hamirpur,Uttar Pradesh,3.1
+Hardoi,Uttar Pradesh,3.4
+Hathras,Uttar Pradesh,3
+Jalaun,Uttar Pradesh,2
+Jaunpur,Uttar Pradesh,2.6
+Jhansi,Uttar Pradesh,4
+Kannauj,Uttar Pradesh,2
+Kanpur Dehat,Uttar Pradesh,1.4
+Kanpur Nagar,Uttar Pradesh,4.8
+Kasganj,Uttar Pradesh,3
+Kaushambi,Uttar Pradesh,2
+Kushinagar,Uttar Pradesh,2.3
+Lakhimpur Kheri,Uttar Pradesh,3
+Lalitpur,Uttar Pradesh,3.4
+Lucknow,Uttar Pradesh,5
+Maharajganj,Uttar Pradesh,3
+Mahoba,Uttar Pradesh,2
+Mainpuri,Uttar Pradesh,2.2
+Mathura,Uttar Pradesh,4.8
+Mau,Uttar Pradesh,2
+Meerut,Uttar Pradesh,3
+Mirzapur,Uttar Pradesh,3
+Moradabad,Uttar Pradesh,2
+Muzaffarnagar,Uttar Pradesh,3.2
+Pilibhit,Uttar Pradesh,2.3
+Pratapgarh,Uttar Pradesh,4.1
+Raebareli,Uttar Pradesh,4.8
+Rampur,Uttar Pradesh,3
+Saharanpur,Uttar Pradesh,2
+Sambhal,Uttar Pradesh,3
+Sant Kabir Nagar,Uttar Pradesh,4
+Shahjahanpur,Uttar Pradesh,3
+Shamli,Uttar Pradesh,3.2
+Shravasti,Uttar Pradesh,3
+Siddharthnagar,Uttar Pradesh,3.4
+Sitapur,Uttar Pradesh,2.4
+Sonbhadra,Uttar Pradesh,3
+Sultanpur,Uttar Pradesh,3.6
+Unnao,Uttar Pradesh,3
+Varanasi,Uttar Pradesh,2.9
+Ahmedabad,Gujarat,5
+Amreli,Gujarat,3
+Anand,Gujarat,2.9
+Aravalli,Gujarat,3.4
+Banaskantha,Gujarat,3
+Bharuch,Gujarat,4
+Botad,Gujarat,2
+Chhota Udepur,Gujarat,3.4
+Dang,Gujarat,4
+Devbhoomi Dwarka,Gujarat,5
+Gandhinagar,Gujarat,5
+Gir Somnath,Gujarat,5
+Jamnagar,Gujarat,3
+Junagadh,Gujarat,2.9
+Kheda,Gujarat,3
+Kutch,Gujarat,4
+Mahisagar,Gujarat,4.3
+Mehsana,Gujarat,2
+Morbi,Gujarat,1.7
+Narmada,Gujarat,2.5
+Navsari,Gujarat,3
+Panchmahal,Gujarat,2.7
+Patan,Gujarat,2
+Porbandar,Gujarat,4
+Rajkot,Gujarat,4.3
+Sabarkantha,Gujarat,2
+Surat,Gujarat,4.5
+Surendranagar,Gujarat,3
+Tapi,Gujarat,2
+Vadodara,Gujarat,5
+Valsad,Gujarat,3.3
