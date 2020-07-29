@@ -15,7 +15,12 @@ import employee_id
 import sqlalchemy
 # for connecting with firestorage
 import pyrebase
-import the_database as thedb
+
+# while deployment uncomment below line
+#import the_database as thedb
+# while using locally uncomment below line
+import the_database_local as thedb
+
 import requests as req
 import json
 import string
@@ -212,34 +217,33 @@ def login():
                 try:
                    p= data.val()[phone]['Password']
                    if password==p:
-                        logged_in = 'm'
-                        type="Manager"
-                        name=data.val()[phone]['Name']
-                        id=data.val()[phone]['Emp_ID']
-                        rating=3
-                        city=data.val()[phone]['District']
-                        l=[]
-                        report=[]
-                        r=ndb.child('Pending_Reports').get()
-                        for i in r.each():
-                            if city==i.val()['district']:
-                                l.append(i.key())
-                        for j in l:
-                            d={}
-                            d.__setitem__('lattitude', r.val()[j]['lattitude'])
-                            d.__setitem__('longitude', r.val()[j]['longitude'])
-                            d.__setitem__('status', r.val()[j]['status'])
-                            d.__setitem__('report_time', r.val()[j]['report_time'])
-                            report.append(d)
+                       logged_in = 'm'
+                       type="Manager"
+                       name=data.val()[phone]['Name']
+                       id=data.val()[phone]['Emp_ID']
+                       rating=3
+                       city=data.val()[phone]['District']
+                       l=[]
+                       report=[]
+                       r=ndb.child('Pending_Reports').get()
+                       for i in r.each():
+                           if city==i.val()['district']:
+                               l.append(i.key())
+                       for j in l:
+                           d={}
+                           d.__setitem__('lattitude', r.val()[j]['lattitude'])
+                           d.__setitem__('longitude', r.val()[j]['longitude'])
+                           d.__setitem__('status', r.val()[j]['status'])
+                           d.__setitem__('report_time', r.val()[j]['report_time'])
+                           report.append(d)
 
-                            for k in report:
-                                now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
-                                now = now.replace('T',' ').split('.')[0]
-                                status=islate(now,k['report_time'])
-                                if status=="Late":
-                                    k['status']=status
-                                    
-                       return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating, city=city,points=report)
+                           for k in report:
+                               now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                               now = now.replace('T',' ').split('.')[0]
+                               status=islate(now,k['report_time'])
+                               if status=="Late":
+                                   k['status']=status
+                    return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating, city=city,points=report)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
@@ -250,14 +254,23 @@ def login():
 
     return render_template('login.html')
 
+
+
 @app.route('/graphs', methods= ['GET', 'POST'])
 def graphs():
     if request.method == 'GET':
-        p_l=20
-        p_m=20
-        p_h=60
-        p_resolve_on_time=70
-        p_resolve_late=30
+        # 'qobj' stands for query-object
+        qobj = thedb.MainQuery()
+        count = qobj.get_label_count()
+        p_l= count['L']
+        p_m= count['M']
+        p_h= count['H']
+        # converting count in percentage
+        s = p_l+p_m+p_h
+        p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+        count = qobj.get_resolved_count()
+        p_resolve_on_time= count['1']
+        p_resolve_late= count['2']
         params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
     if request.method == 'POST':
