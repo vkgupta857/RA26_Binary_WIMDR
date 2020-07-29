@@ -169,6 +169,14 @@ def upload():
     # If request method is other than POST e.g. GET
     return render_template('upload.html')
 
+def islate(now, report_time):
+    now = datetime.datetime.strptime(now, '%Y-%m-%d %H:%M:%S')
+    report_time = datetime.datetime.strptime(report_time, '%Y-%m-%d %H:%M:%S')
+    diff = now - report_time
+    if diff.days > 0:
+        return('Late')
+    else:
+        return('Ontime')
 
 global logged_in
 logged_in = 'n'
@@ -187,8 +195,9 @@ def login():
                    if password==p:
                        logged_in = 'a'
                        type="Admin"
+                       name=data.val()[phone]['Name']
                        id=data.val()[phone]['Emp_ID']
-                       return render_template('Alogin.html',type=type,id=id)
+                       return render_template('Alogin.html',name=name,type=type,id=id)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
@@ -203,12 +212,34 @@ def login():
                 try:
                    p= data.val()[phone]['Password']
                    if password==p:
-                       logged_in = 'm'
-                       type="Manager"
-                       name=data.val()[phone]['Name']
-                       id=data.val()[phone]['Emp_ID']
-                       rating=3
-                       return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating)
+                        logged_in = 'm'
+                        type="Manager"
+                        name=data.val()[phone]['Name']
+                        id=data.val()[phone]['Emp_ID']
+                        rating=3
+                        city=data.val()[phone]['District']
+                        l=[]
+                        report=[]
+                        r=ndb.child('Pending_Reports').get()
+                        for i in r.each():
+                            if city==i.val()['district']:
+                                l.append(i.key())
+                        for j in l:
+                            d={}
+                            d.__setitem__('lattitude', r.val()[j]['lattitude'])
+                            d.__setitem__('longitude', r.val()[j]['longitude'])
+                            d.__setitem__('status', r.val()[j]['status'])
+                            d.__setitem__('report_time', r.val()[j]['report_time'])
+                            report.append(d)
+
+                            for k in report:
+                                now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                                now = now.replace('T',' ').split('.')[0]
+                                status=islate(now,k['report_time'])
+                                if status=="Late":
+                                    k['status']=status
+                                    
+                       return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating, city=city,points=report)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
