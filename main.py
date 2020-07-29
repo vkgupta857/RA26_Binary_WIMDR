@@ -87,6 +87,15 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def islate(now, report_time):
+    now = datetime.datetime.strptime(now, '%Y-%m-%d %H:%M:%S')
+    report_time = datetime.datetime.strptime(report_time, '%Y-%m-%d %H:%M:%S')
+    diff = now - report_time
+    if diff.days > 0:
+        return('Late')
+    else:
+        return('Ontime')
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -169,15 +178,6 @@ def upload():
     # If request method is other than POST e.g. GET
     return render_template('upload.html')
 
-def islate(now, report_time):
-    now = datetime.datetime.strptime(now, '%Y-%m-%d %H:%M:%S')
-    report_time = datetime.datetime.strptime(report_time, '%Y-%m-%d %H:%M:%S')
-    diff = now - report_time
-    if diff.days > 0:
-        return('Late')
-    else:
-        return('Ontime')
-
 global logged_in
 logged_in = 'n'
 
@@ -258,6 +258,7 @@ def graphs():
         p_h=60
         p_resolve_on_time=70
         p_resolve_late=30
+        params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
     if request.method == 'POST':
         state = request.form['state']
@@ -305,11 +306,9 @@ def graphs():
                     p_resolve_on_time=70
                     p_resolve_late=30
 
-        # here we got the pair of dates to run queries
-
-        return render_template('graph.html',p_l=p_l,p_m=p_m,p_h=p_h,p_resolve_on_time=p_resolve_on_time,p_resolve_late=p_resolve_late)
-    return render_template('graph.html',p_l=p_l,p_m=p_m,p_h=p_h,p_resolve_on_time=p_resolve_on_time,p_resolve_late=p_resolve_late)
-
+        params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+        return render_template('graph.html',params=params)
+    return render_template('graph.html',params=params)
 
 
 
@@ -340,7 +339,7 @@ def check():
         d['label'].append(row[0])
         d['count'].append(row[1])
     return(d)
-
+'''
 # Route for reports
 @app.route('/reports', methods= ['GET', 'POST'])
 def reports():
@@ -399,6 +398,7 @@ def reports():
         return json.dumps(response)
 
     return render_template('reports.html')
+'''
 
 ###########
 # Run App
