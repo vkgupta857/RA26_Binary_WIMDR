@@ -103,6 +103,30 @@ def islate(now, report_time):
         return('Late')
     else:
         return('Ontime')
+    
+def get_points(city):
+    l=[]
+    report=[]
+    r=ndb.child('Pending_Reports').get()
+    for i in r.each():
+        if city==i.val()['district']:
+            l.append(i.key())
+    for j in l:
+        d={}
+        d.__setitem__('lattitude', r.val()[j]['lattitude'])
+        d.__setitem__('longitude', r.val()[j]['longitude'])
+        d.__setitem__('status', r.val()[j]['status'])
+        d.__setitem__('report_time', r.val()[j]['report_time'])
+        report.append(d)
+
+        for k in report:
+            now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+            now = now.replace('T',' ').split('.')[0]
+            status=islate(now,k['report_time'])
+            if status=="Late":
+                k['status']=status
+    return report
+
 
 @app.route('/')
 @app.route('/index')
@@ -218,7 +242,7 @@ def login():
 
                 data=ndb.child('Managers').get()
                 try:
-
+                   p= data.val()[phone]['Password']
                    if password==p:
                         logged_in = 'm'
                         name=data.val()[phone]['Name']
@@ -226,27 +250,7 @@ def login():
                         rating=3
                         type="Manager"
                         city=data.val()[phone]['District']
-                        l=[]
-                        report=[]
-                        r=ndb.child('Pending_Reports').get()
-                        for i in r.each():
-                            if city==i.val()['district']:
-                                l.append(i.key())
-                        for j in l:
-                            d={}
-                            d.__setitem__('lattitude', r.val()[j]['lattitude'])
-                            d.__setitem__('longitude', r.val()[j]['longitude'])
-                            d.__setitem__('status', r.val()[j]['status'])
-                            d.__setitem__('report_time', r.val()[j]['report_time'])
-                            report.append(d)
-
-                            for k in report:
-                                now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
-                                now = now.replace('T',' ').split('.')[0]
-                                status=islate(now,k['report_time'])
-                                if status=="Late":
-                                    k['status']=status
-
+                        report= get_points(city)
                         return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,points=report)
                    else:
                        flash('Invalid Password',category="danger")
