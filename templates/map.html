@@ -48,6 +48,7 @@
     </div>
 </nav>
 <div class="container">
+    <br>
     <div class="row">
         <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
         <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
@@ -55,27 +56,12 @@
         <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /></td>
     </div>
     <br>
-    <div id="mapHolder"></div>
+    <div id="mapHolder"> <span class="spinner-border text-success"></span> Loading waste...</div>
+    <br>
 </div>
 
 <script>
     var mapholder = document.getElementById('mapHolder');
-
-    var lat = 23.181467;
-    var lon = 79.9864071;
-    var latlon = new google.maps.LatLng(lat, lon)
-
-    mapholder.style.height = '400px';
-    mapholder.style.width = '100%';
-    var myOptions = {
-        center: latlon, zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
-    };
-
-    var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
-    var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
 
     var iconBase =
         'http://maps.google.com/mapfiles/ms/icons/';
@@ -110,12 +96,33 @@
         success: function (res) {
             // console.log(res);
             var pointsToShow = res.points;
+
+            if(pointsToShow.length <= 0){
+                // alert("Voila! No waste in the city.");
+                document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in "+ city+"</h3><p>Hence, cannot plot on map</p>";
+                throw new Error('No points in the city');
+            }
+            var lat = pointsToShow[0]['lattitude'];
+            var lon = pointsToShow[0]['longitude'];
+            var latlon = new google.maps.LatLng(lat, lon)
+
+            mapholder.style.height = '400px';
+            mapholder.style.width = '100%';
+            var myOptions = {
+                center: latlon, zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+            };
+
+            var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+
             for (var point of pointsToShow) {
                 var lat = point.lattitude;
                 // lattitude spelling is defined in db. dont change
                 var lng = point.longitude;
                 var type = point.status;
-                console.log(lat,lng,type);
+                console.log(lat, lng, type);
 
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, lng),
