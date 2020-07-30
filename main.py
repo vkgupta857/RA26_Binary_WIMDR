@@ -264,22 +264,14 @@ def login():
 
 
 
-@app.route('/map/<city>', methods=['GET', 'POST'])
-def map(city):
-    print(city)
+@app.route('/map', methods=['GET', 'POST'])
+def map():
+    city = request.args.get('city')
     if request.method == 'POST':
+        city = request.form['city']
+        report = get_points(city)
         response = {}
-        points = [{
-            "lat": 23.1347137792272,
-            "lng": 79.9275922311487,
-            "waste_type": "high"
-        },
-        {
-            "lat": 23.1343797088188,
-            "lng": 79.9523614706786,
-            "waste_type": 'alert'
-        }]
-        response['points'] = points
+        response['points'] = report
         return response
 
     return render_template('map.html')

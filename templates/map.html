@@ -2,14 +2,14 @@
 
 {% block head %}
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
-<script src="static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
 {% endblock %}
 {% block body %}
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
     style="box-shadow: 10px 5px 5px grey;">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/index">
             <img src="/static/images/logo.png" alt="logo" /><a style="color: #4e3914;">
                 <h3>Waste Management</h3>
             </a>
@@ -22,24 +22,24 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link " href="upload.html">
+                    <a class="nav-link " href="/upload">
                         Upload
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="reports.html">
+                    <a class="nav-link active" href="/reports">
                         reports
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Graphs.html">
+                    <a class="nav-link" href="/graphs">
                         Graphs
                     </a>
                 </li>
@@ -81,7 +81,7 @@
         'http://maps.google.com/mapfiles/ms/icons/';
 
     var icons = {
-        alert: {
+        Late: {
             icon: iconBase + 'purple-dot.png'
         },
         high: {
@@ -97,15 +97,25 @@
 
     var features = Array;
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const city = urlParams.get('city');
+
     $.ajax({
         url: '/map',
         type: 'POST',
+        data: {
+            city: city
+        },
         success: function (res) {
+            // console.log(res);
             var pointsToShow = res.points;
             for (var point of pointsToShow) {
-                var lat = point.lat;
-                var lng = point.lng;
-                var type = point.waste_type;
+                var lat = point.lattitude;
+                // lattitude spelling is defined in db. dont change
+                var lng = point.longitude;
+                var type = point.status;
+                console.log(lat,lng,type);
 
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, lng),
@@ -113,7 +123,7 @@
                     map: map
                 });
 
-                if (type == 'alert') {
+                if (type == 'Late') {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                 }
             }
