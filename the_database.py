@@ -115,7 +115,7 @@ def add_csv_data():
 
 
 class MainQuery:
-    def __init__(self, state='all', district='all', start_date='2020-01-26', end_date='2020-08-15'):
+    def __init__(self, state='all', district='all', start_date='2019-08-15', end_date='2020-08-15'):
         self.state = state
         self.district = district
         self.start_date = start_date
@@ -125,31 +125,79 @@ class MainQuery:
         # to get the coordinates and label
         if self.state == 'all':
             stmt = sqlalchemy.text(
-                    "select lattitude,longitude,label from reports"
-                    "where report_time between :start_date and :end_date;")
-
-            with rdb.connect() as conn:
-                res = conn.execute(stmt, start_date=self.start_date, end_date=self.end_date).fetchall()
+                "select label, lattitude, longitude from reports "
+                "where report_time between :start_date and :end_date;"
+    )
         else:
             if self.district == 'all':
                 stmt = sqlalchemy.text(
-                        "select lattitude,longitude,label from reports"
-                        "where state=:state and (report_time between :start_date and :end_date);")
-
-                with rdb.connect() as conn:
-                    res = conn.execute(stmt, state=self.state, start_date=self.start_date, end_date=self.end_date).fetchall()
+                        "select label, lattitude, longitude from reports "
+                        "where state=:state and (report_time between :start_date and :end_date);"
+                        )
             else:
                 stmt = sqlalchemy.text(
-                        "select lattitude,longitude,label from reports"
-                        "where (state=:state and district=:district) and (report_time between :start_date and :end_date);")
-
-                with rdb.connect() as conn:
-                    res = conn.execute(stmt, state=self.state, district=self.district,
-                                        start_date=self.start_date, end_date=self.end_date).fetchall()
+                        "select lattitude,longitude,label from reports "
+                        "where (state=:state and district=:district) and (report_time between :start_date and :end_date);"
+                        )
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
         # here convert the res to desired data form and return
 
     def get_label_count(self):
         # get the labels and counts of labels
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                            "select label, count(label) as count from reports "
+                            "where report_time between :start_date and :end_date "
+                            "group by label;"
+                            )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select label, count(label) as count from reports "
+                            "where state=:state and (report_time between :start_date and :end_date) "
+                            "group by label;"
+                    )
+            else:
+                stmt = sqlalchemy.text(
+                        "select label, count(label) as count from reports "
+                        "where (state=:state and district=:district) and (report_time between :start_date and :end_date) "
+                        "group by label;"
+                        )
         with rdb.connect() as conn:
-            res = conn.execute("select label, count(label) as count from reports group by label;").fetchall()
-        # here convert the res to desired data form and return
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                               start_date=self.start_date, end_date=self.end_date).fetchall()
+        d = {}
+        for row in res:
+            d[row[0]] = row[1]
+        return(d)
+
+
+    def get_resolved_count(self):
+        # get the count of resolved ontime and resolved late
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                        "select resolved, count(resolved) as count from reports "
+                        "where report_time between :start_date and :end_date "
+                        "group by resolved;"
+                        )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select resolved, count(resolved) as count from reports "
+                            "where state=:state and (report_time between :start_date and :end_date) "
+                            "group by resolved;"
+                            )
+            else:
+                stmt = sqlalchemy.text(
+                            "select resolved, count(resolved) as count from reports "
+                            "where (state=:state and district=:district) and (report_time between :start_date and :end_date) "
+                            "group by resolved;")
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
+        d = {}
+        for row in res:
+            d[row[0]] = row[1]
+        return(d)
