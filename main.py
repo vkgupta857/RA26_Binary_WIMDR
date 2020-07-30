@@ -250,8 +250,7 @@ def login():
                         rating=3
                         type="Manager"
                         city=data.val()[phone]['District']
-                        report= get_points(city)
-                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,points=report)
+                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
