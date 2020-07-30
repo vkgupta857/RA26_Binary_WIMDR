@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
+<script src="static/js/jquery-3.3.1.min.js"></script>
+{% endblock %}
+{% block body %}
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
+    style="box-shadow: 10px 5px 5px grey;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="/static/images/logo.png" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link " href="upload.html">
+                        Upload
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="reports.html">
+                        reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Graphs.html">
+                        Graphs
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
+        <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
+        <td>MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" /></td>
+        <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /></td>
+    </div>
+    <br>
+    <div id="mapHolder"></div>
+</div>
+
+<script>
+    var mapholder = document.getElementById('mapHolder');
+
+    var lat = 23.181467;
+    var lon = 79.9864071;
+    var latlon = new google.maps.LatLng(lat, lon)
+
+    mapholder.style.height = '400px';
+    mapholder.style.width = '100%';
+    var myOptions = {
+        center: latlon, zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+    };
+
+    var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+    var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+
+    var iconBase =
+        'http://maps.google.com/mapfiles/ms/icons/';
+
+    var icons = {
+        alert: {
+            icon: iconBase + 'purple-dot.png'
+        },
+        high: {
+            icon: iconBase + 'red-dot.png'
+        },
+        medium: {
+            icon: iconBase + 'orange-dot.png'
+        },
+        low: {
+            icon: iconBase + 'green-dot.png'
+        }
+    };
+
+    var features = Array;
+
+    $.ajax({
+        url: '/map',
+        type: 'POST',
+        success: function (res) {
+            var pointsToShow = res.points;
+            for (var point of pointsToShow) {
+                var lat = point.lat;
+                var lng = point.lng;
+                var type = point.waste_type;
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    icon: icons[type].icon,
+                    map: map
+                });
+
+                if (type == 'alert') {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+        },
+        error: function (xhr) {
+            console.log("Error", xhr.status, xhr.statusText);
+        }
+    });
+
+    // var features = [
+    //     {
+    //         position: new google.maps.LatLng(23.1347137792272, 79.9275922311487),
+    //         type: 'high'
+    //     }, {
+    //         position: new google.maps.LatLng(23.2301784279883, 80.0016139567814),
+    //         type: 'alert'
+    //     }, {
+    //         position: new google.maps.LatLng(23.1727464960143, 79.9910974486153),
+    //         type: 'high'
+    //     }, {
+    //         position: new google.maps.LatLng(23.1486192051069, 80.0026714942545),
+    //         type: 'medium'
+    //     }, {
+    //         position: new google.maps.LatLng(23.1531149888702, 79.9342859487367),
+    //         type: 'low'
+    //     }
+    // ];
+
+    // for (var i = 0; i < features.length; i++) {
+    //     var marker = new google.maps.Marker({
+    //         position: features[i].position,
+    //         icon: icons[features[i].type].icon,
+    //         map: map
+    //     });
+
+    //     if (features[i].type == 'alert') {
+    //         marker.setAnimation(google.maps.Animation.BOUNCE);
+    //     }
+    // };
+
+</script>
+
+{% endblock %}

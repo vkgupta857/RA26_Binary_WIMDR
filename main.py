@@ -199,8 +199,8 @@ def login():
                    p= data.val()[phone]['Password']
                    if password==p:
                        logged_in = 'a'
-                       type="Admin"
                        name=data.val()[phone]['Name']
+                       type="Admin"
                        id=data.val()[phone]['Emp_ID']
                        return render_template('Alogin.html',name=name,type=type,id=id)
                    else:
@@ -215,35 +215,36 @@ def login():
 
                 data=ndb.child('Managers').get()
                 try:
-                   p= data.val()[phone]['Password']
-                   if password==p:
-                       logged_in = 'm'
-                       type="Manager"
-                       name=data.val()[phone]['Name']
-                       id=data.val()[phone]['Emp_ID']
-                       rating=3
-                       city=data.val()[phone]['District']
-                       l=[]
-                       report=[]
-                       r=ndb.child('Pending_Reports').get()
-                       for i in r.each():
-                           if city==i.val()['district']:
-                               l.append(i.key())
-                       for j in l:
-                           d={}
-                           d.__setitem__('lattitude', r.val()[j]['lattitude'])
-                           d.__setitem__('longitude', r.val()[j]['longitude'])
-                           d.__setitem__('status', r.val()[j]['status'])
-                           d.__setitem__('report_time', r.val()[j]['report_time'])
-                           report.append(d)
 
-                           for k in report:
-                               now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
-                               now = now.replace('T',' ').split('.')[0]
-                               status=islate(now,k['report_time'])
-                               if status=="Late":
-                                   k['status']=status
-                    return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating, city=city,points=report)
+                   if password==p:
+                        logged_in = 'm'
+                        name=data.val()[phone]['Name']
+                        id=data.val()[phone]['Emp_ID']
+                        rating=3
+                        type="Manager"
+                        city=data.val()[phone]['District']
+                        l=[]
+                        report=[]
+                        r=ndb.child('Pending_Reports').get()
+                        for i in r.each():
+                            if city==i.val()['district']:
+                                l.append(i.key())
+                        for j in l:
+                            d={}
+                            d.__setitem__('lattitude', r.val()[j]['lattitude'])
+                            d.__setitem__('longitude', r.val()[j]['longitude'])
+                            d.__setitem__('status', r.val()[j]['status'])
+                            d.__setitem__('report_time', r.val()[j]['report_time'])
+                            report.append(d)
+
+                            for k in report:
+                                now = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                                now = now.replace('T',' ').split('.')[0]
+                                status=islate(now,k['report_time'])
+                                if status=="Late":
+                                    k['status']=status
+
+                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,points=report)
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
@@ -255,6 +256,25 @@ def login():
     return render_template('login.html')
 
 
+
+@app.route('/map', methods=['GET', 'POST'])
+def map():
+    if request.method == 'POST':
+        response = {}
+        points = [{
+            "lat": 23.1347137792272,
+            "lng": 79.9275922311487,
+            "waste_type": "high"
+        },
+        {
+            "lat": 23.1343797088188,
+            "lng": 79.9523614706786,
+            "waste_type": 'alert'
+        }]
+        response['points'] = points
+        return response
+
+    return render_template('map.html')
 
 @app.route('/graphs', methods= ['GET', 'POST'])
 def graphs():
@@ -283,45 +303,102 @@ def graphs():
         if duration == 'custom date':
             start_date = request.form['start date']
             end_date = request.form['end date']
-            p_l=20
-            p_m=20
-            p_h=60
-            p_resolve_on_time=70
-            p_resolve_late=30
+            qobj = thedb.MainQuery(state,city,start_date,end_date)
+            count = qobj.get_label_count()
+            p_l= count['L']
+            p_m= count['M']
+            p_h= count['H']
+            # converting count in percentage
+            s = p_l+p_m+p_h
+            p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+            count = qobj.get_resolved_count()
+            p_resolve_on_time= count['1']
+            p_resolve_late= count['2']
+            params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
         else:
             if duration == 'week':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(7)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
+
 
             elif duration == 'month':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(30)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
 
             elif duration == '3 months':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(90)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
             elif duration == 'year':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(365)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
-        params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
         return render_template('graph.html',params=params)
     return render_template('graph.html',params=params)
+
+
 
 
 
