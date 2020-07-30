@@ -65,9 +65,12 @@ ndb = firebase.database()
 # App Routes Section
 ######################
 def date_before_n_days(n):
-    tod = datetime.datetime.now()
+    dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+    dt = dt.replace('T',' ').split('.')[0]
+    tod = datetime.datetime.strptime(dt, '%Y-%m-%d %H:%M:%S')
     d = datetime.timedelta(days = n)
     a = str(tod - d).split('.')[0]
+    a = a.split(' ')[0]
     return(a)
 
 def get_filename():
@@ -321,8 +324,8 @@ def graphs():
             if duration == 'week':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                start_date=dt.split('')[0]
-                end_date = date_before_n_days(7)
+                end_date=dt.split('')[0]
+                start_date = date_before_n_days(7)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
                 count = qobj.get_label_count()
                 p_l= count['L']
@@ -341,8 +344,8 @@ def graphs():
             elif duration == 'month':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                start_date=dt.split('')[0]
-                end_date = date_before_n_days(30)
+                end_date=dt.split('')[0]
+                start_date = date_before_n_days(30)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
                 count = qobj.get_label_count()
                 p_l= count['L']
@@ -361,8 +364,8 @@ def graphs():
             elif duration == '3 months':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                start_date=dt.split('')[0]
-                end_date = date_before_n_days(90)
+                end_date=dt.split('')[0]
+                start_date = date_before_n_days(90)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
                 count = qobj.get_label_count()
                 p_l= count['L']
@@ -380,8 +383,8 @@ def graphs():
             elif duration == 'year':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                start_date=dt.split('')[0]
-                end_date = date_before_n_days(365)
+                end_date=dt.split('')[0]
+                start_date = date_before_n_days(365)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
                 count = qobj.get_label_count()
                 p_l= count['L']
