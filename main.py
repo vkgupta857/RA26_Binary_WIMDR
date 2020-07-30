@@ -256,6 +256,25 @@ def login():
 
 
 
+@app.route('/map', methods=['GET', 'POST'])
+def map():
+    if request.method == 'POST':
+        response = {}
+        points = [{
+            "lat": 23.1347137792272,
+            "lng": 79.9275922311487,
+            "waste_type": "high"
+        },
+        {
+            "lat": 23.1343797088188,
+            "lng": 79.9523614706786,
+            "waste_type": 'alert'
+        }]
+        response['points'] = points
+        return response
+
+    return render_template('map.html')
+
 @app.route('/graphs', methods= ['GET', 'POST'])
 def graphs():
     if request.method == 'GET':
