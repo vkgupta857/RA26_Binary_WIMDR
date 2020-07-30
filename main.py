@@ -264,8 +264,9 @@ def login():
 
 
 
-@app.route('/map', methods=['GET', 'POST'])
-def map():
+@app.route('/map/<city>', methods=['GET', 'POST'])
+def map(city):
+    print(city)
     if request.method == 'POST':
         response = {}
         points = [{
