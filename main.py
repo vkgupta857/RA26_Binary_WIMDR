@@ -303,45 +303,102 @@ def graphs():
         if duration == 'custom date':
             start_date = request.form['start date']
             end_date = request.form['end date']
-            p_l=20
-            p_m=20
-            p_h=60
-            p_resolve_on_time=70
-            p_resolve_late=30
+            qobj = thedb.MainQuery(state,city,start_date,end_date)
+            count = qobj.get_label_count()
+            p_l= count['L']
+            p_m= count['M']
+            p_h= count['H']
+            # converting count in percentage
+            s = p_l+p_m+p_h
+            p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+            count = qobj.get_resolved_count()
+            p_resolve_on_time= count['1']
+            p_resolve_late= count['2']
+            params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
         else:
             if duration == 'week':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(7)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
+
 
             elif duration == 'month':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(30)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
 
             elif duration == '3 months':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(90)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+
 
             elif duration == 'year':
-                    p_l=20
-                    p_m=20
-                    p_h=60
-                    p_resolve_on_time=70
-                    p_resolve_late=30
+                dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+                dt = dt.replace('T',' ').split('.')[0]
+                start_date=dt.split('')[0]
+                end_date = date_before_n_days(365)
+                qobj = thedb.MainQuery(state,city,start_date,end_date)
+                count = qobj.get_label_count()
+                p_l= count['L']
+                p_m= count['M']
+                p_h= count['H']
+                # converting count in percentage
+                s = p_l+p_m+p_h
+                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                count = qobj.get_resolved_count()
+                p_resolve_on_time= count['1']
+                p_resolve_late= count['2']
+                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
-        params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
         return render_template('graph.html',params=params)
     return render_template('graph.html',params=params)
+
+
 
 
 
