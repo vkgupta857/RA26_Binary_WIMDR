@@ -50,10 +50,10 @@
 <div class="container">
     <br>
     <div class="row">
-        <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
-        <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
-        <td>MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" /></td>
-        <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /></td>
+        <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
+        <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" /></td>
+        <td>MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" /></td>
+        <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
     </div>
     <br>
     <div id="mapHolder"> <span class="spinner-border text-success"></span> Loading waste...</div>
@@ -68,16 +68,16 @@
 
     var icons = {
         Late: {
-            icon: iconBase + 'purple-dot.png'
-        },
-        high: {
             icon: iconBase + 'red-dot.png'
         },
-        medium: {
+        high: {
             icon: iconBase + 'orange-dot.png'
         },
+        medium: {
+            icon: iconBase + 'yellow-dot.png'
+        },
         low: {
-            icon: iconBase + 'green-dot.png'
+            icon: iconBase + 'purple-dot.png'
         }
     };
 
@@ -109,7 +109,8 @@
             mapholder.style.height = '400px';
             mapholder.style.width = '100%';
             var myOptions = {
-                center: latlon, zoom: 12,
+                center: latlon,
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,
                 navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
@@ -139,37 +140,6 @@
             console.log("Error", xhr.status, xhr.statusText);
         }
     });
-
-    // var features = [
-    //     {
-    //         position: new google.maps.LatLng(23.1347137792272, 79.9275922311487),
-    //         type: 'high'
-    //     }, {
-    //         position: new google.maps.LatLng(23.2301784279883, 80.0016139567814),
-    //         type: 'alert'
-    //     }, {
-    //         position: new google.maps.LatLng(23.1727464960143, 79.9910974486153),
-    //         type: 'high'
-    //     }, {
-    //         position: new google.maps.LatLng(23.1486192051069, 80.0026714942545),
-    //         type: 'medium'
-    //     }, {
-    //         position: new google.maps.LatLng(23.1531149888702, 79.9342859487367),
-    //         type: 'low'
-    //     }
-    // ];
-
-    // for (var i = 0; i < features.length; i++) {
-    //     var marker = new google.maps.Marker({
-    //         position: features[i].position,
-    //         icon: icons[features[i].type].icon,
-    //         map: map
-    //     });
-
-    //     if (features[i].type == 'alert') {
-    //         marker.setAnimation(google.maps.Animation.BOUNCE);
-    //     }
-    // };
 
 </script>
 
