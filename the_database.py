@@ -201,3 +201,67 @@ class MainQuery:
         for row in res:
             d[row[0]] = row[1]
         return(d)
+    
+    
+    def get_barplot_data(self):
+        # to get the daily and weekly data about barplot
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                        "select distinct date(report_time) as report_date, label ,count(label) as count from reports "
+                        "where report_time between :start_date and :end_date "
+                        "group by report_date, label order by report_date;"
+                        )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select distinct date(report_time) as report_date, label ,count(label) as count from reports "
+                            "where state=:state and (report_time between :start_date and :end_date) "
+                            "group by report_date, label order by report_date;"
+                            )
+            else:
+                stmt = sqlalchemy.text(
+                            "select distinct date(report_time) as report_date, label ,count(label) as count from reports "
+                            "where (state=:state and district=:district) and (report_time between :start_date and :end_date) "
+                            "group by report_date, label order by report_date;"
+                            )
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
+        
+        d = {}
+        for row in res:
+            date = row[0].strftime("%d-%m-%Y")
+            label = row[1]
+            count = row[2]
+            try:
+                d[date][label] = count
+            except:
+                d[date] = {}
+                d[date][label] = count
+                
+        daily = []
+        dates = list(d.keys())
+        for date in dates:
+            d2 = {'Low':0, 'Medium':0, 'High':0, 'Total':0}
+            label_count = d[date]
+            for label in label_count.keys():
+                if label == 'L':
+                    d2['Low'] = label_count[label]
+                elif label == 'M':
+                    d2['Medium'] = label_count[label]
+                elif label == 'H':
+                    d2['High'] = label_count[label]
+            d2['Total'] = d2['Low']+d2['Medium']+d2['High']
+            daily.append(d2)
+            
+        weekly = []
+        for i in range(0,len(daily), 7):
+            week = {'Low':0, 'Medium':0, 'High':0, 'Total':0}
+            for day in daily[i:i+7]:
+                week['Low'] += day['Low']
+                week['Medium'] += day['Medium']
+                week['High'] += day['High']
+                week['Total'] += day['Total']
+            weekly.append(week)
+        
+        return(daily, weekly)
