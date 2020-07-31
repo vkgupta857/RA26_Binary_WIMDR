@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% block head%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+    .checked {
+        color: orange;
+    }
+
+
+    table {
+        margin: 0 auto;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid #d4d4d4;
+        font-size: 20px;
+        background: #fff;
+    }
+
+    table th,
+    table tr:nth-child(2n+2) {
+        background: #e7e7e7;
+    }
+
+    table th,
+    table td {
+        padding: 20px 50px;
+    }
+
+    table th {
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    .stars-outer {
+        display: inline-block;
+        position: relative;
+        font-family: FontAwesome;
+    }
+
+    .stars-outer::before {
+        content: "\f006 \f006 \f006 \f006 \f006";
+    }
+
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        color: #f8ce0b;
+    }
+
+    .attribution {
+        font-size: 12px;
+        color: #444;
+        text-decoration: none;
+        text-align: center;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        z-index: -1;
+    }
+
+    .attribution:hover {
+        color: #1fa67a;
+    }
+</style>
+{% endblock %}
+{% block body %}
+
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/index">
+                <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
+                    <h3>Waste Management</h3>
+                </a>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="fas fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <h4 class="text-center">WELCOME TO THE PORTAL</h4>
+    <div class="row" style="padding-left: 25%; margin-top: 2%;">
+        <div class="col-lg-8 mb-4 contact-left">
+
+            <form name="sentMessage" id="contactForm" action="">
+                <table>
+                    <tbody>
+                        <tr class="">
+                            <td>Employee Name: </td>
+                            <td>{{name}}</td>
+                        </tr>
+                        <tr class="">
+                            <td>Employee Type:</td>
+                            <td>
+                                {{type}}
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td>Employee Id</td>
+                            <td>
+                                {{id}}
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td>District:</td>
+                            <td>
+                                {{city}}
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td>District:</td>
+                            <td>
+                                <a href="/map?city={{city}}">Go to map</a>
+                            </td>
+                        </tr>
+                        <tr class="hotel_a">
+                            <td>Your Rating</td>
+                            <td>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <script type="text/javascript">
+                    const ratings = {
+                        hotel_a: {{ rating }},
+};
+
+                    // total number of stars
+                    const starTotal = 5;
+
+                    for (const rating in ratings) {
+                        const starPercentage = (ratings[rating] / starTotal) * 100;
+                        const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+                        document.querySelector(`.${rating} .stars-inner`).style.width = starPercentageRounded;
+                    }
+                </script>
+
+
+
+                <hr><br>
+                <div id="success"></div>
+                <!-- For success/fail messages -->
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Sign Out</button>
+            </form>
+
+        </div>
+    </div>
+    {% endblock %}

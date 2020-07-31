@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+{% endblock %}
+{% block body %}
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/index">
+            <img src="/static/images/logo.png" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link " href="/upload">
+                        Upload
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/reports">
+                        reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/graphs">
+                        Graphs
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <br>
+    <div class="row">
+        <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
+        <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" /></td>
+        <td>MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" /></td>
+        <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
+    </div>
+    <br>
+    <div id="mapHolder"> <span class="spinner-border text-success"></span> Loading waste...</div>
+    <br>
+</div>
+
+<script>
+    var mapholder = document.getElementById('mapHolder');
+
+    var iconBase =
+        'http://maps.google.com/mapfiles/ms/icons/';
+
+    var icons = {
+        Late: {
+            icon: iconBase + 'red-dot.png'
+        },
+        high: {
+            icon: iconBase + 'orange-dot.png'
+        },
+        medium: {
+            icon: iconBase + 'yellow-dot.png'
+        },
+        low: {
+            icon: iconBase + 'purple-dot.png'
+        }
+    };
+
+    var features = Array;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const city = urlParams.get('city');
+
+    $.ajax({
+        url: '/map',
+        type: 'POST',
+        data: {
+            city: city
+        },
+        success: function (res) {
+            // console.log(res);
+            var pointsToShow = res.points;
+
+            if (pointsToShow.length <= 0) {
+                // alert("Voila! No waste in the city.");
+                document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in " + city + "</h3><p>Hence, cannot plot on map</p>";
+                throw new Error('No points in the city');
+            }
+            var lat = pointsToShow[0]['lattitude'];
+            var lon = pointsToShow[0]['longitude'];
+            var latlon = new google.maps.LatLng(lat, lon)
+
+            mapholder.style.height = '400px';
+            mapholder.style.width = '100%';
+            var myOptions = {
+                center: latlon,
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+            };
+
+            var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+
+            for (var point of pointsToShow) {
+                var lat = point.lattitude;
+                // lattitude spelling is defined in db. dont change
+                var lng = point.longitude;
+                var type = point.status;
+                console.log(lat, lng, type);
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    icon: icons[type].icon,
+                    map: map
+                });
+
+                if (type == 'Late') {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+        },
+        error: function (xhr) {
+            console.log("Error", xhr.status, xhr.statusText);
+        }
+    });
+
+</script>
+
+{% endblock %}
