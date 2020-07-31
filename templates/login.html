@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
-    style="box-shadow: 10px 10px 5px grey;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/index">
             <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
@@ -31,33 +30,32 @@
     </div>
 </nav>
 <div class="container">
+    <br>
     <div class="row" style="padding-left: 30%; margin-top: 2%;">
-        <div class="col-lg-8 mb-4 contact-left">
+        <div class="col-lg-6 mb-4 contact-left">
             <h3>Login</h3>
             <hr>
             <form action="/login" method="post">
                 <div class="form-group">
                         <label>Phone Number:</label>
-                        <input type="text" pattern="[1-9]{1}[0-9]{9}" class="form-control" id="phone" name="phone"
+                        <input type="text" pattern="[1-9]{1}[0-9]{9}" class="form-control form-control-sm" id="phone" name="phone"
                             required data-validation-required-message="Please enter your phone number.">
                 </div>
                 <div class="control-group form-group">
                         <label>Password:</label>
-                        <input type="Password" class="form-control" id="Password" name="password" required
+                        <input type="Password" class="form-control form-control-sm" id="Password" name="password" required
                             data-validation-required-message="Please enter you password.">
                 </div>
-                <hr><br>
                 <div class="control-group form-group">
                         <label>Login as:</label>
-                        <select class="form-control" name="login" required>
+                        <select class="form-control form-control-sm" name="login" required>
                             <option>Manager</option>
                             <option>Admin</option>
                         </select>
                 </div>
-                <hr><br>
                 <div id="success"></div>
                 <!-- For success/fail messages -->
-                <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
+                <button type="submit" class="btn btn-success btn-sm" id="sendMessageButton">Login</button>
             </form>
         </div>
     </div>

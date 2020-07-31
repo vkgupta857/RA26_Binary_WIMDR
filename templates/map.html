@@ -6,8 +6,7 @@
 {% endblock %}
 {% block body %}
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
-    style="box-shadow: 10px 5px 5px grey;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/index">
             <img src="/static/images/logo.png" alt="logo" /><a style="color: #4e3914;">
@@ -97,9 +96,9 @@
             // console.log(res);
             var pointsToShow = res.points;
 
-            if(pointsToShow.length <= 0){
+            if (pointsToShow.length <= 0) {
                 // alert("Voila! No waste in the city.");
-                document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in "+ city+"</h3><p>Hence, cannot plot on map</p>";
+                document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in " + city + "</h3><p>Hence, cannot plot on map</p>";
                 throw new Error('No points in the city');
             }
             var lat = pointsToShow[0]['lattitude'];

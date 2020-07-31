@@ -1,12 +1,8 @@
-/*!
- *  N & LW Lawn Care - Landscaping Bootstrap4 HTML5 Responsive Template
- */
 
- 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800');
  
 body {
-  margin-top: 70px;
+  margin-top: 90px;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   color: #4e3914;
@@ -54,6 +50,7 @@ button.btn-secondary:hover{
 
 .top-nav{
 	background-color: #ffffff !important;
+	box-shadow: 0px 2px 5px grey;
 }
 .navbar-expand-lg.top-nav .navbar-nav .nav-link{
 	padding: 10px 15px;
@@ -575,7 +572,6 @@ footer p {
 	margin: 0 auto;
 	text-align: center;
 }
-.error-contents{}
 .pricing-box{
 	padding: 30px 0px;
 }
