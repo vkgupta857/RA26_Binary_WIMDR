@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-#import the_database as thedb
+import the_database as thedb
 # while using locally uncomment below line
-import the_database_local as thedb
+#import the_database_local as thedb
 
 import requests as req
 import json
@@ -275,46 +275,68 @@ def map():
 
     return render_template('map.html')
 
+@app.route('/clustermap', methods= ['GET', 'POST'])
+def clustermap():
+    return render_template('clustermap.html')
+
+@app.route('/heatmap', methods= ['GET', 'POST'])
+def heatmap():
+    return render_template('heatrmap.html')
+
+
 @app.route('/graphs', methods= ['GET', 'POST'])
 def graphs():
     if request.method == 'GET':
         # 'qobj' stands for query-object
         qobj = thedb.MainQuery()
+
+        #data for pie charts
         count = qobj.get_label_count()
-        p_l= count['L']
-        p_m= count['M']
-        p_h= count['H']
-        # converting count in percentage
-        s = p_l+p_m+p_h
-        p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+        c_l= count['L']
+        c_m= count['M']
+        c_h= count['H']
         count = qobj.get_resolved_count()
-        p_resolve_on_time= count['1']
-        p_resolve_late= count['2']
-        params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+        c_resolve_on_time= count['1']
+        c_resolve_late= count['2']
+        c_pending=20
+
+        #data for top 5 cities
+        #clean,dirty=
+
+        params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
 
     if request.method == 'POST':
         state = request.form['state']
         city = request.form['city']
         duration = request.form['duration']
-
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
-        if duration == 'custom date':
+        
+        if duration == 'date':
             start_date = request.form['start date']
             end_date = request.form['end date']
             qobj = thedb.MainQuery(state,city,start_date,end_date)
-            count = qobj.get_label_count()
-            p_l= count['L']
-            p_m= count['M']
-            p_h= count['H']
-            # converting count in percentage
-            s = p_l+p_m+p_h
-            p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
-            count = qobj.get_resolved_count()
-            p_resolve_on_time= count['1']
-            p_resolve_late= count['2']
-            params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+            
+            #data for bar graph
+            daily,weekly=qobj.get_barplot_data()
+            response={}
+            response['daily']=daily
+            response['weekly']=weekly
 
+            
+            #data for pie charts
+            count = qobj.get_label_count()
+            c_l= count['L']
+            c_m= count['M']
+            c_h= count['H']
+
+            count = qobj.get_resolved_count()
+            c_resolve_on_time= count['1']
+            c_resolve_late= count['2']
+            c_pending=20
+            params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+
+            return response
 
         else:
             if duration == 'week':
@@ -323,18 +345,24 @@ def graphs():
                 end_date=dt.split('')[0]
                 start_date = date_before_n_days(7)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
-                count = qobj.get_label_count()
-                p_l= count['L']
-                p_m= count['M']
-                p_h= count['H']
-                # converting count in percentage
-                s = p_l+p_m+p_h
-                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
-                count = qobj.get_resolved_count()
-                p_resolve_on_time= count['1']
-                p_resolve_late= count['2']
-                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
+                #data for bar graph
+                daily,weekly=qobj.get_barplot_data()
+                response={}
+                response['daily']=daily
+                response['weekly']=weekly
+
+                #data for pie charts
+                count = qobj.get_label_count()
+                c_l= count['L']
+                c_m= count['M']
+                c_h= count['H']
+                count = qobj.get_resolved_count()
+                c_resolve_on_time= count['1']
+                c_resolve_late= count['2']
+                c_pending=20
+                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+                return response
 
 
             elif duration == 'month':
@@ -343,17 +371,25 @@ def graphs():
                 end_date=dt.split('')[0]
                 start_date = date_before_n_days(30)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+                #data for bar graph
+                daily,weekly=qobj.get_barplot_data() 
+                response={}
+                response['daily']=daily
+                response['weekly']=weekly
+
+
+                #data for pie charts
                 count = qobj.get_label_count()
-                p_l= count['L']
-                p_m= count['M']
-                p_h= count['H']
-                # converting count in percentage
-                s = p_l+p_m+p_h
-                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                c_l= count['L']
+                c_m= count['M']
+                c_h= count['H']
                 count = qobj.get_resolved_count()
-                p_resolve_on_time= count['1']
-                p_resolve_late= count['2']
-                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+                c_resolve_on_time= count['1']
+                c_resolve_late= count['2']
+                c_pending=20
+                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+                return response
 
 
 
@@ -363,17 +399,25 @@ def graphs():
                 end_date=dt.split('')[0]
                 start_date = date_before_n_days(90)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+                #data for bar graph
+                daily,weekly=qobj.get_barplot_data()
+                response={}
+                response['daily']=daily
+                response['weekly']=weekly
+
+
+                #data for pie charts
                 count = qobj.get_label_count()
-                p_l= count['L']
-                p_m= count['M']
-                p_h= count['H']
-                # converting count in percentage
-                s = p_l+p_m+p_h
-                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
+                c_l= count['L']
+                c_m= count['M']
+                c_h= count['H']
                 count = qobj.get_resolved_count()
-                p_resolve_on_time= count['1']
-                p_resolve_late= count['2']
-                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
+                c_resolve_on_time= count['1']
+                c_resolve_late= count['2']
+                c_pending=20
+                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+                return response
 
 
             elif duration == 'year':
@@ -382,20 +426,51 @@ def graphs():
                 end_date=dt.split('')[0]
                 start_date = date_before_n_days(365)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
-                count = qobj.get_label_count()
-                p_l= count['L']
-                p_m= count['M']
-                p_h= count['H']
-                # converting count in percentage
-                s = p_l+p_m+p_h
-                p_l,p_m,p_h = (p_l*100)/s, (p_m*100)/s, (p_h*100)/s
-                count = qobj.get_resolved_count()
-                p_resolve_on_time= count['1']
-                p_resolve_late= count['2']
-                params={'p_l':p_l,'p_m':p_m,'p_h':p_h,'p_resolve_on_time':p_resolve_on_time,'p_resolve_late':p_resolve_late}
 
-        return render_template('graph.html',params=params)
-    return render_template('graph.html',params=params)
+                #data for bar graph
+                daily,weekly=qobj.get_barplot_data()
+                response={}
+                response['daily']=daily
+                response['weekly']=weekly
+
+
+                #data for pie charts
+                count = qobj.get_label_count()
+                c_l= count['L']
+                c_m= count['M']
+                c_h= count['H']
+                count = qobj.get_resolved_count()
+                c_resolve_on_time= count['1']
+                c_resolve_late= count['2']
+                c_pending=20
+                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+                return response
+
+
+            elif duration == 'all':
+                qobj = thedb.MainQuery(state,city)
+
+                #data for bar graph
+                daily,weekly=qobj.get_barplot_data()
+                response={}
+                response['daily']=daily
+                response['weekly']=weekly
+
+                #data for pie charts
+                count = qobj.get_label_count()
+                c_l= count['L']
+                c_m= count['M']
+                c_h= count['H']
+                count = qobj.get_resolved_count()
+                c_resolve_on_time= count['1']
+                c_resolve_late= count['2']
+                c_pending=20
+                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+                return response
+
+                
+        return render_template('graphs.html',params=params)
+    return render_template('graphs.html',params=params)
 
 
 
