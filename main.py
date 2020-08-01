@@ -318,7 +318,7 @@ def graphs():
             qobj = thedb.MainQuery(state,city,start_date,end_date)
             
             #data for bar graph
-            #daily,weekly=
+            daily,weekly=qobj.get_barplot_data()
             response={}
             response['daily']=daily
             response['weekly']=weekly
@@ -347,7 +347,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                #daily,weekly=
+                daily,weekly=qobj.get_barplot_data()
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -373,7 +373,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                #daily,weekly= 
+                daily,weekly=qobj.get_barplot_data() 
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -401,7 +401,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                #daily,weekly=
+                daily,weekly=qobj.get_barplot_data()
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -428,7 +428,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                #daily,weekly=
+                daily,weekly=qobj.get_barplot_data()
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -451,7 +451,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city)
 
                 #data for bar graph
-                #daily,weekly=
+                daily,weekly=qobj.get_barplot_data()
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
