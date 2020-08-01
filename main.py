@@ -280,7 +280,7 @@ def clustermap():
     return render_template('clustermap.html')
 
 @app.route('/heatmap', methods= ['GET', 'POST'])
-def clustermap():
+def heatmap():
     return render_template('heatrmap.html')
 
 
@@ -301,7 +301,7 @@ def graphs():
         c_pending=20
 
         #data for top 5 cities
-        clean,dirty=
+        #clean,dirty=
 
         params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
 
@@ -318,7 +318,7 @@ def graphs():
             qobj = thedb.MainQuery(state,city,start_date,end_date)
             
             #data for bar graph
-            daily,weekly=
+            #daily,weekly=
             response={}
             response['daily']=daily
             response['weekly']=weekly
@@ -347,7 +347,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                daily,weekly=
+                #daily,weekly=
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -373,7 +373,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                daily,weekly=
+                #daily,weekly= 
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -401,7 +401,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                daily,weekly=
+                #daily,weekly=
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -428,7 +428,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
                 #data for bar graph
-                daily,weekly=
+                #daily,weekly=
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
@@ -451,7 +451,7 @@ def graphs():
                 qobj = thedb.MainQuery(state,city)
 
                 #data for bar graph
-                daily,weekly=
+                #daily,weekly=
                 response={}
                 response['daily']=daily
                 response['weekly']=weekly
