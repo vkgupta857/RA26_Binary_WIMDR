@@ -102,7 +102,7 @@ def add_csv_data():
     except:
         last = 0   
     
-    df = df.iloc[last:,:]
+    df = df.loc[last:,:]
     
 
     stmt = sqlalchemy.text(
@@ -111,14 +111,11 @@ def add_csv_data():
             "VALUES (:state, :district, :lattitude,	:longitude, :report_time, :label, :pick_time, :resolved, :emp_ID, :filename);"
         )
     for i in range(df.shape[0]):
-        try:
-            with rdb.connect() as conn:
-                conn.execute(stmt, state=df['state'][i], district=df['district'][i],
+        with rdb.connect() as conn:
+            conn.execute(stmt, state=df['state'][i], district=df['district'][i],
                          lattitude=str(df['lattitude'][i]), longitude=str(df['longitude'][i]),
                          report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i],
                          resolved=str(df['resolved'][i]), emp_ID=df['emp_id'][i], filename=df['filename'][i])
-        except:
-            return("Kuch to gadbad hai!")
     return('Yess')
 
 
