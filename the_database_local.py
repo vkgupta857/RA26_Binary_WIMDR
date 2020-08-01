@@ -72,7 +72,7 @@ def add_csv_data():
                 conn.execute(stmt, state=df['state'][i], district=df['district'][i],
                          lattitude=str(df['lattitude'][i]), longitude=str(df['longitude'][i]),
                          report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i],
-                         resolved=str(df['resolved'][i]), emp_ID=df['emp_ID'][i], filename=df['filename'][i])
+                         resolved=str(df['resolved'][i]), emp_ID=df['emp_id'][i], filename=df['filename'][i])
         except:
             return("Kuch to gadbad hai!")
     return('Yess')
