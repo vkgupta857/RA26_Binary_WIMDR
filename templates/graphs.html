@@ -1062,30 +1062,78 @@ const linedataSource = {
     };
 
     const resolveDataSource = {
-        chart: {
-            caption: "Queries resolved within time vs late",
-            plottooltext: "<b>$value</b> queries $label ",
-            showlegend: "1",
-            showpercentvalues: "1",
-            legendposition: "bottom",
-            usedataplotcolorforlabels: "1",
-            theme: "fusion"
-        },
- data: [
-            {
-                label: "Resolved in time",
-                value: "{{params['c_resolve_on_time']}}"
+       "chart": {
+        "caption": "Waste queries resolved within time vs late",
+        "plotToolText": "$value",
+        "theme": "fusion",
+        "chartBottomMargin": "50",
+        "showValue": "1"
+      },
+      "colorRange": {
+        "color": [{
+          "minValue": "0",
+          "maxValue": "{{params['c_resolve_on_time']}}",
+          "code": "#6baa01"
+        },  {
+          "minValue": "{{params['c_resolve_on_time']}}",
+          "maxValue": "{{params['c_resolve_on_time']+params['c_resolve_late']}}",
+          "code": "#e44a00"
+        }]
+      },
+      "dials": {
+        "dial": [{
+          "value": "{{params['c_resolve_on_time']}}"
+        }]
+      },
+
+      "annotations": {
+        "origw": "450",
+        "origh": "300",
+        "autoscale": "1",
+        "showBelow": "0",
+        "groups": [{
+          "id": "arcs",
+          "items": [{
+              "id": "national-cs-bg",
+              "type": "rectangle",
+              "x": "$chartCenterX+2",
+              "y": "$chartEndY - 45",
+              "tox": "$chartCenterX + 80",
+              "toy": "$chartEndY - 25",
+              "fillcolor": "#e44a00"
             },
             {
-                label: "Resolved late",
-                value: "{{params['c_resolve_late']}}"
+              "id": "national-cs-text",
+              "type": "Text",
+              "color": "#ffffff",
+              "label": "resolved late",
+              "fontSize": "12",
+              "align": "left",
+              "x": "$chartCenterX + 7",
+              "y": "$chartEndY - 35"
             },
             {
-            	label: "Pending",
-            	value:"{{params['c_pending']}}"
+              "id": "state-cs-bg",
+              "type": "rectangle",
+              "x": "$chartCenterX-2",
+              "y": "$chartEndY - 45",
+              "tox": "$chartCenterX - 110",
+              "toy": "$chartEndY - 25",
+              "fillcolor": "#6baa01"
+            },
+            {
+              "id": "state-cs-text",
+              "type": "Text",
+              "color": "#ffffff",
+              "label": "resolved within time",
+              "fontSize": "12",
+              "align": "right",
+              "x": "$chartCenterX - 7",
+              "y": "$chartEndY - 35"
             }
-       
-        ]
+          ]
+        }]
+      }	    
     };
    
 
@@ -1103,7 +1151,7 @@ const linedataSource = {
         }).render();
 
         var resolveChart = new FusionCharts({
-            type: "doughnut2d",
+            type: "angulargauge",
             renderAt: "resolve-chart-container",
             width: "100%",
             height: "500%",
