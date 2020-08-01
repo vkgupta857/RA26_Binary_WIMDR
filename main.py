@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-import the_database as thedb
+#import the_database as thedb
 # while using locally uncomment below line
-#import the_database_local as thedb
+import the_database_local as thedb
 
 import requests as req
 import json
@@ -368,7 +368,7 @@ def graphs():
             elif duration == 'month':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                end_date=dt.split('')[0]
+                end_date=dt.split(' ')[0]
                 start_date = date_before_n_days(30)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
