@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-#import the_database as thedb
+import the_database as thedb
 # while using locally uncomment below line
-import the_database_local as thedb
+#import the_database_local as thedb
 
 import requests as req
 import json

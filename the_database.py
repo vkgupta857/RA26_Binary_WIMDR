@@ -94,8 +94,16 @@ def check():
 
 
 def add_csv_data():
-    df = pd.read_csv('new_reports.csv')
-
+    df = pd.read_csv('real_reports.csv')
+    
+    try:
+        with rdb.connect() as conn:
+            last = conn.execute("select report_no from reports order by report_no desc limit 1;").fetchone()[0]
+    except:
+        last = 0   
+    
+    df = df.iloc[last:,:]
+    
 
     stmt = sqlalchemy.text(
             "INSERT INTO reports"
@@ -110,7 +118,7 @@ def add_csv_data():
                          report_time=df['report_time'][i], label=df['label'][i], pick_time=df['pick_time'][i],
                          resolved=str(df['resolved'][i]), emp_ID=df['emp_ID'][i], filename=df['filename'][i])
         except:
-            pass
+            return("Kuch to gadbad hai!")
     return('Yess')
 
 
