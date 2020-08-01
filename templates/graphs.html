@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head%}
-
+<script src="/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
   var countries = Object();
@@ -228,13 +228,11 @@
       </div>
       <div class="form-group col-md-2">
         <label for="custom">START DATE</label>
-        <input type="date" id="custom" class="form-control form-control-sm" name="start"
-          disabled="disabled" />
+        <input type="date" id="custom" class="form-control form-control-sm" name="start" disabled="disabled" />
       </div>
       <div class="form-group col-md-2">
         <label for="end">END DATE</label>
-        <input type="date" id="end" class="form-control form-control-sm" name="end"
-          disabled="disabled" />
+        <input type="date" id="end" class="form-control form-control-sm" name="end" disabled="disabled" />
       </div>
       <div class="form-group col-md-2">
         <br>
@@ -282,7 +280,7 @@
       <div class="card">
         <div class="card-body">
           <a href="/clustermap"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
-              height="315px"></a>
+              height="315px" class="img-fluid"></a>
         </div>
       </div>
     </div>
@@ -320,9 +318,46 @@
   src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 
 <script type="text/javascript">
+  const monthlydataSource = {
+    chart: {
+      caption: "Categorical statistics of waste queries reported over the month",
+      yaxisname: "Total waste queries reported",
+      plottooltext:
+        "<b>$dataValue</b> of $seriesName reported on $label",
+      showsum: "0",
+      theme: "fusion"
+    },
+    categories: [
+      {
+        category: []
+      }
+    ],
+    dataset: [
+      {
+        seriesname: "High Waste",
+        data: []
+      },
+      {
+        seriesname: "Medium Waste",
+        data: []
+      },
+
+      {
+        seriesname: "Low Waste",
+        data: []
+      }
+    ]
+  };
+
+  // console.log(monthlydataSource.categories[0].category);
+  // console.log(monthlydataSource.dataset[0].seriesname);
+  // console.log(monthlydataSource.dataset[1].data);
+  // console.log(monthlydataSource.dataset[2].data);
 
   function addFilters() {
-    event.preventDefault();
+    if(event){
+      event.preventDefault();
+    }
     var state = document.getElementById('stateId').value;
     var city = document.getElementById('city').value;
     var duration = document.getElementById('duration').value;
@@ -347,8 +382,11 @@
     }
     console.log(state, city, duration, startDate, endDate);
     // throw Error("this is an error");
+    var highWasteList = [];
+    var mediumWasteList = [];
+    var lowWasteList = [];
     $.ajax({
-      url: '/graphs',
+      url: '/reports',
       type: 'POST',
       data: {
         state: state,
@@ -357,8 +395,25 @@
         startDate: startDate,
         endDate: endDate
       },
-      success: function (data) {
-        console.log(data);
+      success: function (res) {
+        console.log(res);
+        var dailyList = res.daily;
+        // console.log(dailyList);
+        var highWasteList = [];
+        var mediumWasteList = [];
+        var lowWasteList = [];
+        var labelList = [];
+        for (var wasteType of dailyList) {
+          highWasteList.push({ value: wasteType.High });
+          mediumWasteList.push({ value: wasteType.Medium });
+          lowWasteList.push({ value: wasteType.Low });
+          labelList.push({label: ""});
+        }
+        monthlydataSource.categories[0].category = labelList;
+        monthlydataSource.dataset[0].data = highWasteList;
+        monthlydataSource.dataset[1].data = mediumWasteList;
+        monthlydataSource.dataset[2].data = lowWasteList;
+        plotMonthly();
       },
       error: function (xhr) {
         console.log("Error occured:", xhr.status, xhr.statusText);
@@ -366,7 +421,19 @@
     })
   }
 
+  // Call addFilters() on page load
+  addFilters();
 
+  function plotMonthly(){
+    var monthlyChart = new FusionCharts({
+      type: "stackedcolumn2d",
+      renderAt: "monthly-chart-container",
+      width: "100%",
+      height: "300%",
+      dataFormat: "json",
+      dataSource: monthlydataSource
+    }).render();
+  }
 
   const top5cleanDataSource = {
     chart: {
@@ -433,405 +500,6 @@
         label: "Jaipur",
         value: "45"
       }
-    ]
-  };
-
-  const monthlydataSource = {
-    chart: {
-      caption: "Categorical statistics of waste queries reported over the month",
-      yaxisname: "Total waste queries reported",
-      plottooltext:
-        "<b>$dataValue</b> of $seriesName reported on $label",
-      showsum: "0",
-      theme: "fusion"
-    },
-    categories: [
-      {
-        category: [
-          {
-            label: "01 June"
-          },
-          {
-            label: "02 June"
-          },
-          {
-            label: "03 June"
-          },
-          {
-            label: "04 June"
-          },
-          {
-            label: "05 June"
-          },
-          {
-            label: "06 June"
-          },
-          {
-            label: "07 June"
-          },
-          {
-            label: "08 June"
-          },
-          {
-            label: "09 June"
-          },
-          {
-            label: "10 June"
-          },
-          {
-            label: "11 June"
-          },
-          {
-            label: "12 June"
-          },
-          {
-            label: "13 June"
-          },
-          {
-            label: "14 June"
-          },
-          {
-            label: "15 June"
-          },
-          {
-            label: "16 June"
-          },
-          {
-            label: "17 June"
-          },
-          {
-            label: "18 June"
-          },
-          {
-            label: "19 June"
-          },
-          {
-            label: "20 June"
-          },
-          {
-            label: "21 June"
-          },
-          {
-            label: "22 June"
-          },
-          {
-            label: "23 June"
-          },
-          {
-            label: "24 June"
-          },
-          {
-            label: "25 June"
-          },
-          {
-            label: "26 June"
-          },
-          {
-            label: "27 June"
-          },
-          {
-            label: "28 June"
-          },
-          {
-            label: "29 June"
-          },
-          {
-            label: "30 June"
-          }
-
-        ]
-      }
-    ],
-    dataset: [
-      {
-        seriesname: "High Waste",
-        data: [
-          {
-            value: "15622"
-          },
-          {
-            value: "10612"
-          },
-          {
-            value: "15820"
-          },
-          {
-            value: "26723"
-          },
-          {
-            value: "35415"
-          },
-          {
-            value: "25555"
-          },
-          {
-            value: "81803"
-          },
-          {
-            value: "47950"
-          },
-          {
-            value: "42396"
-          },
-          {
-            value: "19435"
-          },
-          {
-            value: "9780"
-          },
-          {
-            value: "23243"
-          },
-          {
-            value: "28619"
-          },
-          {
-            value: "8477"
-          },
-          {
-            value: "3503"
-          },
-          {
-            value: "14278"
-          },
-          {
-            value: "30522"
-          },
-          {
-            value: "61518"
-          },
-          {
-            value: "24819"
-          },
-          {
-            value: "16437"
-          },
-          {
-            value: "21171"
-          },
-          {
-            value: "1690"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "11253"
-          },
-          {
-            value: "24185"
-          },
-          {
-            value: "3546"
-          },
-          {
-            value: "74936"
-          },
-          {
-            value: "2733"
-          },
-          {
-            value: "5767"
-          },
-          {
-            value: "9797"
-          }
-        ]
-      },
-      {
-        seriesname: "Medium Waste",
-        data: [
-          {
-            value: "3622"
-          },
-          {
-            value: "2612"
-          },
-          {
-            value: "5820"
-          },
-          {
-            value: "6723"
-          },
-          {
-            value: "5415"
-          },
-          {
-            value: "5555"
-          },
-          {
-            value: "1803"
-          },
-          {
-            value: "7950"
-          },
-          {
-            value: "2396"
-          },
-          {
-            value: "9435"
-          },
-          {
-            value: "2780"
-          },
-          {
-            value: "3243"
-          },
-          {
-            value: "8619"
-          },
-          {
-            value: "1477"
-          },
-          {
-            value: "1503"
-          },
-          {
-            value: "4278"
-          },
-          {
-            value: "9522"
-          },
-          {
-            value: "2518"
-          },
-          {
-            value: "4819"
-          },
-          {
-            value: "6437"
-          },
-          {
-            value: "6171"
-          },
-          {
-            value: "2690"
-          },
-          {
-            value: "1418"
-          },
-          {
-            value: "1253"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          }
-
-        ]
-      },
-
-      {
-        seriesname: "Low Waste",
-        data: [
-          {
-            value: "3622"
-          },
-          {
-            value: "2612"
-          },
-          {
-            value: "5820"
-          },
-          {
-            value: "6723"
-          },
-          {
-            value: "5415"
-          },
-          {
-            value: "5555"
-          },
-          {
-            value: "1803"
-          },
-          {
-            value: "7950"
-          },
-          {
-            value: "2396"
-          },
-          {
-            value: "9435"
-          },
-          {
-            value: "2780"
-          },
-          {
-            value: "3243"
-          },
-          {
-            value: "8619"
-          },
-          {
-            value: "1477"
-          },
-          {
-            value: "1503"
-          },
-          {
-            value: "4278"
-          },
-          {
-            value: "9522"
-          },
-          {
-            value: "2518"
-          },
-          {
-            value: "4819"
-          },
-          {
-            value: "6437"
-          },
-          {
-            value: "6171"
-          },
-          {
-            value: "2690"
-          },
-          {
-            value: "1418"
-          },
-          {
-            value: "1253"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          },
-          {
-            value: "2418"
-          }
-
-        ]
-      }
-
     ]
   };
 
@@ -1191,23 +859,23 @@
       dataSource: top5dirtyDataSource
     }).render();
 
-    var monthlyChart = new FusionCharts({
-      type: "stackedcolumn2d",
-      renderAt: "monthly-chart-container",
-      width: "100%",
-      height: "300%",
-      dataFormat: "json",
-      dataSource: monthlydataSource
-    }).render();
+    // var monthlyChart = new FusionCharts({
+    //   type: "stackedcolumn2d",
+    //   renderAt: "monthly-chart-container",
+    //   width: "100%",
+    //   height: "300%",
+    //   dataFormat: "json",
+    //   dataSource: monthlydataSource
+    // }).render();
 
-    var weeklyChart = new FusionCharts({
-      type: "stackedcolumn2d",
-      renderAt: "Weekly-chart-container",
-      width: "100%",
-      height: "300%",
-      dataFormat: "json",
-      dataSource: weeklydataSource
-    }).render();
+    // var weeklyChart = new FusionCharts({
+    //   type: "stackedcolumn2d",
+    //   renderAt: "Weekly-chart-container",
+    //   width: "100%",
+    //   height: "300%",
+    //   dataFormat: "json",
+    //   dataSource: weeklydataSource
+    // }).render();
 
     FusionCharts.ready(function () {
       var myChart = new FusionCharts({
