@@ -349,6 +349,37 @@
     ]
   };
 
+  const weeklydataSource = {
+    chart: {
+      caption: "Categorical statistics of waste queries reported over the week",
+      yaxisname: "Total waste queries reported",
+      plottooltext:
+        "<b>$dataValue</b> of $seriesName reported on $label",
+      showsum: "0",
+      theme: "fusion"
+    },
+    categories: [
+      {
+        category: []
+      }
+    ],
+    dataset: [
+      {
+        seriesname: "High Waste",
+        data: []
+      },
+      {
+        seriesname: "Medium Waste",
+        data: []
+      },
+
+      {
+        seriesname: "Low Waste",
+        data: []
+      }
+    ]
+  };
+
   // console.log(monthlydataSource.categories[0].category);
   // console.log(monthlydataSource.dataset[0].seriesname);
   // console.log(monthlydataSource.dataset[1].data);
@@ -396,24 +427,46 @@
         endDate: endDate
       },
       success: function (res) {
-        console.log(res);
-        var dailyList = res.daily;
-        // console.log(dailyList);
-        var highWasteList = [];
-        var mediumWasteList = [];
-        var lowWasteList = [];
-        var labelList = [];
-        for (var wasteType of dailyList) {
-          highWasteList.push({ value: wasteType.High });
-          mediumWasteList.push({ value: wasteType.Medium });
-          lowWasteList.push({ value: wasteType.Low });
-          labelList.push({label: ""});
+        // console.log(res);
+        if(res.daily){
+          var dailyList = res.daily;
+          // console.log(dailyList);
+          var highWasteList = [];
+          var mediumWasteList = [];
+          var lowWasteList = [];
+          var labelList = [];
+          for (var wasteType of dailyList) {
+            highWasteList.push({ value: wasteType.High });
+            mediumWasteList.push({ value: wasteType.Medium });
+            lowWasteList.push({ value: wasteType.Low });
+            labelList.push({label: ""});
+          }
+          monthlydataSource.categories[0].category = labelList;
+          monthlydataSource.dataset[0].data = highWasteList;
+          monthlydataSource.dataset[1].data = mediumWasteList;
+          monthlydataSource.dataset[2].data = lowWasteList;
+          plotMonthly();
         }
-        monthlydataSource.categories[0].category = labelList;
-        monthlydataSource.dataset[0].data = highWasteList;
-        monthlydataSource.dataset[1].data = mediumWasteList;
-        monthlydataSource.dataset[2].data = lowWasteList;
-        plotMonthly();
+
+        if(res.weekly){
+          var weeklyList = res.weekly;
+          // console.log(dailyList);
+          var highWasteListWeekly = [];
+          var mediumWasteListWeekly = [];
+          var lowWasteListWeekly = [];
+          var labelListWeekly = [];
+          for (var wasteType of weeklyList) {
+            highWasteListWeekly.push({ value: wasteType.High });
+            mediumWasteListWeekly.push({ value: wasteType.Medium });
+            lowWasteListWeekly.push({ value: wasteType.Low });
+            labelListWeekly.push({label: ""});
+          }
+          weeklydataSource.categories[0].category = labelListWeekly;
+          weeklydataSource.dataset[0].data = highWasteListWeekly;
+          weeklydataSource.dataset[1].data = mediumWasteListWeekly;
+          weeklydataSource.dataset[2].data = lowWasteListWeekly;
+          plotWeekly();
+        }
       },
       error: function (xhr) {
         console.log("Error occured:", xhr.status, xhr.statusText);
@@ -432,6 +485,17 @@
       height: "300%",
       dataFormat: "json",
       dataSource: monthlydataSource
+    }).render();
+  }
+
+  function plotWeekly(){
+    var monthlyChart = new FusionCharts({
+      type: "stackedcolumn2d",
+      renderAt: "monthly-chart-container",
+      width: "100%",
+      height: "300%",
+      dataFormat: "json",
+      dataSource: weeklydataSource
     }).render();
   }
 
@@ -615,105 +679,6 @@
           }
         ]
       }
-    ]
-  };
-
-  const weeklydataSource = {
-    chart: {
-      caption: "Categorical statistics of waste queries reported over the week",
-      yaxisname: "Total waste queries reported",
-      plottooltext:
-        "<b>$dataValue</b> of $seriesName reported on $label",
-      showsum: "0",
-      theme: "fusion"
-    },
-    categories: [
-      {
-        category: [
-          {
-            label: "01-07 June"
-          },
-          {
-            label: "08-14 June"
-          },
-          {
-            label: "15-21 June"
-          },
-          {
-            label: "21-27 June"
-          },
-          {
-            label: "27-30 June"
-          },
-
-
-        ]
-      }
-    ],
-    dataset: [
-      {
-        seriesname: "High Waste",
-        data: [
-          {
-            value: "156"
-          },
-          {
-            value: "106"
-          },
-          {
-            value: "158"
-          },
-          {
-            value: "267"
-          },
-          {
-            value: "35"
-          }
-        ]
-      },
-      {
-        seriesname: "Medium Waste",
-        data: [
-          {
-            value: "362"
-          },
-          {
-            value: "261"
-          },
-          {
-            value: "582"
-          },
-          {
-            value: "672"
-          },
-          {
-            value: "54"
-          }
-        ]
-      },
-
-      {
-        seriesname: "Low Waste",
-        data: [
-          {
-            value: "362"
-          },
-          {
-            value: "261"
-          },
-          {
-            value: "582"
-          },
-          {
-            value: "672"
-          },
-          {
-            value: "54"
-          }
-
-        ]
-      }
-
     ]
   };
 
