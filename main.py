@@ -36,10 +36,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = "MySecretKeyDontCopy"
 # Temporarily file can be uploaded in '/tmp' folder in GCP
-app.config['UPLOAD_FOLDER'] = '/tmp/'
+#app.config['UPLOAD_FOLDER'] = '/tmp/'
 
 # for local
-# app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 
 # cred = credentials.Certificate('SIH-Realtime-DB.json')
@@ -64,6 +64,46 @@ ndb = firebase.database()
 ######################
 # App Routes Section
 ######################
+# data preprocessing for heatmap with time
+def preprocessForHeatMapWithTime(res):
+    # takes resproxy as input
+    d = {}
+    
+    for row in res:
+        lat = float(row[1])
+        lng = float(row[2])
+        date = str(row[0])
+        try:
+            d[date].append([lat,lng])
+        except:
+            d[date] = []
+            d[date].append([lat,lng])
+            
+    time_index = list(d.keys())
+    data = []
+    for date in time_index:
+        data.append(d[date])
+    return(data, time_index)
+
+def create_heatmap_with_time(res, place):
+    # takes resproxy as input
+    data, time_index = preprocessForHeatMapWithTime(res)
+    m = folium.Map(
+        data[0][0],
+        tiles='stamentoner',
+        zoom_start={'state':6, 'district':13}[place])
+
+    hm = plugins.HeatMapWithTime(
+        data,
+        index=time_index,
+        auto_play=False,
+        max_opacity=0.3
+    )
+    
+    hm.add_to(m)
+    m.save('templates/heatmap-time.html')
+    
+
 def date_before_n_days(n):
     dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
     dt = dt.replace('T',' ').split('.')[0]
@@ -161,8 +201,8 @@ def upload():
             filename = get_filename()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg'))
             pathoncloud='images/'+filename
-            #pathlocal= 'static/uploads/'+filename
-            pathlocal = '/tmp/image.jpg'
+            pathlocal= 'static/uploads/'+'image.jpg'
+            #pathlocal = '/tmp/image.jpg'
 
             storage.child(pathoncloud).put(pathlocal)
 
