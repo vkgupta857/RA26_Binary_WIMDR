@@ -726,120 +726,7 @@
     ]
   };
 
-  const linedataSource = {
-    chart: {
-      caption: "Cleanliness growth of states in the given timeframe",
-      yaxisname: "Percentage growth",
-      showhovereffect: "1",
-      numbersuffix: "%",
-      drawcrossline: "1",
-      plottooltext: "<b>$dataValue</b> of growth by $seriesName",
-      theme: "fusion"
-    },
-    categories: [
-      {
-        category: [
-          {
-            label: "January"
-          },
-          {
-            label: "February"
-          },
-          {
-            label: "March"
-          },
-          {
-            label: "April"
-          },
-          {
-            label: "May"
-          }
-        ]
-      }
-    ],
-    dataset: [
-      {
-        seriesname: "Madhya Pradesh",
-        data: [
-          {
-            value: "5"
-          },
-          {
-            value: "10"
-          },
-          {
-            value: "8"
-          },
-          {
-            value: "20"
-          },
-          {
-            value: "22"
-          }
-        ]
-      },
-      {
-        seriesname: "Maharashtra",
-        data: [
-          {
-            value: "16"
-          },
-          {
-            value: "10"
-          },
-          {
-            value: "12"
-          },
-          {
-            value: "12"
-          },
-          {
-            value: "15"
-          }
-        ]
-      },
-      {
-        seriesname: "Gujarat",
-        data: [
-          {
-            value: "20"
-          },
-          {
-            value: "22"
-          },
-          {
-            value: "27"
-          },
-          {
-            value: "31"
-          },
-          {
-            value: "33"
-          }
-        ]
-      },
-      {
-        seriesname: "Rajasthan",
-        data: [
-          {
-            value: "19"
-          },
-          {
-            value: "21"
-          },
-          {
-            value: "15"
-          },
-          {
-            value: "19"
-          },
-          {
-            value: "24"
-          }
-        ]
-      }
-    ]
-  };
+ 
 
   FusionCharts.ready(function () {
 
@@ -888,15 +775,7 @@
       dataSource: monthlydataSource
     }).render();
 
-   
-    var myChart = new FusionCharts({
-      type: "msline",
-      renderAt: "line-chart-container",
-      width: "100%",
-      height: "500%",
-      dataFormat: "json",
-      dataSource: linedataSource
-    }).render();
+
 
   });
 
