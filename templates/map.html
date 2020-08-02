@@ -47,15 +47,36 @@
     </div>
 </nav>
 <div class="container">
-    <br>
-    <div class="row">
-        <td>ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /></td>
-        <td>HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" /></td>
-        <td>MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" /></td>
-        <td>LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /></td>
+    <br class="my-2">
+    <h4 class="text-center">Category-wise Wastes reported</h4>
+    <p class="text-center">
+        <b>Legends - </b>
+        ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" height="20" class="mr-4" />
+        HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" height="20" class="mr-4" />
+        MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" height="20" class="mr-4" />
+        LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" height="20" class="mr-4" />
+    </p>
+    <div class="card text-center">
+        <div class="card-body">
+            <div id="mapHolder"> <span class="spinner-border text-success"></span> Fetching data...</div>
+        </div>
+    </div>
+    <hr class="my-4 bg-dark">
+    <h4 class="text-center">False/Frequent (Anomalies) Reports</h4>
+    <p class="text-center">
+        <b>Legends - </b>
+        Reported more than once: <img src="/static/images/blue.png" height="20" class="mr-4" />
+        Reporting daily for 3 days: <img src="/static/images/darkblue.png" height="20" />
+    </p>
+    <div class="card text-center">
+        <div class="card-body">
+            <div id="UnusualActivityMap"> <span class="spinner-border text-success"></span> Fetching data...</div>
+        </div>
     </div>
     <br>
-    <div id="mapHolder"> <span class="spinner-border text-success"></span> Loading waste...</div>
+    <div class="text-center">
+        <a href="/ClustermapM?city={{city}}"><button class="btn btn-success">View Cluster Map</button></a>
+    </div>
     <br>
 </div>
 
@@ -69,37 +90,39 @@
         Late: {
             icon: iconBase + 'red-dot.png'
         },
-        high: {
+        H: {
             icon: iconBase + 'orange-dot.png'
         },
-        medium: {
+        M: {
             icon: iconBase + 'yellow-dot.png'
         },
-        low: {
+        L: {
             icon: iconBase + 'purple-dot.png'
         }
     };
 
-    var features = Array;
+    // var features = Array;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const city = urlParams.get('city');
+    const state = urlParams.get('state');
 
     $.ajax({
         url: '/map',
         type: 'POST',
         data: {
-            city: city
+            city: city,
+            state: state
         },
         success: function (res) {
             // console.log(res);
             var pointsToShow = res.points;
+            console.log(pointsToShow);
 
             if (pointsToShow.length <= 0) {
                 // alert("Voila! No waste in the city.");
                 document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in " + city + "</h3><p>Hence, cannot plot on map</p>";
-                throw new Error('No points in the city');
             }
             var lat = pointsToShow[0]['lattitude'];
             var lon = pointsToShow[0]['longitude'];
@@ -109,7 +132,7 @@
             mapholder.style.width = '100%';
             var myOptions = {
                 center: latlon,
-                zoom: 13,
+                zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,
                 navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
