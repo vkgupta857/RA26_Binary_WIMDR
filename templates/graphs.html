@@ -154,6 +154,10 @@
   #week {
     border-radius: 0px 30px 30px 0px;
   }
+  
+    #fact{
+  	padding: 25px;
+  }
 </style>
 {% endblock %}
 {% block body %}
@@ -185,7 +189,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/graphs">
-            Reports
+            Admin Dashboard
           </a>
         </li>
       </ul>
@@ -284,17 +288,17 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <a href="/heatmap"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
+          <a href="/heatmap?state=region&city=country&duration=duration&start=start&end=end"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
               height="315px" class="img-fluid"></a>
+          <a href="/heatmap_with_time?state=region&city=country&duration=duration&start=start&end=end"><H6 class="text-center">SHOW HEATMAP WITH TIME</H6></a>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <div id="line-chart-container" class="chart-container"></div>
-        </div>
-      </div>
+        <br>
+           <div  class="card" id="fact">Around 3.235K queries per million  have been reported from the place</div><hr>
+           <div class="card" id="fact">Average time to resolve a report from this place has been reported to be around 4.2 hours</div><hr>
+           <div class="card" id="fact">127 tonnes of waste has been collected till date from the place</div>      
     </div>
   </div>
 
@@ -722,120 +726,7 @@
     ]
   };
 
-  const linedataSource = {
-    chart: {
-      caption: "Cleanliness growth of states in the given timeframe",
-      yaxisname: "Percentage growth",
-      showhovereffect: "1",
-      numbersuffix: "%",
-      drawcrossline: "1",
-      plottooltext: "<b>$dataValue</b> of growth by $seriesName",
-      theme: "fusion"
-    },
-    categories: [
-      {
-        category: [
-          {
-            label: "January"
-          },
-          {
-            label: "February"
-          },
-          {
-            label: "March"
-          },
-          {
-            label: "April"
-          },
-          {
-            label: "May"
-          }
-        ]
-      }
-    ],
-    dataset: [
-      {
-        seriesname: "Madhya Pradesh",
-        data: [
-          {
-            value: "5"
-          },
-          {
-            value: "10"
-          },
-          {
-            value: "8"
-          },
-          {
-            value: "20"
-          },
-          {
-            value: "22"
-          }
-        ]
-      },
-      {
-        seriesname: "Maharashtra",
-        data: [
-          {
-            value: "16"
-          },
-          {
-            value: "10"
-          },
-          {
-            value: "12"
-          },
-          {
-            value: "12"
-          },
-          {
-            value: "15"
-          }
-        ]
-      },
-      {
-        seriesname: "Gujarat",
-        data: [
-          {
-            value: "20"
-          },
-          {
-            value: "22"
-          },
-          {
-            value: "27"
-          },
-          {
-            value: "31"
-          },
-          {
-            value: "33"
-          }
-        ]
-      },
-      {
-        seriesname: "Rajasthan",
-        data: [
-          {
-            value: "19"
-          },
-          {
-            value: "21"
-          },
-          {
-            value: "15"
-          },
-          {
-            value: "19"
-          },
-          {
-            value: "24"
-          }
-        ]
-      }
-    ]
-  };
+ 
 
   FusionCharts.ready(function () {
 
@@ -884,15 +775,7 @@
       dataSource: monthlydataSource
     }).render();
 
-   
-    var myChart = new FusionCharts({
-      type: "msline",
-      renderAt: "line-chart-container",
-      width: "100%",
-      height: "500%",
-      dataFormat: "json",
-      dataSource: linedataSource
-    }).render();
+
 
   });
 

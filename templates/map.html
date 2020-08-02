@@ -26,22 +26,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link " href="/upload">
-                        Upload
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/reports">
-                        reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/graphs">
-                        Graphs
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -65,8 +49,8 @@
     <h4 class="text-center">False/Frequent (Anomalies) Reports</h4>
     <p class="text-center">
         <b>Legends - </b>
-        Reported more than once: <img src="/static/images/blue.png" height="20" class="mr-4" />
-        Reporting daily for 3 days: <img src="/static/images/darkblue.png" height="20" />
+        
+        Reporting daily for 3 days: <img src="/static/images/blue.png" height="20" />
     </p>
     <div class="card text-center">
         <div class="card-body">
@@ -75,7 +59,7 @@
     </div>
     <br>
     <div class="text-center">
-        <a href="/ClustermapM?city={{city}}"><button class="btn btn-success">View Cluster Map</button></a>
+        <a href="/ClustermapM?city={{city}}&state={{state}}"><button class="btn btn-success">View Cluster Map</button></a>
     </div>
     <br>
 </div>
@@ -145,7 +129,7 @@
                 // lattitude spelling is defined in db. dont change
                 var lng = point.longitude;
                 var type = point.status;
-                console.log(lat, lng, type);
+                // console.log(lat, lng, type);
 
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, lng),
@@ -156,6 +140,110 @@
                 if (type == 'Late') {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                 }
+            }
+
+            // AnomalyMap statrs here
+
+            var activityPts = [
+                {
+                    position: new google.maps.LatLng(23.1369307508016, 79.9414282743248),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.1727464960143, 79.9910974486153),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.1486192051069, 80.0026714942545),
+                    type: 'Anamoly'
+                }, {
+                    position: new google.maps.LatLng(23.1531149888702, 79.9342859487367),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.1167438348741, 79.9520082160492),
+                    type: 'Anamoly'
+                }, {
+                    position: new google.maps.LatLng(23.1889701697534, 79.9194404400441),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.2318370186875, 80.0006429944103),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.1673166117458, 79.9199472512678),
+                    type: 'Anamolytoday'
+
+                }, {
+                    position: new google.maps.LatLng(23.1598206580546, 79.9530009019027),
+                    type: 'Anamoly'
+                }, {
+                    position: new google.maps.LatLng(23.148966713523, 79.9250629976011),
+                    type: 'Anamolytoday'
+                }, {
+                    position: new google.maps.LatLng(23.1489922123079, 79.9328874032764),
+                    type: 'Anamoly'
+                },
+                {
+                    position: new google.maps.LatLng(23.187380568543, 80.0008778100509),
+                    type: 'Anamoly'
+                }
+            ];
+
+            var ActivityMap = document.getElementById("UnusualActivityMap");
+            var Activityicon = {
+                Anamoly: {
+                    icon: '/static/images/darkblue.png'
+                },
+                Anamolytoday: {
+                    icon: '/static/images/blue.png'
+                }
+            };
+            ActivityMap.style.height = '400px';
+            ActivityMap.style.width = '100%';
+            var anomalyOptions = {
+                center: new google.maps.LatLng(23.187380568543, 80.0008778100509),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+            };
+
+            var anomalyMap = new google.maps.Map(document.getElementById('UnusualActivityMap'), anomalyOptions);
+
+            for (var i = 0; i < activityPts.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: activityPts[i].position,
+                    icon: Activityicon[activityPts[i].type].icon,
+                    map: map
+                });
+                console.log(activityPts[i]);
+                if (activityPts[i].type == 'Anamolytoday') {
+                    var radius = 800;
+                    var position = marker.getPosition();
+                    var circle = new google.maps.Circle({
+                        center: position,
+                        radius: radius,
+                        fillColor: "#00ace6",
+                        fillOpacity: 0.3,
+                        map: map,
+                        strokeColor: "#00ace6",
+                        strokeOpacity: 0.3,
+                        strokeWeight: 2
+                    });
+                }
+
+                if (activityPts[i].type == 'Anamoly') {
+                    var radius = 800;
+                    var position = marker.getPosition();
+                    var circle = new google.maps.Circle({
+                        center: position,
+                        radius: radius,
+                        fillColor: "#000066",
+                        fillOpacity: 0.3,
+                        map: map,
+                        strokeColor: "#000066",
+                        strokeOpacity: 0.3,
+                        strokeWeight: 2
+                    });
+                }
+
             }
         },
         error: function (xhr) {
