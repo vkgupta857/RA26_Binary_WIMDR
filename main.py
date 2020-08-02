@@ -362,7 +362,7 @@ def map():
         response['points'] = report
         
         #points for anomaly detection
-        anamoly=
+        anamoly=get_anomaly_points(city,state)
         response['anamoly']= get_anomaly_points(city, state)
         return response
 
@@ -438,7 +438,7 @@ def heatmap():
             filename=create_heatmap(data,city)
         return render_template(filename)
 
-     elif duration == 'year':
+    elif duration == 'year':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
         end_date=dt.split('')[0]
