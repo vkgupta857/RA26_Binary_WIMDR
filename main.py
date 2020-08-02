@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-#import the_database as thedb
+import the_database as thedb
 # while using locally uncomment below line
-import the_database_local as thedb
+# import the_database_local as thedb
 
 import requests as req
 import json
@@ -321,7 +321,7 @@ def login():
 @app.route('/map', methods=['GET', 'POST'])
 def map():
     city = request.args.get('city')
-    city = request.args.get('city')
+    state = request.args.get('state')
     if request.method == 'POST':
         city = request.form['city']
         state = request.form['state']
@@ -355,7 +355,7 @@ def clustermap():
 
 @app.route('/heatmap', methods= ['GET', 'POST'])
 def heatmap():
-    return render_template('heatrmap.html')
+    return render_template('heatmap.html')
 
 @app.route('/ClustermapM', methods=['GET', 'POST'])
 def ClustermapM():
@@ -396,13 +396,13 @@ def graphs():
         state = request.form['state']
         city = request.form['city']
         duration = request.form['duration']
-        print(state,district,duration)
+        print(state,city,duration)
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
         
         if duration == 'date':
-            start_date = request.form['start date']
-            end_date = request.form['end date']
+            start_date = request.form['startDate']
+            end_date = request.form['endDate']
             qobj = thedb.MainQuery(state,city,start_date,end_date)
 
         else:
