@@ -360,6 +360,7 @@ def graphs():
         state = request.form['state']
         city = request.form['city']
         duration = request.form['duration']
+        print(state,district,duration)
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
         
@@ -367,54 +368,14 @@ def graphs():
             start_date = request.form['start date']
             end_date = request.form['end date']
             qobj = thedb.MainQuery(state,city,start_date,end_date)
-            
-            #data for bar graph
-            daily,weekly=qobj.get_barplot_data()
-            response={}
-            response['daily']=daily
-            response['weekly']=weekly
-
-            
-            #data for pie charts
-            count = qobj.get_label_count()
-            c_l= count['L']
-            c_m= count['M']
-            c_h= count['H']
-
-            count = qobj.get_resolved_count()
-            c_resolve_on_time= count['1']
-            c_resolve_late= count['2']
-            c_pending=20
-            params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-
-            return response
 
         else:
             if duration == 'week':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                end_date=dt.split('')[0]
+                end_date=dt.split(' ')[0]
                 start_date = date_before_n_days(7)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
-
-                #data for bar graph
-                daily,weekly=qobj.get_barplot_data()
-                response={}
-                response['daily']=daily
-                response['weekly']=weekly
-
-                #data for pie charts
-                count = qobj.get_label_count()
-                c_l= count['L']
-                c_m= count['M']
-                c_h= count['H']
-                count = qobj.get_resolved_count()
-                c_resolve_on_time= count['1']
-                c_resolve_late= count['2']
-                c_pending=20
-                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-                return response
-
 
             elif duration == 'month':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
@@ -423,108 +384,53 @@ def graphs():
                 start_date = date_before_n_days(30)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
-                #data for bar graph
-                daily,weekly=qobj.get_barplot_data() 
-                response={}
-                response['daily']=daily
-                response['weekly']=weekly
-
-
-                #data for pie charts
-                count = qobj.get_label_count()
-                c_l= count['L']
-                c_m= count['M']
-                c_h= count['H']
-                count = qobj.get_resolved_count()
-                c_resolve_on_time= count['1']
-                c_resolve_late= count['2']
-                c_pending=20
-                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-                return response
-
-
-
             elif duration == '3 months':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                end_date=dt.split('')[0]
+                end_date=dt.split(' ')[0]
                 start_date = date_before_n_days(90)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
-
-                #data for bar graph
-                daily,weekly=qobj.get_barplot_data()
-                response={}
-                response['daily']=daily
-                response['weekly']=weekly
-
-
-                #data for pie charts
-                count = qobj.get_label_count()
-                c_l= count['L']
-                c_m= count['M']
-                c_h= count['H']
-                count = qobj.get_resolved_count()
-                c_resolve_on_time= count['1']
-                c_resolve_late= count['2']
-                c_pending=20
-                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-                return response
-
 
             elif duration == 'year':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                end_date=dt.split('')[0]
+                end_date=dt.split(' ')[0]
                 start_date = date_before_n_days(365)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
-
-                #data for bar graph
-                daily,weekly=qobj.get_barplot_data()
-                response={}
-                response['daily']=daily
-                response['weekly']=weekly
-
-
-                #data for pie charts
-                count = qobj.get_label_count()
-                c_l= count['L']
-                c_m= count['M']
-                c_h= count['H']
-                count = qobj.get_resolved_count()
-                c_resolve_on_time= count['1']
-                c_resolve_late= count['2']
-                c_pending=20
-                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-                return response
-
 
             elif duration == 'all':
                 qobj = thedb.MainQuery(state,city)
 
-                #data for bar graph
-                daily,weekly=qobj.get_barplot_data()
-                response={}
-                response['daily']=daily
-                response['weekly']=weekly
+        #data for bar graph
+        daily,weekly=qobj.get_barplot_data()
+        response={}
+        response['daily']=daily
+        response['weekly']=weekly
 
-                #data for pie charts
-                count = qobj.get_label_count()
-                c_l= count['L']
-                c_m= count['M']
-                c_h= count['H']
-                count = qobj.get_resolved_count()
-                c_resolve_on_time= count['1']
-                c_resolve_late= count['2']
-                c_pending=20
-                params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
-                return response
+        #data for pie charts
+        count = qobj.get_label_count()
+        print("Count for labels",count)
+        if(not (count['L'] or count['L'] or count['L'])):
+            print("No data")
+        c_l= count['L']
+        c_m= count['M']
+        c_h= count['H']
+        count = qobj.get_resolved_count()
+        print("Count for labels",count)
+        c_resolve_on_time= count['1']
+        c_resolve_late= count['2']
+        c_pending=20
 
-                
-        return render_template('graphs.html',params=params)
+        # Commenting params. It has no use for now - Vinod
+        # params={'c_l':c_l,'c_m':c_m,'c_h':c_h,'c_resolve_on_time':c_resolve_on_time,'c_resolve_late':c_resolve_late,'c_pending':c_pending}
+        response['c_l'] = c_l
+        response['c_m'] = c_m
+        response['c_h'] = c_h
+        response['c_resolve_on_time'] = c_resolve_on_time
+        response['c_resolve_late'] = c_resolve_late
+        return response
+
     return render_template('graphs.html',params=params)
-
-
-
 
 
 ###############################################
