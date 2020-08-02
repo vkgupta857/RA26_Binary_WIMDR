@@ -64,30 +64,10 @@ ndb = firebase.database()
 ######################
 # App Routes Section
 ######################
-# data preprocessing for heatmap with time
-def preprocessForHeatMapWithTime(res):
-    # takes resproxy as input
-    d = {}
-    
-    for row in res:
-        lat = float(row[1])
-        lng = float(row[2])
-        date = str(row[0])
-        try:
-            d[date].append([lat,lng])
-        except:
-            d[date] = []
-            d[date].append([lat,lng])
-            
-    time_index = list(d.keys())
-    data = []
-    for date in time_index:
-        data.append(d[date])
-    return(data, time_index)
 
-def create_heatmap_with_time(res, place):
-    # takes resproxy as input
-    data, time_index = preprocessForHeatMapWithTime(res)
+# function for creating Heatmap with time
+def create_heatmap_with_time(data, time_index, place):
+    # takes data and time_index as input
     m = folium.Map(
         data[0][0],
         tiles='stamentoner',
@@ -102,8 +82,37 @@ def create_heatmap_with_time(res, place):
     
     hm.add_to(m)
     m.save('templates/heatmap-time.html')
-    
+    return('heatmap-time.html')
 
+# function for creating heatmap
+def create_heatmap(data,place):
+    try:
+        location = res[0]
+        zoom_start={'state':6, 'district':13}[place]
+    except:
+        location = [27.44,  77.67]
+        zoom_start = 6
+    map = folium.Map(zoom_start=zoom_start,
+                     location=location, 
+                     control_scale=True)
+    folium.plugins.HeatMap(data, radius=8, max_zoom=13).add_to(map)
+    map.save('templates/heatmap1.html')
+    return('heatmap1.html')
+    
+# function to create cluster-map
+def create_cluster_map(res):
+    # function to create cluster map only for district
+    colorCode = {'H':'red', 'M':'orange', 'L':'green'}
+    map = folium.Map(zoom_start=10,location=[19.05,  72.85], control_scale=True)
+    map = folium.plugins.MarkerCluster().add_to(map)
+    for row in res:
+        color = colorCode[row[1]]
+        popupmsg='{} {}'.format({'L':'Low','M':'Medium','H':'High'}[row[1]],str(row[0]))
+        folium.Marker([float(row[2]), float(row[3])],popup=popupmsg,icon=folium.Icon(color=color, icon='info-sign')).add_to(map)
+    map.save('templates/cluster_map_city.html')
+    return('cluster_map_city.html')
+
+# fucntion to get a date before n days of current date
 def date_before_n_days(n):
     dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
     dt = dt.replace('T',' ').split('.')[0]
@@ -113,6 +122,8 @@ def date_before_n_days(n):
     a = a.split(' ')[0]
     return(a)
 
+# function to get the unique filename for each report
+# to neglect the chances of overwriting an image in database
 def get_filename():
     length = 5
     letters = string.ascii_letters

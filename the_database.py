@@ -270,3 +270,81 @@ class MainQuery:
             weekly.append(week)
         
         return(daily, weekly)
+    
+    def get_heatmap_data(self):
+        # to get the data for heatmap
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                        "select lattitude,longitude from reports "
+                        "where report_time between :start_date and :end_date;"
+                        )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select lattitude,longitude from reports "
+                            "where state=:state and (report_time between :start_date and :end_date);"
+                            )
+            else:
+                stmt = sqlalchemy.text(
+                            "select lattitude,longitude from reports "
+                            "where (state=:state and district=:district) and (report_time between :start_date and :end_date);"
+                            )
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
+        
+        data = []
+        for row in res:
+            lat,lng = float(row[0]),float(row[1])
+            data.append([lat,lng])
+        return(data)
+        
+    def get_heatmaptime_data(self):
+        # to get data for heatmap with time
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                        "select date(report_time), lattitude,longitude from reports "
+                        "where report_time between :start_date and :end_date;"
+                        )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select date(report_time), lattitude,longitude from reports "
+                            "where state=:state and (report_time between :start_date and :end_date);"
+                            )
+            else:
+                stmt = sqlalchemy.text(
+                            "select date(report_time), lattitude,longitude from reports "
+                            "where (state=:state and district=:district) and (report_time between :start_date and :end_date);"
+                            )
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
+        
+        data, time_index = preprocessForHeatMapWithTime(res)
+        return(data, time_index)
+    
+    def get_clustermap_data(self):
+        # to get data for clustermap
+        # to get data for heatmap with time
+        if self.state == 'all':
+            stmt = sqlalchemy.text(
+                        "select date(report_time),label, lattitude,longitude from reports "
+                        "where report_time between :start_date and :end_date;"
+                        )
+        else:
+            if self.district == 'all':
+                stmt = sqlalchemy.text(
+                            "select date(report_time),label, lattitude,longitude from reports "
+                            "where state=:state and (report_time between :start_date and :end_date);"
+                            )
+            else:
+                stmt = sqlalchemy.text(
+                            "select date(report_time),label, lattitude,longitude from reports "
+                            "where (state=:state and district=:district) and (report_time between :start_date and :end_date);"
+                            )
+        with rdb.connect() as conn:
+            res = conn.execute(stmt, state=self.state, district=self.district,
+                                start_date=self.start_date, end_date=self.end_date).fetchall()
+        return(res)
+        
