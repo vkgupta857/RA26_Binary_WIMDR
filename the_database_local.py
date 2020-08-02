@@ -48,6 +48,21 @@ def check():
         res = conn.execute("select label, count(label) as count from reports group by label;").fetchall()
     return(res)
 
+def get_emp_rating(district):
+    stmt = sqlalchemy.text(
+        "select a.district, (a.resolved_on_time*5)/b.resolved_total as percentage "
+        "from (select distinct district, count(resolved) as resolved_on_time from reports "
+		"where resolved = 1 and district = :district "
+		"group by reports.district) as a "
+        "join (select distinct district, count(resolved) as resolved_total from reports "
+		"where district = :district "
+		"group by reports.district) as b "
+        "on a.district = b.district;"
+        )
+    
+    with rdb.connect() as conn:
+        res = conn.execute(stmt, district=district).fetchone()
+    return(round(float(res[1]),2))
 
 def add_csv_data():
     df = pd.read_csv('real_reports.csv')
