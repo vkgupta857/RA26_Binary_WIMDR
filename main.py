@@ -298,13 +298,13 @@ def login():
                         logged_in = 'm'
                         name=data.val()[phone]['Name']
                         id=data.val()[phone]['Emp_ID']
-                       
+                        state=data.val()[phone]['State']
                         type="Manager"
                         city=data.val()[phone]['District']
                     
                         rating= thedb.get_emp_rating(city)
                         time="24 hrs per report"
-                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,time=time)
+                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,time=time,state=state)
                    
                   
                    else:
@@ -322,14 +322,16 @@ def login():
 @app.route('/map', methods=['GET', 'POST'])
 def map():
     city = request.args.get('city')
+    state = request.args.get('state')
     if request.method == 'POST':
         city = request.form['city']
+        state = request.form['state']
         report = get_points(city)
         response = {}
         response['points'] = report
         return response
 
-    return render_template('map.html')
+    return render_template('map.html',city=city,state=state)
 
 @app.route('/clustermap', methods= ['GET', 'POST'])
 def clustermap():
@@ -338,6 +340,19 @@ def clustermap():
 @app.route('/heatmap', methods= ['GET', 'POST'])
 def heatmap():
     return render_template('heatrmap.html')
+
+@app.route('/ClustermapM', methods=['GET', 'POST'])
+def ClustermapM():
+    city = request.args.get('city')
+    state = request.args.get('state')
+    dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+    dt = dt.replace('T',' ').split('.')[0]
+    end_date=dt.split(' ')[0]
+    start_date = date_before_n_days(30)
+    qobj = thedb.MainQuery(state=state, district=city, start_date=start_date, end_date=end_date)
+    res=qobj.get_clustermap_data()
+    filename=create_cluster_map(res)
+    return render_template(filename)
 
 
 @app.route('/graphs', methods= ['GET', 'POST'])
