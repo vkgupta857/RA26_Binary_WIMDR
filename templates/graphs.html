@@ -154,6 +154,10 @@
   #week {
     border-radius: 0px 30px 30px 0px;
   }
+  
+    #fact{
+  	padding: 25px;
+  }
 </style>
 {% endblock %}
 {% block body %}
@@ -286,15 +290,15 @@
         <div class="card-body">
           <a href="/heatmap"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
               height="315px" class="img-fluid"></a>
+          <a href="/heatmap_with_time"><H6 class="text-center">SHOW HEATMAP WITH TIME</H6></a>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <div id="line-chart-container" class="chart-container"></div>
-        </div>
-      </div>
+        <br>
+           <div  class="card" id="fact">Around 3.235K queries per million  have been reported from the place</div><hr>
+           <div class="card" id="fact">Average time to resolve a report from this place has been reported to be around 4.2 hours</div><hr>
+           <div class="card" id="fact">127 tonnes of waste has been collected till date from the place</div>      
     </div>
   </div>
 
