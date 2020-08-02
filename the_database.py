@@ -174,8 +174,17 @@ class MainQuery:
             res = conn.execute(stmt, state=self.state, district=self.district,
                                start_date=self.start_date, end_date=self.end_date).fetchall()
         d = {}
-        for row in res:
-            d[row[0]] = row[1]
+
+        # Assigning default values to prevent error - Vinod
+        d['L'] = 0
+        d['M'] = 0
+        d['H'] = 0
+
+        if(res == []):
+            print("No Waste Data")
+        else:
+            for row in res:
+                d[row[0]] = row[1]
         return(d)
 
 
@@ -202,9 +211,18 @@ class MainQuery:
         with rdb.connect() as conn:
             res = conn.execute(stmt, state=self.state, district=self.district,
                                 start_date=self.start_date, end_date=self.end_date).fetchall()
+
         d = {}
-        for row in res:
-            d[row[0]] = row[1]
+
+        # Assigning default values to avoid errors - Vinod
+        d['1'] = 0
+        d['2'] = 0
+
+        if(res == []):
+            print("No Waste Data")
+        else:
+            for row in res:
+                d[row[0]] = row[1]
         return(d)
     
     
