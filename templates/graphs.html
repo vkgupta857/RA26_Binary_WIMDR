@@ -158,8 +158,7 @@
 {% endblock %}
 {% block body %}
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
-  style="box-shadow: 10px 10px 5px grey;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/index">
       <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
@@ -251,8 +250,8 @@
           </div>
           <br>
           <div class="flex-container">
-            <div><button class="btn btn-success" id="month" onclick="click2()">Show Monthy Graph</button></div>
-            <div> <button class="btn btn-default" id="week" onclick="click1()">Show Weekly Graph</button></div>
+            <div><button class="btn btn-success" id="month" onclick="click2()">Show Daily Reports</button></div>
+            <div> <button class="btn btn-default" id="week" onclick="click1()">Show Weekly Reports</button></div>
           </div>
         </div>
       </div>
@@ -264,14 +263,18 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <div id="category-chart-container" class="chart-container"></div>
+          <div id="category-chart-container" class="chart-container">
+            <div class="spinner-border text-sucess text-center"></div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <div id="resolve-chart-container" class="chart-container"></div>
+          <div id="resolve-chart-container" class="chart-container">
+            <div class="spinner-border text-sucess text-center"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -382,6 +385,107 @@
     ]
   };
 
+  const categoryDataSource = {
+    chart: {
+      caption: "Queries reported category-wise",
+      plottooltext: "<b>$value</b> queries of <b>$label</b> reported",
+      showlegend: "1",
+      showpercentvalues: "1",
+      legendposition: "bottom",
+      usedataplotcolorforlabels: "1",
+      theme: "fusion"
+    },
+    data: [
+      {
+        label: "High Waste",
+        value: ""
+      },
+      {
+        label: "Medium Waste",
+        value: ""
+      },
+      {
+        label: "Low Waste",
+        value: ""
+      }
+    ]
+  };
+
+  const resolveDataSource = {
+    "chart": {
+      "caption": "Waste queries resolved within time vs late",
+      "plotToolText": "$value",
+      "theme": "fusion",
+      "chartBottomMargin": "50",
+      "showValue": "1"
+    },
+    "colorRange": {
+      "color": [{
+        "minValue": "0",
+        "maxValue": "",
+        "code": "#6baa01"
+      }, {
+        "minValue": "",
+        "maxValue": "",
+        "code": "#e44a00"
+      }]
+    },
+    "dials": {
+      "dial": [{
+        "value": ""
+      }]
+    },
+
+    "annotations": {
+      "origw": "450",
+      "origh": "300",
+      "autoscale": "1",
+      "showBelow": "0",
+      "groups": [{
+        "id": "arcs",
+        "items": [{
+          "id": "national-cs-bg",
+          "type": "rectangle",
+          "x": "$chartCenterX+2",
+          "y": "$chartEndY - 45",
+          "tox": "$chartCenterX + 80",
+          "toy": "$chartEndY - 25",
+          "fillcolor": "#e44a00"
+        },
+        {
+          "id": "national-cs-text",
+          "type": "Text",
+          "color": "#ffffff",
+          "label": "Resolved late",
+          "fontSize": "12",
+          "align": "left",
+          "x": "$chartCenterX + 7",
+          "y": "$chartEndY - 35"
+        },
+        {
+          "id": "state-cs-bg",
+          "type": "rectangle",
+          "x": "$chartCenterX-2",
+          "y": "$chartEndY - 45",
+          "tox": "$chartCenterX - 110",
+          "toy": "$chartEndY - 25",
+          "fillcolor": "#6baa01"
+        },
+        {
+          "id": "state-cs-text",
+          "type": "Text",
+          "color": "#ffffff",
+          "label": "Resolved within time",
+          "fontSize": "12",
+          "align": "right",
+          "x": "$chartCenterX - 7",
+          "y": "$chartEndY - 35"
+        }
+        ]
+      }]
+    }
+  };
+  // console.log("=====>", resolveDataSource.colorRange.color[0].minValue);
   // console.log(monthlydataSource.categories[0].category);
   // console.log(monthlydataSource.dataset[0].seriesname);
   // console.log(monthlydataSource.dataset[1].data);
@@ -390,6 +494,8 @@
   function addFilters() {
 
     document.getElementById('monthly-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
+    document.getElementById('category-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
+    document.getElementById('resolve-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
     if(event){
       event.preventDefault();
     }
@@ -432,49 +538,67 @@
         endDate: endDate
       },
       success: function (res) {
-        // console.log(res);
-        if(res.daily){
+        console.log(res);
+        if(res.daily && res.weekly){
           var dailyList = res.daily;
-          console.log(dailyList);
-          if(dailyList.length == 0){
-            console.log("DialyList is empty");
-            document.getElementById('monthly-chart-container').innerHTML = '<h5 class="text-danger text-center">No data available for selected filters.</h5>';
-          }
-          var highWasteList = [];
-          var mediumWasteList = [];
-          var lowWasteList = [];
-          var labelList = [];
-          for (var wasteType of dailyList) {
-            highWasteList.push({ value: wasteType.High });
-            mediumWasteList.push({ value: wasteType.Medium });
-            lowWasteList.push({ value: wasteType.Low });
-            labelList.push({label: ""});
-          }
-          monthlydataSource.categories[0].category = labelList;
-          monthlydataSource.dataset[0].data = highWasteList;
-          monthlydataSource.dataset[1].data = mediumWasteList;
-          monthlydataSource.dataset[2].data = lowWasteList;
-          plotMonthly();
-        }
-
-        if(res.weekly){
           var weeklyList = res.weekly;
-          console.log(weeklyList);
-          var highWasteListWeekly = [];
-          var mediumWasteListWeekly = [];
-          var lowWasteListWeekly = [];
-          var labelListWeekly = [];
-          for (var wasteType of weeklyList) {
-            highWasteListWeekly.push({ value: wasteType.High });
-            mediumWasteListWeekly.push({ value: wasteType.Medium });
-            lowWasteListWeekly.push({ value: wasteType.Low });
-            labelListWeekly.push({label: ""});
+          // console.log(dailyList);
+          if(dailyList.length == 0 || weeklyList.length == 0){
+            console.log("DialyList is empty");
+            document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+            document.getElementById('category-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+            document.getElementById('resolve-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+          } else {
+            var highWasteList = [];
+            var mediumWasteList = [];
+            var lowWasteList = [];
+            var labelList = [];
+            for (var wasteType of dailyList) {
+              highWasteList.push({ value: wasteType.High });
+              mediumWasteList.push({ value: wasteType.Medium });
+              lowWasteList.push({ value: wasteType.Low });
+              labelList.push({label: ""});
+            }
+            monthlydataSource.categories[0].category = labelList;
+            monthlydataSource.dataset[0].data = highWasteList;
+            monthlydataSource.dataset[1].data = mediumWasteList;
+            monthlydataSource.dataset[2].data = lowWasteList;
+            plotMonthly();
+
+            // Set weeklyDataSource
+            var weeklyList = res.weekly;
+            var highWasteListWeekly = [];
+            var mediumWasteListWeekly = [];
+            var lowWasteListWeekly = [];
+            var labelListWeekly = [];
+            for (var wasteType of weeklyList) {
+              highWasteListWeekly.push({ value: wasteType.High });
+              mediumWasteListWeekly.push({ value: wasteType.Medium });
+              lowWasteListWeekly.push({ value: wasteType.Low });
+              labelListWeekly.push({label: ""});
+            }
+            weeklydataSource.categories[0].category = labelListWeekly;
+            weeklydataSource.dataset[0].data = highWasteListWeekly;
+            weeklydataSource.dataset[1].data = mediumWasteListWeekly;
+            weeklydataSource.dataset[2].data = lowWasteListWeekly;
+
+            // Set categoryDataSource
+            categoryDataSource.data[0].value = res['c_h'];
+            categoryDataSource.data[1].value = res['c_m'];
+            categoryDataSource.data[2].value = res['c_l'];
+            plotCategory();
+
+            // Set resolveDataSource
+            resolveDataSource.colorRange.color[0].maxValue = res['c_resolve_on_time'];
+            resolveDataSource.colorRange.color[1].minValue = res['c_resolve_on_time'];
+            resolveDataSource.colorRange.color[1].maxValue = res['c_resolve_on_time'] + res['c_resolve_late'];
+            resolveDataSource.dials.dial[0].value = res['c_resolve_on_time'];
+            plotResolved();
           }
-          weeklydataSource.categories[0].category = labelListWeekly;
-          weeklydataSource.dataset[0].data = highWasteListWeekly;
-          weeklydataSource.dataset[1].data = mediumWasteListWeekly;
-          weeklydataSource.dataset[2].data = lowWasteListWeekly;
-          plotWeekly();
+        } else {
+          document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+          document.getElementById('category-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+          document.getElementById('resolve-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
         }
       },
       error: function (xhr) {
@@ -505,6 +629,28 @@
       height: "300%",
       dataFormat: "json",
       dataSource: weeklydataSource
+    }).render();
+  }
+
+  function plotCategory(){
+    var categoryChart = new FusionCharts({
+      type: "doughnut2d",
+      renderAt: "category-chart-container",
+      width: "100%",
+      height: "500%",
+      dataFormat: "json",
+      dataSource: categoryDataSource
+    }).render();
+  }
+
+  function plotResolved(){
+    var resolveChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "resolve-chart-container",
+      width: "100%",
+      height: "500%",
+      dataFormat: "json",
+      dataSource: resolveDataSource
     }).render();
   }
 
@@ -691,111 +837,7 @@
     ]
   };
 
-  const categoryDataSource = {
-    chart: {
-      caption: "Queries reported category-wise",
-      plottooltext: "<b>$value</b> queries of <b>$label</b> reported",
-      showlegend: "1",
-      showpercentvalues: "1",
-      legendposition: "bottom",
-      usedataplotcolorforlabels: "1",
-      theme: "fusion"
-    },
-    data: [
-      {
-        label: "High Waste",
-        value: "{{params['c_h']}}"
-      },
-      {
-        label: "Medium Waste",
-        value: "{{params['c_m']}}"
-      },
-      {
-        label: "Low Waste",
-        value: "{{params['c_l']}}"
-      }
-    ]
-  };
-
-  const resolveDataSource = {
-    "chart": {
-      "caption": "Waste queries resolved within time vs late",
-      "plotToolText": "$value",
-      "theme": "fusion",
-      "chartBottomMargin": "50",
-      "showValue": "1"
-    },
-    "colorRange": {
-      "color": [{
-        "minValue": "0",
-        "maxValue": "{{params['c_resolve_on_time']}}",
-        "code": "#6baa01"
-      }, {
-        "minValue": "{{params['c_resolve_on_time']}}",
-        "maxValue": "{{params['c_resolve_on_time']+params['c_resolve_late']}}",
-        "code": "#e44a00"
-      }]
-    },
-    "dials": {
-      "dial": [{
-        "value": "{{params['c_resolve_on_time']}}"
-      }]
-    },
-
-    "annotations": {
-      "origw": "450",
-      "origh": "300",
-      "autoscale": "1",
-      "showBelow": "0",
-      "groups": [{
-        "id": "arcs",
-        "items": [{
-          "id": "national-cs-bg",
-          "type": "rectangle",
-          "x": "$chartCenterX+2",
-          "y": "$chartEndY - 45",
-          "tox": "$chartCenterX + 80",
-          "toy": "$chartEndY - 25",
-          "fillcolor": "#e44a00"
-        },
-        {
-          "id": "national-cs-text",
-          "type": "Text",
-          "color": "#ffffff",
-          "label": "resolved late",
-          "fontSize": "12",
-          "align": "left",
-          "x": "$chartCenterX + 7",
-          "y": "$chartEndY - 35"
-        },
-        {
-          "id": "state-cs-bg",
-          "type": "rectangle",
-          "x": "$chartCenterX-2",
-          "y": "$chartEndY - 45",
-          "tox": "$chartCenterX - 110",
-          "toy": "$chartEndY - 25",
-          "fillcolor": "#6baa01"
-        },
-        {
-          "id": "state-cs-text",
-          "type": "Text",
-          "color": "#ffffff",
-          "label": "resolved within time",
-          "fontSize": "12",
-          "align": "right",
-          "x": "$chartCenterX - 7",
-          "y": "$chartEndY - 35"
-        }
-        ]
-      }]
-    }
-  };
-
-
-
   FusionCharts.ready(function () {
-
 
     var categoryChart = new FusionCharts({
       type: "doughnut2d",
@@ -833,34 +875,24 @@
       dataSource: top5dirtyDataSource
     }).render();
 
-    // var monthlyChart = new FusionCharts({
-    //   type: "stackedcolumn2d",
-    //   renderAt: "monthly-chart-container",
-    //   width: "100%",
-    //   height: "300%",
-    //   dataFormat: "json",
-    //   dataSource: monthlydataSource
-    // }).render();
+    var monthlyChart = new FusionCharts({
+      type: "stackedcolumn2d",
+      renderAt: "monthly-chart-container",
+      width: "100%",
+      height: "300%",
+      dataFormat: "json",
+      dataSource: monthlydataSource
+    }).render();
 
-    // var weeklyChart = new FusionCharts({
-    //   type: "stackedcolumn2d",
-    //   renderAt: "Weekly-chart-container",
-    //   width: "100%",
-    //   height: "300%",
-    //   dataFormat: "json",
-    //   dataSource: weeklydataSource
-    // }).render();
-
-    FusionCharts.ready(function () {
-      var myChart = new FusionCharts({
-        type: "msline",
-        renderAt: "line-chart-container",
-        width: "100%",
-        height: "500%",
-        dataFormat: "json",
-        dataSource: linedataSource
-      }).render();
-    });
+   
+    var myChart = new FusionCharts({
+      type: "msline",
+      renderAt: "line-chart-container",
+      width: "100%",
+      height: "500%",
+      dataFormat: "json",
+      dataSource: linedataSource
+    }).render();
 
   });
 
