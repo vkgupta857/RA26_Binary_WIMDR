@@ -272,14 +272,14 @@ def login():
             login_as=request.form['login']
             if login_as=="Admin":
 
-                data=ndb.child('Managers').get()
+                data=ndb.child('Admin').get()
                 try:
-                   p= data.val()[phone]['Password']
+                   p= data.val()['Password']
                    if password==p:
                        logged_in = 'a'
-                       name=data.val()[phone]['Name']
+                       name=data.val()['Name']
                        type="Admin"
-                       id=data.val()[phone]['Emp_ID']
+                       id='KPUtGo75965'
                        return render_template('Alogin.html',name=name,type=type,id=id)
                    else:
                        flash('Invalid Password',category="danger")
