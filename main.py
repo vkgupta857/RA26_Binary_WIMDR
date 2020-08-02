@@ -252,7 +252,7 @@ def upload():
             # ref.push(data)
             ndb.child('Pending_Reports').push(data)
 
-            return render_template('uploaded_file.html',filename=filename, label=status)
+            return render_template('uploaded_file.html',filename=filename, label={'L':'Low','M':'Medium','H':'High'}[status])
 
         else:
             flash("Invalid file type", category="danger")
