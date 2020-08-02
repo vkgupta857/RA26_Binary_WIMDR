@@ -17,15 +17,16 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-import the_database as thedb
+#import the_database as thedb
 # while using locally uncomment below line
-# import the_database_local as thedb
+import the_database_local as thedb
 
 import requests as req
 import json
 import string
 import time
 import datetime
+from geopy.distance import geodesic
 
 
 app = Flask(__name__)
@@ -130,6 +131,25 @@ def get_filename():
     result =  'image_'+''.join(random.choice(letters) for i in range(length))+'.jpg'
     return(result)
 
+# function to get anomaly points for a district in last 7 days
+def get_anomaly_points(district,state):
+    end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+    end_date = dt.replace('T',' ').split('.')[0].split(' ')[0]
+    start_date = date_before_n_days(8)
+    qobj = thedb.MainQuery(district=district, state=state, start_date=start_date, end_date=end_date)
+    data, time_index = qobj.get_heatmaptime_data()
+    an = []
+    for i in range(len(data)-2):
+        pts = data[i]+data[i+1]
+        for j in range(len(pts)):
+            for k in range(j+1,len(pts)):
+                l1 = pts[j]
+                l2 = pts[k]
+                if geodesic(l1, l2).km*1000 < 100:
+                    lat = (l1[0]+l2[0])/2
+                    lng = (l1[1]+l2[1])/2
+                    an.append([lat,lng])
+    return(an)
 
 def get_place(lat,lng):
     result = rg.search((lat,lng))
@@ -343,7 +363,7 @@ def map():
         
         #points for anomaly detection
         anamoly=
-        response['anamoly']=anamoly
+        response['anamoly']= get_anomaly_points(city, state)
         return response
 
     return render_template('map.html',city=city,state=state)
