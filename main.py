@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-import the_database as thedb
+#import the_database as thedb
 # while using locally uncomment below line
-#import the_database_local as thedb
+import the_database_local as thedb
 
 import requests as req
 import json
@@ -36,10 +36,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = "MySecretKeyDontCopy"
 # Temporarily file can be uploaded in '/tmp' folder in GCP
-app.config['UPLOAD_FOLDER'] = '/tmp/'
+#app.config['UPLOAD_FOLDER'] = '/tmp/'
 
 # for local
-# app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 
 # cred = credentials.Certificate('SIH-Realtime-DB.json')
@@ -64,6 +64,55 @@ ndb = firebase.database()
 ######################
 # App Routes Section
 ######################
+
+# function for creating Heatmap with time
+def create_heatmap_with_time(data, time_index, place):
+    # takes data and time_index as input
+    m = folium.Map(
+        data[0][0],
+        tiles='stamentoner',
+        zoom_start={'state':6, 'district':13}[place])
+
+    hm = plugins.HeatMapWithTime(
+        data,
+        index=time_index,
+        auto_play=False,
+        max_opacity=0.3
+    )
+    
+    hm.add_to(m)
+    m.save('templates/heatmap-time.html')
+    return('heatmap-time.html')
+
+# function for creating heatmap
+def create_heatmap(data,place):
+    try:
+        location = res[0]
+        zoom_start={'state':6, 'district':13}[place]
+    except:
+        location = [27.44,  77.67]
+        zoom_start = 6
+    map = folium.Map(zoom_start=zoom_start,
+                     location=location, 
+                     control_scale=True)
+    folium.plugins.HeatMap(data, radius=8, max_zoom=13).add_to(map)
+    map.save('templates/heatmap1.html')
+    return('heatmap1.html')
+    
+# function to create cluster-map
+def create_cluster_map(res):
+    # function to create cluster map only for district
+    colorCode = {'H':'red', 'M':'orange', 'L':'green'}
+    map = folium.Map(zoom_start=10,location=[19.05,  72.85], control_scale=True)
+    map = folium.plugins.MarkerCluster().add_to(map)
+    for row in res:
+        color = colorCode[row[1]]
+        popupmsg='{} {}'.format({'L':'Low','M':'Medium','H':'High'}[row[1]],str(row[0]))
+        folium.Marker([float(row[2]), float(row[3])],popup=popupmsg,icon=folium.Icon(color=color, icon='info-sign')).add_to(map)
+    map.save('templates/cluster_map_city.html')
+    return('cluster_map_city.html')
+
+# fucntion to get a date before n days of current date
 def date_before_n_days(n):
     dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
     dt = dt.replace('T',' ').split('.')[0]
@@ -73,6 +122,8 @@ def date_before_n_days(n):
     a = a.split(' ')[0]
     return(a)
 
+# function to get the unique filename for each report
+# to neglect the chances of overwriting an image in database
 def get_filename():
     length = 5
     letters = string.ascii_letters
@@ -161,8 +212,8 @@ def upload():
             filename = get_filename()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg'))
             pathoncloud='images/'+filename
-            #pathlocal= 'static/uploads/'+filename
-            pathlocal = '/tmp/image.jpg'
+            pathlocal= 'static/uploads/'+'image.jpg'
+            #pathlocal = '/tmp/image.jpg'
 
             storage.child(pathoncloud).put(pathlocal)
 
@@ -368,7 +419,7 @@ def graphs():
             elif duration == 'month':
                 dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
                 dt = dt.replace('T',' ').split('.')[0]
-                end_date=dt.split('')[0]
+                end_date=dt.split(' ')[0]
                 start_date = date_before_n_days(30)
                 qobj = thedb.MainQuery(state,city,start_date,end_date)
 
