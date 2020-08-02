@@ -17,9 +17,9 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-import the_database as thedb
+#import the_database as thedb
 # while using locally uncomment below line
-# import the_database_local as thedb
+import the_database_local as thedb
 
 import requests as req
 import json
@@ -318,20 +318,36 @@ def login():
     return render_template('login.html')
 
 
-
 @app.route('/map', methods=['GET', 'POST'])
 def map():
     city = request.args.get('city')
-    state = request.args.get('state')
+    city = request.args.get('city')
     if request.method == 'POST':
         city = request.form['city']
         state = request.form['state']
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split(' ')[0]
+        start_date = date_before_n_days(30)
+        qobj = thedb.MainQuery(state=state, district=city, start_date=start_date, end_date=end_date)
+            
+        #data for bar graph
+        daily,weekly=qobj.get_barplot_data()
+        response={}
+        response['daily']=daily
+        response['weekly']=weekly
+        
+        #points for map
         report = get_points(city)
-        response = {}
         response['points'] = report
+        
+        #points for anomaly detection
+        anamoly=
+        response['anamoly']=anamoly
         return response
 
     return render_template('map.html',city=city,state=state)
+
 
 @app.route('/clustermap', methods= ['GET', 'POST'])
 def clustermap():
@@ -339,7 +355,7 @@ def clustermap():
 
 @app.route('/heatmap', methods= ['GET', 'POST'])
 def heatmap():
-    return render_template('heatmap.html')
+    return render_template('heatrmap.html')
 
 @app.route('/ClustermapM', methods=['GET', 'POST'])
 def ClustermapM():
@@ -380,13 +396,13 @@ def graphs():
         state = request.form['state']
         city = request.form['city']
         duration = request.form['duration']
-        print(state,city,duration)
+        print(state,district,duration)
         # duration can be "week", "month", "3_months", "year" or "date"
         # if duration == "date" then start_date and end_date will have values
         
         if duration == 'date':
-            start_date = request.form['startDate']
-            end_date = request.form['endDate']
+            start_date = request.form['start date']
+            end_date = request.form['end date']
             qobj = thedb.MainQuery(state,city,start_date,end_date)
 
         else:
