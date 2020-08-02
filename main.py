@@ -298,10 +298,15 @@ def login():
                         logged_in = 'm'
                         name=data.val()[phone]['Name']
                         id=data.val()[phone]['Emp_ID']
-                        rating=3
+                       
                         type="Manager"
                         city=data.val()[phone]['District']
-                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city)
+                    
+                        rating= thedb.get_emp_rating(city)
+                        time="24 hrs per report"
+                        return render_template('Mlogin.html',name=name,type=type,id=id,rating=rating,city=city,time=time)
+                   
+                  
                    else:
                        flash('Invalid Password',category="danger")
                        return redirect(request.url)
