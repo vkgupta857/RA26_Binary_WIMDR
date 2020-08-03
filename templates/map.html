@@ -50,14 +50,14 @@
     <p class="text-center">
         <b>Legends - </b>
         
-        Reporting daily for 3 days: <img src="/static/images/blue.png" height="20" />
+        Reporting daily for 3 days: <img src="/static/images/marker-blue.png" height="20" />
     </p>
     <div class="card text-center">
         <div class="card-body">
             <div id="anomalyMapHolder"> <span class="spinner-border text-success"></span> Fetching data...</div>
         </div>
     </div>
-    <br>
+    <hr class="bg-dark my-4">
     <div class="text-center">
         <a href="/ClustermapM?city={{city}}&state={{state}}"><button class="btn btn-success">View Cluster Map</button></a>
     </div>
@@ -103,87 +103,89 @@
             // console.log(res);
             var pointsToShow = res.points;
 
-            var anomalyPoints = res.anomaly;
-
-            console.log(pointsToShow);
-
-            if (pointsToShow.length <= 0) {
-                // alert("Voila! No waste in the city.");
+            if (pointsToShow.length == 0) {
                 document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in " + city + "</h3><p>Hence, cannot plot on map</p>";
-                document.getElementById('anomalyMapHolder').style.display = false;
+            } else {
+                var lat = pointsToShow[0]['lattitude'];
+                var lon = pointsToShow[0]['longitude'];
+                var latlon = new google.maps.LatLng(lat, lon)
+
+                mapholder.style.height = '400px';
+                mapholder.style.width = '100%';
+                var myOptions = {
+                    center: latlon,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false,
+                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+                };
+
+                var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+
+                for (var point of pointsToShow) {
+                    var lat = point.lattitude;
+                    // lattitude spelling is defined in db. dont change
+                    var lng = point.longitude;
+                    var type = point.status;
+                    // console.log(lat, lng, type);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        icon: icons[type].icon,
+                        map: map,
+                        title: type
+                    });
+
+                    if (type == 'Late') {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                }
             }
-            var lat = pointsToShow[0]['lattitude'];
-            var lon = pointsToShow[0]['longitude'];
-            var latlon = new google.maps.LatLng(lat, lon)
 
-            mapholder.style.height = '400px';
-            mapholder.style.width = '100%';
-            var myOptions = {
-                center: latlon,
-                zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
-            };
+            // AnomalyMap starts here
 
-            var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+            var anomalyPoints = res.anomaly;
+            console.log(anomalyPoints);
 
-            for (var point of pointsToShow) {
-                var lat = point.lattitude;
-                // lattitude spelling is defined in db. dont change
-                var lng = point.longitude;
-                var type = point.status;
-                // console.log(lat, lng, type);
+            if (anomalyPoints.length == 0) {
+                document.getElementById('anomalyMapHolder').innerHTML = "<p>No anomalies detected.</p>";
+                console.log("No anomalies!");
+            } else {
+                var lat = anomalyPoints[0][0];
+                var lon = anomalyPoints[0][1];
+                // console.log("ahc",lat,lon);
+                var latlon = new google.maps.LatLng(lat, lon);
 
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(lat, lng),
-                    icon: icons[type].icon,
-                    map: map
-                });
+                console.log("mapCenter",latlon);
 
-                if (type == 'Late') {
+                var anomalyMapHolder = document.getElementById("anomalyMapHolder");
+
+                anomalyMapHolder.style.height = '400px';
+                anomalyMapHolder.style.width = '100%';
+                var anomalyOptions = {
+                    center: latlon,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false,
+                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+                };
+
+                var anomalyMap = new google.maps.Map(document.getElementById('anomalyMapHolder'), anomalyOptions);
+
+                for (var point of anomalyPoints) {
+                    var lat = point[0];
+                    var lng = point[1];
+
+                    console.log(lat, lng);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        icon: '/static/images/marker-blue.png',
+                        map: anomalyMap,
+                        title: "Anomaly"
+                    });
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                 }
-            }
-
-            // AnomalyMap statrs here
-
-            var activityPts = [
-                {
-                    position: [23.1369307508016, 79.9414282743248],
-                    type: 'Anamolytoday'
-                }
-            ];
-
-            var lat = pointsToShow[0][0];
-            var lon = pointsToShow[0][0];
-            var latlon = new google.maps.LatLng(lat, lon)
-
-            var anomalyMapHolder = document.getElementById("anomalyMapHolder");
-
-            anomalyMapHolder.style.height = '400px';
-            anomalyMapHolder.style.width = '100%';
-            var anomalyOptions = {
-                center: latlon,
-                zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
-            };
-
-            var anomalyMap = new google.maps.Map(document.getElementById('anomalyMapHolder'), anomalyOptions);
-
-            for (var point of anomalyPoints) {
-                var lat = point[0];
-                var lng = point[1];
-
-                console.log(lat, lng);
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(lat, lng),
-                    icon: '/static/images/darkblue.png',
-                    map: anomalyMap
-                });
             }
         },
         error: function (xhr) {
