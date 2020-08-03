@@ -28,6 +28,10 @@ import time
 import datetime
 from geopy.distance import geodesic
 
+import folium
+import folium.plugins
+from folium.plugins import HeatMapWithTime
+
 
 app = Flask(__name__)
 
@@ -74,7 +78,7 @@ def create_heatmap_with_time(data, time_index, place):
         tiles='stamentoner',
         zoom_start={'state':6, 'district':13}[place])
 
-    hm = plugins.HeatMapWithTime(
+    hm =folium.plugins.HeatMapWithTime(
         data,
         index=time_index,
         auto_play=False,
@@ -104,7 +108,7 @@ def create_heatmap(data,place):
 def create_cluster_map(res):
     # function to create cluster map only for district
     colorCode = {'H':'red', 'M':'orange', 'L':'green'}
-    map = folium.Map(zoom_start=10,location=[19.05,  72.85], control_scale=True)
+    map = folium.Map(zoom_start=10,location=[float(res[0][2]), float(res[0][3])], control_scale=True)
     map = folium.plugins.MarkerCluster().add_to(map)
     for row in res:
         color = colorCode[row[1]]
@@ -392,7 +396,7 @@ def heatmapwithtime():
 
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(7)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
@@ -412,7 +416,7 @@ def heatmapwithtime():
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
         data,time_index=qobj.get_heatmaptime_data()
-       if city=="all":
+        if city=="all":
             filename=create_heatmap_with_time(data,time_index,"state")
         else:
             filename=create_heatmap_with_time(data,time_index,"district")
@@ -421,7 +425,7 @@ def heatmapwithtime():
     elif duration == '3 months':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(90)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
@@ -435,7 +439,7 @@ def heatmapwithtime():
     elif duration == 'year':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(365)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
@@ -481,7 +485,7 @@ def heatmap():
 
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(7)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
@@ -509,7 +513,7 @@ def heatmap():
     elif duration == '3 months':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(90)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
@@ -523,7 +527,7 @@ def heatmap():
     elif duration == 'year':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
-        end_date=dt.split('')[0]
+        end_date=dt.split(' ')[0]
         start_date = date_before_n_days(365)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 

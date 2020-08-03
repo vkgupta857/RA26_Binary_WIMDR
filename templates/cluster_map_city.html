@@ -1,0 +1,3523 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e7b87ba0a6454230a765477d0a65ed26 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_e7b87ba0a6454230a765477d0a65ed26" ></div>
+        
+</body>
+<script>    
+    
+            var map_e7b87ba0a6454230a765477d0a65ed26 = L.map(
+                "map_e7b87ba0a6454230a765477d0a65ed26",
+                {
+                    center: [23.17778041307076, 79.9898548551914],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_e7b87ba0a6454230a765477d0a65ed26);
+
+            
+
+        
+    
+            var tile_layer_bdc11c8c30204932b9e0dd59e6896b8c = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_e7b87ba0a6454230a765477d0a65ed26);
+        
+    
+            var marker_cluster_8a5743283f61485a83fc677222ab5d45 = L.markerClusterGroup(
+                {}
+            );
+            map_e7b87ba0a6454230a765477d0a65ed26.addLayer(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var marker_5dfc27a00ed3469d9201e59f7217ab4e = L.marker(
+                [23.17778041307076, 79.9898548551914],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e2ac444713bb4d99959c3d36f40ee10f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5dfc27a00ed3469d9201e59f7217ab4e.setIcon(icon_e2ac444713bb4d99959c3d36f40ee10f);
+        
+    
+        var popup_b0035c009b424caf8a91dfc99d6af274 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f506672d8e434d4fb9ec5517a282a28c = $(`<div id="html_f506672d8e434d4fb9ec5517a282a28c" style="width: 100.0%; height: 100.0%;">Low 2020-07-04</div>`)[0];
+            popup_b0035c009b424caf8a91dfc99d6af274.setContent(html_f506672d8e434d4fb9ec5517a282a28c);
+        
+
+        marker_5dfc27a00ed3469d9201e59f7217ab4e.bindPopup(popup_b0035c009b424caf8a91dfc99d6af274)
+        ;
+
+        
+    
+    
+            var marker_2c2fd93ac23440ae82192dad03eaa50b = L.marker(
+                [23.15868257689768, 79.98719194217065],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7e4b6d45e11a49f9a9cf84c807280b73 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2c2fd93ac23440ae82192dad03eaa50b.setIcon(icon_7e4b6d45e11a49f9a9cf84c807280b73);
+        
+    
+        var popup_e13a24368b8a4c929f2484907bd17062 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_86eeb39a7f4a4941ab106b985c1c3bf6 = $(`<div id="html_86eeb39a7f4a4941ab106b985c1c3bf6" style="width: 100.0%; height: 100.0%;">Low 2020-07-04</div>`)[0];
+            popup_e13a24368b8a4c929f2484907bd17062.setContent(html_86eeb39a7f4a4941ab106b985c1c3bf6);
+        
+
+        marker_2c2fd93ac23440ae82192dad03eaa50b.bindPopup(popup_e13a24368b8a4c929f2484907bd17062)
+        ;
+
+        
+    
+    
+            var marker_0d6c5d9e047740a6a844c6a7c58f84e8 = L.marker(
+                [23.206743885891317, 79.99158220301895],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_a1f83f7ac08f428aae32b590b8dd0144 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_0d6c5d9e047740a6a844c6a7c58f84e8.setIcon(icon_a1f83f7ac08f428aae32b590b8dd0144);
+        
+    
+        var popup_6999d9bec9854b3ebdaebd8b25fdd88f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5b4f618aa81b4a19bba9a3f66e7c2816 = $(`<div id="html_5b4f618aa81b4a19bba9a3f66e7c2816" style="width: 100.0%; height: 100.0%;">Low 2020-07-04</div>`)[0];
+            popup_6999d9bec9854b3ebdaebd8b25fdd88f.setContent(html_5b4f618aa81b4a19bba9a3f66e7c2816);
+        
+
+        marker_0d6c5d9e047740a6a844c6a7c58f84e8.bindPopup(popup_6999d9bec9854b3ebdaebd8b25fdd88f)
+        ;
+
+        
+    
+    
+            var marker_5df086c63bb34ef7af27c678c35b7c45 = L.marker(
+                [23.19081823651896, 79.9952710823181],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f43127377dc241d1905d56be8863fd0a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5df086c63bb34ef7af27c678c35b7c45.setIcon(icon_f43127377dc241d1905d56be8863fd0a);
+        
+    
+        var popup_2b9844ca81634974b7cbcdbd34d30c81 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_64390b3b267043b18c1caf697e6d00a0 = $(`<div id="html_64390b3b267043b18c1caf697e6d00a0" style="width: 100.0%; height: 100.0%;">Low 2020-07-04</div>`)[0];
+            popup_2b9844ca81634974b7cbcdbd34d30c81.setContent(html_64390b3b267043b18c1caf697e6d00a0);
+        
+
+        marker_5df086c63bb34ef7af27c678c35b7c45.bindPopup(popup_2b9844ca81634974b7cbcdbd34d30c81)
+        ;
+
+        
+    
+    
+            var marker_96c08bbf95404bfe9a7a9dddd14173af = L.marker(
+                [23.168306708633896, 80.00635656974059],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c8ea03721e23410eaeba05fcdfff7031 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_96c08bbf95404bfe9a7a9dddd14173af.setIcon(icon_c8ea03721e23410eaeba05fcdfff7031);
+        
+    
+        var popup_00155939bfc14a6ca899689d574f40a2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a8cb817b08a14d3998dbbc7dfa84f375 = $(`<div id="html_a8cb817b08a14d3998dbbc7dfa84f375" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_00155939bfc14a6ca899689d574f40a2.setContent(html_a8cb817b08a14d3998dbbc7dfa84f375);
+        
+
+        marker_96c08bbf95404bfe9a7a9dddd14173af.bindPopup(popup_00155939bfc14a6ca899689d574f40a2)
+        ;
+
+        
+    
+    
+            var marker_374a413ea6da49a3b4f6336cc9bf1fad = L.marker(
+                [23.17749667704286, 79.99497469419025],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_3427e201609e4b59bd0d8eac2343d8b8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_374a413ea6da49a3b4f6336cc9bf1fad.setIcon(icon_3427e201609e4b59bd0d8eac2343d8b8);
+        
+    
+        var popup_d8f2e4ab4cf441ae93ce6b05c5600162 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a166d8a07d894b3780937756075d5178 = $(`<div id="html_a166d8a07d894b3780937756075d5178" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_d8f2e4ab4cf441ae93ce6b05c5600162.setContent(html_a166d8a07d894b3780937756075d5178);
+        
+
+        marker_374a413ea6da49a3b4f6336cc9bf1fad.bindPopup(popup_d8f2e4ab4cf441ae93ce6b05c5600162)
+        ;
+
+        
+    
+    
+            var marker_4333c3c6af294a1ba85aa437f22a0571 = L.marker(
+                [23.194150330996514, 79.98337246258417],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6b13b5d082e14b36b3e0db495f3ebac4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_4333c3c6af294a1ba85aa437f22a0571.setIcon(icon_6b13b5d082e14b36b3e0db495f3ebac4);
+        
+    
+        var popup_52ce70751fc64c6dac35c02d8ae263c1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fa69a9a064a349ecbae0cb6779e06e84 = $(`<div id="html_fa69a9a064a349ecbae0cb6779e06e84" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_52ce70751fc64c6dac35c02d8ae263c1.setContent(html_fa69a9a064a349ecbae0cb6779e06e84);
+        
+
+        marker_4333c3c6af294a1ba85aa437f22a0571.bindPopup(popup_52ce70751fc64c6dac35c02d8ae263c1)
+        ;
+
+        
+    
+    
+            var marker_36b749e600784f5cab15db7531ece4e4 = L.marker(
+                [23.170324528985066, 80.00315179288883],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_b3196b308bb54b9981ffff8eb07779e3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_36b749e600784f5cab15db7531ece4e4.setIcon(icon_b3196b308bb54b9981ffff8eb07779e3);
+        
+    
+        var popup_e30be86ffbd942faa011927d6cbc8a1c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5348aba88440462c965582d2feb7a65a = $(`<div id="html_5348aba88440462c965582d2feb7a65a" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_e30be86ffbd942faa011927d6cbc8a1c.setContent(html_5348aba88440462c965582d2feb7a65a);
+        
+
+        marker_36b749e600784f5cab15db7531ece4e4.bindPopup(popup_e30be86ffbd942faa011927d6cbc8a1c)
+        ;
+
+        
+    
+    
+            var marker_fe76ea45b8ee4bfc871e70f9d6f14aab = L.marker(
+                [23.18292130062406, 80.01047644542949],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f315d496f7824729a0d6d5a8f5725bc4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_fe76ea45b8ee4bfc871e70f9d6f14aab.setIcon(icon_f315d496f7824729a0d6d5a8f5725bc4);
+        
+    
+        var popup_753c32f5c32d48479c185f505ff9d3e3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_63000b57d33c4d76a11937a83df07da9 = $(`<div id="html_63000b57d33c4d76a11937a83df07da9" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_753c32f5c32d48479c185f505ff9d3e3.setContent(html_63000b57d33c4d76a11937a83df07da9);
+        
+
+        marker_fe76ea45b8ee4bfc871e70f9d6f14aab.bindPopup(popup_753c32f5c32d48479c185f505ff9d3e3)
+        ;
+
+        
+    
+    
+            var marker_c2d1e118f2e042658ee0880faeb634ab = L.marker(
+                [23.18946872658177, 79.97042962550556],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_56cfc141f8e04d1d80cf610c105ba3db = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c2d1e118f2e042658ee0880faeb634ab.setIcon(icon_56cfc141f8e04d1d80cf610c105ba3db);
+        
+    
+        var popup_4dd6f9df5fd84cf3871d537683a2e663 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_206aeeafb3a64b16a84a92dde92985a9 = $(`<div id="html_206aeeafb3a64b16a84a92dde92985a9" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_4dd6f9df5fd84cf3871d537683a2e663.setContent(html_206aeeafb3a64b16a84a92dde92985a9);
+        
+
+        marker_c2d1e118f2e042658ee0880faeb634ab.bindPopup(popup_4dd6f9df5fd84cf3871d537683a2e663)
+        ;
+
+        
+    
+    
+            var marker_8373f2d1d5a548d5939a6330ead8fb2e = L.marker(
+                [23.17285262047259, 79.99778390667834],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_770372012417470893919b4987b16991 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_8373f2d1d5a548d5939a6330ead8fb2e.setIcon(icon_770372012417470893919b4987b16991);
+        
+    
+        var popup_1e9cf1864def469d90ce12b578ba0b75 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e7060e03c03b450193f5b967dff6be2b = $(`<div id="html_e7060e03c03b450193f5b967dff6be2b" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_1e9cf1864def469d90ce12b578ba0b75.setContent(html_e7060e03c03b450193f5b967dff6be2b);
+        
+
+        marker_8373f2d1d5a548d5939a6330ead8fb2e.bindPopup(popup_1e9cf1864def469d90ce12b578ba0b75)
+        ;
+
+        
+    
+    
+            var marker_3a2b10a97cf344ee880994173b7b6752 = L.marker(
+                [23.180078968514646, 80.00905248588553],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_3370e4d5b54549fc91feeaf4147613e3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_3a2b10a97cf344ee880994173b7b6752.setIcon(icon_3370e4d5b54549fc91feeaf4147613e3);
+        
+    
+        var popup_61b98f69722c4882a4851acea4d14447 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_564e1ddd22e84ef3a1165e4d53da2039 = $(`<div id="html_564e1ddd22e84ef3a1165e4d53da2039" style="width: 100.0%; height: 100.0%;">Low 2020-07-05</div>`)[0];
+            popup_61b98f69722c4882a4851acea4d14447.setContent(html_564e1ddd22e84ef3a1165e4d53da2039);
+        
+
+        marker_3a2b10a97cf344ee880994173b7b6752.bindPopup(popup_61b98f69722c4882a4851acea4d14447)
+        ;
+
+        
+    
+    
+            var marker_32228816bb1241c89c1cac875b6d1c3e = L.marker(
+                [23.175626370103373, 79.97755742616906],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e60b4d760da349e5a523f87195f06f5f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_32228816bb1241c89c1cac875b6d1c3e.setIcon(icon_e60b4d760da349e5a523f87195f06f5f);
+        
+    
+        var popup_63165931134d47c6ae335e3d17de828e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a487c7c7eb50487288c9a6c9310a9081 = $(`<div id="html_a487c7c7eb50487288c9a6c9310a9081" style="width: 100.0%; height: 100.0%;">Low 2020-07-06</div>`)[0];
+            popup_63165931134d47c6ae335e3d17de828e.setContent(html_a487c7c7eb50487288c9a6c9310a9081);
+        
+
+        marker_32228816bb1241c89c1cac875b6d1c3e.bindPopup(popup_63165931134d47c6ae335e3d17de828e)
+        ;
+
+        
+    
+    
+            var marker_826b57b83c684c69bf179c923c55c390 = L.marker(
+                [23.180744032131862, 79.98108092461155],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e279decd303c42bb8f9eb6d5e9d4fb31 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_826b57b83c684c69bf179c923c55c390.setIcon(icon_e279decd303c42bb8f9eb6d5e9d4fb31);
+        
+    
+        var popup_05e40111a21f47889e66b054f6cedb37 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b62f43e220a04c0fa518f258fbb72ffe = $(`<div id="html_b62f43e220a04c0fa518f258fbb72ffe" style="width: 100.0%; height: 100.0%;">Low 2020-07-06</div>`)[0];
+            popup_05e40111a21f47889e66b054f6cedb37.setContent(html_b62f43e220a04c0fa518f258fbb72ffe);
+        
+
+        marker_826b57b83c684c69bf179c923c55c390.bindPopup(popup_05e40111a21f47889e66b054f6cedb37)
+        ;
+
+        
+    
+    
+            var marker_e8410da6ff9d438a9edcd40385f3edc1 = L.marker(
+                [23.200109876178235, 79.97391454056549],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4e1d5a6739cb48c0bcc289cb092b66c6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e8410da6ff9d438a9edcd40385f3edc1.setIcon(icon_4e1d5a6739cb48c0bcc289cb092b66c6);
+        
+    
+        var popup_f0faa96f417e403cb6c5943f55affa07 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_741dfec547784f118961264556ddab93 = $(`<div id="html_741dfec547784f118961264556ddab93" style="width: 100.0%; height: 100.0%;">Medium 2020-07-06</div>`)[0];
+            popup_f0faa96f417e403cb6c5943f55affa07.setContent(html_741dfec547784f118961264556ddab93);
+        
+
+        marker_e8410da6ff9d438a9edcd40385f3edc1.bindPopup(popup_f0faa96f417e403cb6c5943f55affa07)
+        ;
+
+        
+    
+    
+            var marker_c241ef608179446fabfcf367cac194eb = L.marker(
+                [23.20513066450154, 79.98837485110471],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c98f240040c046f9b81f8d6eb3473ebf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c241ef608179446fabfcf367cac194eb.setIcon(icon_c98f240040c046f9b81f8d6eb3473ebf);
+        
+    
+        var popup_bb60f5093b52420fb8da34cd4ede7f3f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4454e79ea92f4f37b9ec44b95aa19490 = $(`<div id="html_4454e79ea92f4f37b9ec44b95aa19490" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_bb60f5093b52420fb8da34cd4ede7f3f.setContent(html_4454e79ea92f4f37b9ec44b95aa19490);
+        
+
+        marker_c241ef608179446fabfcf367cac194eb.bindPopup(popup_bb60f5093b52420fb8da34cd4ede7f3f)
+        ;
+
+        
+    
+    
+            var marker_43dce519b1ca40b9bfe6f245295a2a56 = L.marker(
+                [23.175914005277637, 79.96203227198293],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6b3eb4cb9ada44c0ab503195643d9477 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_43dce519b1ca40b9bfe6f245295a2a56.setIcon(icon_6b3eb4cb9ada44c0ab503195643d9477);
+        
+    
+        var popup_daf574acb4894c75b30374fb8e506a7c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_32a6adafefd84ca7ab0221f0d9e8b04b = $(`<div id="html_32a6adafefd84ca7ab0221f0d9e8b04b" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_daf574acb4894c75b30374fb8e506a7c.setContent(html_32a6adafefd84ca7ab0221f0d9e8b04b);
+        
+
+        marker_43dce519b1ca40b9bfe6f245295a2a56.bindPopup(popup_daf574acb4894c75b30374fb8e506a7c)
+        ;
+
+        
+    
+    
+            var marker_7263ca0781884ee792837f6de2f44622 = L.marker(
+                [23.16936054863039, 79.97546546946113],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_18dc9cfcb40a4cc3847f1d1e95c4ed38 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7263ca0781884ee792837f6de2f44622.setIcon(icon_18dc9cfcb40a4cc3847f1d1e95c4ed38);
+        
+    
+        var popup_b4737e43293b4a61996b57b57c0ec23d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d9b65683e49a4a8c9eeca6bc918157f6 = $(`<div id="html_d9b65683e49a4a8c9eeca6bc918157f6" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_b4737e43293b4a61996b57b57c0ec23d.setContent(html_d9b65683e49a4a8c9eeca6bc918157f6);
+        
+
+        marker_7263ca0781884ee792837f6de2f44622.bindPopup(popup_b4737e43293b4a61996b57b57c0ec23d)
+        ;
+
+        
+    
+    
+            var marker_d8537fa7906f4278964d3a7d3b196466 = L.marker(
+                [23.18662744385557, 79.97894951387926],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_1a3601bffe8c4a76a203b75862eeac9e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_d8537fa7906f4278964d3a7d3b196466.setIcon(icon_1a3601bffe8c4a76a203b75862eeac9e);
+        
+    
+        var popup_0a176bb9a168462e941a9b652d07933e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_010f820f01f94ca2b21912758b33e7c3 = $(`<div id="html_010f820f01f94ca2b21912758b33e7c3" style="width: 100.0%; height: 100.0%;">High 2020-07-07</div>`)[0];
+            popup_0a176bb9a168462e941a9b652d07933e.setContent(html_010f820f01f94ca2b21912758b33e7c3);
+        
+
+        marker_d8537fa7906f4278964d3a7d3b196466.bindPopup(popup_0a176bb9a168462e941a9b652d07933e)
+        ;
+
+        
+    
+    
+            var marker_46b116523c5c442b9bb433cf9f73fdf2 = L.marker(
+                [23.17401517706037, 80.0098992367396],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_3452cf7c7ff8400e9666bfa73f4cbb85 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_46b116523c5c442b9bb433cf9f73fdf2.setIcon(icon_3452cf7c7ff8400e9666bfa73f4cbb85);
+        
+    
+        var popup_136d28b298fb4deb82d46d028097e829 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1a07c6b0fb0e449f96b017c53c3822a1 = $(`<div id="html_1a07c6b0fb0e449f96b017c53c3822a1" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_136d28b298fb4deb82d46d028097e829.setContent(html_1a07c6b0fb0e449f96b017c53c3822a1);
+        
+
+        marker_46b116523c5c442b9bb433cf9f73fdf2.bindPopup(popup_136d28b298fb4deb82d46d028097e829)
+        ;
+
+        
+    
+    
+            var marker_77fb764cfdf1422e9dd5ec841691cdea = L.marker(
+                [23.166400853512023, 79.97691902101162],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_cb1d393b65c843beab9c62e7110545d5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_77fb764cfdf1422e9dd5ec841691cdea.setIcon(icon_cb1d393b65c843beab9c62e7110545d5);
+        
+    
+        var popup_f37384823da94e8f9a19bc8c0fb73c6f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_37687d4ffdb647f5b9fdcff96c64d14f = $(`<div id="html_37687d4ffdb647f5b9fdcff96c64d14f" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_f37384823da94e8f9a19bc8c0fb73c6f.setContent(html_37687d4ffdb647f5b9fdcff96c64d14f);
+        
+
+        marker_77fb764cfdf1422e9dd5ec841691cdea.bindPopup(popup_f37384823da94e8f9a19bc8c0fb73c6f)
+        ;
+
+        
+    
+    
+            var marker_a849d032f56649669e2bc875d0ac29a7 = L.marker(
+                [23.186509107176875, 80.00619799574079],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_d390c57a90f540348e7c3b5c63aef07e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_a849d032f56649669e2bc875d0ac29a7.setIcon(icon_d390c57a90f540348e7c3b5c63aef07e);
+        
+    
+        var popup_7add246a7dc045ffbf767131afd363f0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5169d2d95c284aa782a94e6e7bf5c4a5 = $(`<div id="html_5169d2d95c284aa782a94e6e7bf5c4a5" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_7add246a7dc045ffbf767131afd363f0.setContent(html_5169d2d95c284aa782a94e6e7bf5c4a5);
+        
+
+        marker_a849d032f56649669e2bc875d0ac29a7.bindPopup(popup_7add246a7dc045ffbf767131afd363f0)
+        ;
+
+        
+    
+    
+            var marker_69fed576b7e44f6ab6c3c3830b187888 = L.marker(
+                [23.18871452386928, 79.99566633859472],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_02bfa747e8f84428a3f42b36633deff2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_69fed576b7e44f6ab6c3c3830b187888.setIcon(icon_02bfa747e8f84428a3f42b36633deff2);
+        
+    
+        var popup_145800ed80814920903a6d135c9539bb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5ef4e923b21e45569e9472a7305ae547 = $(`<div id="html_5ef4e923b21e45569e9472a7305ae547" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_145800ed80814920903a6d135c9539bb.setContent(html_5ef4e923b21e45569e9472a7305ae547);
+        
+
+        marker_69fed576b7e44f6ab6c3c3830b187888.bindPopup(popup_145800ed80814920903a6d135c9539bb)
+        ;
+
+        
+    
+    
+            var marker_8308b89d407348628f0c39ab068a1e1a = L.marker(
+                [23.177327019616502, 79.97832517739684],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_163f12476a4d4dc7b1d5621dc9f221ec = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_8308b89d407348628f0c39ab068a1e1a.setIcon(icon_163f12476a4d4dc7b1d5621dc9f221ec);
+        
+    
+        var popup_55c0559b7e9640299076a17785753d10 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_004e345b2f0d4367a47db1c0ca8d0821 = $(`<div id="html_004e345b2f0d4367a47db1c0ca8d0821" style="width: 100.0%; height: 100.0%;">Low 2020-07-07</div>`)[0];
+            popup_55c0559b7e9640299076a17785753d10.setContent(html_004e345b2f0d4367a47db1c0ca8d0821);
+        
+
+        marker_8308b89d407348628f0c39ab068a1e1a.bindPopup(popup_55c0559b7e9640299076a17785753d10)
+        ;
+
+        
+    
+    
+            var marker_b5d7b9947223470f9648b35b57bd66a5 = L.marker(
+                [23.200963604640986, 79.98323154949638],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f45df3acdccb48349eeda38e0aa35264 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b5d7b9947223470f9648b35b57bd66a5.setIcon(icon_f45df3acdccb48349eeda38e0aa35264);
+        
+    
+        var popup_1c8768783b2a4447bfc1cd3aa5ed3a0b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_138bab0d4dea4ebeba0d3e34bea8532a = $(`<div id="html_138bab0d4dea4ebeba0d3e34bea8532a" style="width: 100.0%; height: 100.0%;">Low 2020-07-08</div>`)[0];
+            popup_1c8768783b2a4447bfc1cd3aa5ed3a0b.setContent(html_138bab0d4dea4ebeba0d3e34bea8532a);
+        
+
+        marker_b5d7b9947223470f9648b35b57bd66a5.bindPopup(popup_1c8768783b2a4447bfc1cd3aa5ed3a0b)
+        ;
+
+        
+    
+    
+            var marker_a32c2c1b97e246c6927b1dcae568617d = L.marker(
+                [23.158165876884627, 79.9798751425255],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c8183c2be00c4e9ca3c665c1c9aa6279 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_a32c2c1b97e246c6927b1dcae568617d.setIcon(icon_c8183c2be00c4e9ca3c665c1c9aa6279);
+        
+    
+        var popup_8efdbb0c52114b96a793e1e00c2ff5af = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bfc0afd36e474571803f3704fb5f107b = $(`<div id="html_bfc0afd36e474571803f3704fb5f107b" style="width: 100.0%; height: 100.0%;">Low 2020-07-08</div>`)[0];
+            popup_8efdbb0c52114b96a793e1e00c2ff5af.setContent(html_bfc0afd36e474571803f3704fb5f107b);
+        
+
+        marker_a32c2c1b97e246c6927b1dcae568617d.bindPopup(popup_8efdbb0c52114b96a793e1e00c2ff5af)
+        ;
+
+        
+    
+    
+            var marker_e1295c76568c42978bdba9cebc0946a4 = L.marker(
+                [23.184372253274198, 79.96120525003123],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e98859e366d04003b6a2bb948021aa70 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_e1295c76568c42978bdba9cebc0946a4.setIcon(icon_e98859e366d04003b6a2bb948021aa70);
+        
+    
+        var popup_9c121c79adfe485fb1d4a0aa3bc7b47e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7ad2ee6ddfb24140b30ec36b4c914db5 = $(`<div id="html_7ad2ee6ddfb24140b30ec36b4c914db5" style="width: 100.0%; height: 100.0%;">Low 2020-07-08</div>`)[0];
+            popup_9c121c79adfe485fb1d4a0aa3bc7b47e.setContent(html_7ad2ee6ddfb24140b30ec36b4c914db5);
+        
+
+        marker_e1295c76568c42978bdba9cebc0946a4.bindPopup(popup_9c121c79adfe485fb1d4a0aa3bc7b47e)
+        ;
+
+        
+    
+    
+            var marker_03012220c15348289fb9ba9f47aad153 = L.marker(
+                [23.195481507330346, 79.97200906652463],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_79bdd01bd7a346f38326321aac1386e7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_03012220c15348289fb9ba9f47aad153.setIcon(icon_79bdd01bd7a346f38326321aac1386e7);
+        
+    
+        var popup_829474c6d19f4baf9ef640914620b718 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_507b209f822a4840880d557a61ceffb3 = $(`<div id="html_507b209f822a4840880d557a61ceffb3" style="width: 100.0%; height: 100.0%;">Low 2020-07-08</div>`)[0];
+            popup_829474c6d19f4baf9ef640914620b718.setContent(html_507b209f822a4840880d557a61ceffb3);
+        
+
+        marker_03012220c15348289fb9ba9f47aad153.bindPopup(popup_829474c6d19f4baf9ef640914620b718)
+        ;
+
+        
+    
+    
+            var marker_b400fecf047e4dbf96f7b581078787e1 = L.marker(
+                [23.15964366375041, 79.98488077917729],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_862f8af3ba064e5e8e94ec188a3dcf2c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b400fecf047e4dbf96f7b581078787e1.setIcon(icon_862f8af3ba064e5e8e94ec188a3dcf2c);
+        
+    
+        var popup_f4efcc344d024576853cd386d80742b1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d873175b1c084450b12b8f49a7595b58 = $(`<div id="html_d873175b1c084450b12b8f49a7595b58" style="width: 100.0%; height: 100.0%;">Low 2020-07-08</div>`)[0];
+            popup_f4efcc344d024576853cd386d80742b1.setContent(html_d873175b1c084450b12b8f49a7595b58);
+        
+
+        marker_b400fecf047e4dbf96f7b581078787e1.bindPopup(popup_f4efcc344d024576853cd386d80742b1)
+        ;
+
+        
+    
+    
+            var marker_aa93d82924554baa905420b119898010 = L.marker(
+                [23.17011610813265, 79.995265892547],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ce850efd158b4bebb6344ca9cb1111b1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_aa93d82924554baa905420b119898010.setIcon(icon_ce850efd158b4bebb6344ca9cb1111b1);
+        
+    
+        var popup_823ea94460b7480fb0f9e7a044662bf7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ff159393829b4e75a349078b21c8290f = $(`<div id="html_ff159393829b4e75a349078b21c8290f" style="width: 100.0%; height: 100.0%;">Low 2020-07-09</div>`)[0];
+            popup_823ea94460b7480fb0f9e7a044662bf7.setContent(html_ff159393829b4e75a349078b21c8290f);
+        
+
+        marker_aa93d82924554baa905420b119898010.bindPopup(popup_823ea94460b7480fb0f9e7a044662bf7)
+        ;
+
+        
+    
+    
+            var marker_91214906c4df41af81c23d816491f450 = L.marker(
+                [23.18222476726881, 80.0070155398728],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_eb6528dd7cfc4d538773672659314e2e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_91214906c4df41af81c23d816491f450.setIcon(icon_eb6528dd7cfc4d538773672659314e2e);
+        
+    
+        var popup_1957a932bb0148caaffb48cfca4fe553 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4ff09f585ad94e40a69af3e8051591ba = $(`<div id="html_4ff09f585ad94e40a69af3e8051591ba" style="width: 100.0%; height: 100.0%;">Low 2020-07-09</div>`)[0];
+            popup_1957a932bb0148caaffb48cfca4fe553.setContent(html_4ff09f585ad94e40a69af3e8051591ba);
+        
+
+        marker_91214906c4df41af81c23d816491f450.bindPopup(popup_1957a932bb0148caaffb48cfca4fe553)
+        ;
+
+        
+    
+    
+            var marker_c7c51165fe6c49e387fa86fd3701dfd5 = L.marker(
+                [23.184180659854945, 79.998406820197],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_db61195343db4704ba5f18fd59c98cd5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c7c51165fe6c49e387fa86fd3701dfd5.setIcon(icon_db61195343db4704ba5f18fd59c98cd5);
+        
+    
+        var popup_ac9b7fb5d97a4e6db4bf036b7f08a5cb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_de8040961dee4b748224bd0a95ee7d83 = $(`<div id="html_de8040961dee4b748224bd0a95ee7d83" style="width: 100.0%; height: 100.0%;">Low 2020-07-09</div>`)[0];
+            popup_ac9b7fb5d97a4e6db4bf036b7f08a5cb.setContent(html_de8040961dee4b748224bd0a95ee7d83);
+        
+
+        marker_c7c51165fe6c49e387fa86fd3701dfd5.bindPopup(popup_ac9b7fb5d97a4e6db4bf036b7f08a5cb)
+        ;
+
+        
+    
+    
+            var marker_bdc4413a887a4f84b87f143f7c22c159 = L.marker(
+                [23.16749134271739, 79.965075480761],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f797b150ea7f4d0c92efea08099ffeed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_bdc4413a887a4f84b87f143f7c22c159.setIcon(icon_f797b150ea7f4d0c92efea08099ffeed);
+        
+    
+        var popup_fb6663db6902461c9925b75b3e2bccef = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c4618bf76c514a889751108c4afab028 = $(`<div id="html_c4618bf76c514a889751108c4afab028" style="width: 100.0%; height: 100.0%;">Low 2020-07-10</div>`)[0];
+            popup_fb6663db6902461c9925b75b3e2bccef.setContent(html_c4618bf76c514a889751108c4afab028);
+        
+
+        marker_bdc4413a887a4f84b87f143f7c22c159.bindPopup(popup_fb6663db6902461c9925b75b3e2bccef)
+        ;
+
+        
+    
+    
+            var marker_c74eb9cf0a674c9991c4b5fc7b7c5a26 = L.marker(
+                [23.205892032275486, 79.99177043670164],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_69fb386fee7348d18c82b7b5bdaae318 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c74eb9cf0a674c9991c4b5fc7b7c5a26.setIcon(icon_69fb386fee7348d18c82b7b5bdaae318);
+        
+    
+        var popup_79e64d6dc4a84061a2a766fa258e9d0f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0290f198a1e145be9efce39abd0ebc0c = $(`<div id="html_0290f198a1e145be9efce39abd0ebc0c" style="width: 100.0%; height: 100.0%;">Low 2020-07-10</div>`)[0];
+            popup_79e64d6dc4a84061a2a766fa258e9d0f.setContent(html_0290f198a1e145be9efce39abd0ebc0c);
+        
+
+        marker_c74eb9cf0a674c9991c4b5fc7b7c5a26.bindPopup(popup_79e64d6dc4a84061a2a766fa258e9d0f)
+        ;
+
+        
+    
+    
+            var marker_cafe7c0346254b1a97722907e215e012 = L.marker(
+                [23.183917919861393, 79.97751009938455],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_085f7165b2194c50ac0a0fe2ae1cc206 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_cafe7c0346254b1a97722907e215e012.setIcon(icon_085f7165b2194c50ac0a0fe2ae1cc206);
+        
+    
+        var popup_4c466e0e156f4448a429064349a17818 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_627591a265794a58af3426f142283ad1 = $(`<div id="html_627591a265794a58af3426f142283ad1" style="width: 100.0%; height: 100.0%;">Medium 2020-07-10</div>`)[0];
+            popup_4c466e0e156f4448a429064349a17818.setContent(html_627591a265794a58af3426f142283ad1);
+        
+
+        marker_cafe7c0346254b1a97722907e215e012.bindPopup(popup_4c466e0e156f4448a429064349a17818)
+        ;
+
+        
+    
+    
+            var marker_17cae52f972645508986387cd3187e4a = L.marker(
+                [23.181196830370997, 79.97151530352964],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_447e5958ab0d4acea48f16a1bdccf785 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_17cae52f972645508986387cd3187e4a.setIcon(icon_447e5958ab0d4acea48f16a1bdccf785);
+        
+    
+        var popup_89bb3014e63941e4885b18be59bebd94 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6afe4d26f7f7435da314831e602c2f27 = $(`<div id="html_6afe4d26f7f7435da314831e602c2f27" style="width: 100.0%; height: 100.0%;">Low 2020-07-10</div>`)[0];
+            popup_89bb3014e63941e4885b18be59bebd94.setContent(html_6afe4d26f7f7435da314831e602c2f27);
+        
+
+        marker_17cae52f972645508986387cd3187e4a.bindPopup(popup_89bb3014e63941e4885b18be59bebd94)
+        ;
+
+        
+    
+    
+            var marker_2b8d3cdf03864ccc8902a7f81acd04dc = L.marker(
+                [23.202577482624324, 79.98761369727515],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_df037e6cf6234896bca7d0582a99ef0b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2b8d3cdf03864ccc8902a7f81acd04dc.setIcon(icon_df037e6cf6234896bca7d0582a99ef0b);
+        
+    
+        var popup_0383460d313f4fdfa294b55f3f0a54b9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_03d4eeab44b348ae86f32f3251b60285 = $(`<div id="html_03d4eeab44b348ae86f32f3251b60285" style="width: 100.0%; height: 100.0%;">Low 2020-07-10</div>`)[0];
+            popup_0383460d313f4fdfa294b55f3f0a54b9.setContent(html_03d4eeab44b348ae86f32f3251b60285);
+        
+
+        marker_2b8d3cdf03864ccc8902a7f81acd04dc.bindPopup(popup_0383460d313f4fdfa294b55f3f0a54b9)
+        ;
+
+        
+    
+    
+            var marker_ecc822aeae1445989bd010f93c65095a = L.marker(
+                [23.160923344828586, 79.99931002625614],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6aabb5347152476d8d307a57ca7e359d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ecc822aeae1445989bd010f93c65095a.setIcon(icon_6aabb5347152476d8d307a57ca7e359d);
+        
+    
+        var popup_7878081837474cebad36137f9754371a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f5520e14aa0d40f3a327a2fcc55dc01e = $(`<div id="html_f5520e14aa0d40f3a327a2fcc55dc01e" style="width: 100.0%; height: 100.0%;">Low 2020-07-11</div>`)[0];
+            popup_7878081837474cebad36137f9754371a.setContent(html_f5520e14aa0d40f3a327a2fcc55dc01e);
+        
+
+        marker_ecc822aeae1445989bd010f93c65095a.bindPopup(popup_7878081837474cebad36137f9754371a)
+        ;
+
+        
+    
+    
+            var marker_9c38cd8e8ec74858b388415500cc60c3 = L.marker(
+                [23.19987552958888, 79.99380935313239],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e7920566f77b475db1a8df136c38d706 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9c38cd8e8ec74858b388415500cc60c3.setIcon(icon_e7920566f77b475db1a8df136c38d706);
+        
+    
+        var popup_a0f83d85138b497ba7b1a483c16a8c61 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_277f763bea4742f49264b74113740a7b = $(`<div id="html_277f763bea4742f49264b74113740a7b" style="width: 100.0%; height: 100.0%;">Low 2020-07-11</div>`)[0];
+            popup_a0f83d85138b497ba7b1a483c16a8c61.setContent(html_277f763bea4742f49264b74113740a7b);
+        
+
+        marker_9c38cd8e8ec74858b388415500cc60c3.bindPopup(popup_a0f83d85138b497ba7b1a483c16a8c61)
+        ;
+
+        
+    
+    
+            var marker_7587659849134550ac512884e705113a = L.marker(
+                [23.16988506317069, 80.008922481844],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e5529272c6aa4c3093ee968ed482b989 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_7587659849134550ac512884e705113a.setIcon(icon_e5529272c6aa4c3093ee968ed482b989);
+        
+    
+        var popup_affcf8c35cae41a9a7352f116e391ab7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_196b8d88a33c4312bf166b31c11759e3 = $(`<div id="html_196b8d88a33c4312bf166b31c11759e3" style="width: 100.0%; height: 100.0%;">Medium 2020-07-11</div>`)[0];
+            popup_affcf8c35cae41a9a7352f116e391ab7.setContent(html_196b8d88a33c4312bf166b31c11759e3);
+        
+
+        marker_7587659849134550ac512884e705113a.bindPopup(popup_affcf8c35cae41a9a7352f116e391ab7)
+        ;
+
+        
+    
+    
+            var marker_4d02b2fc2dfc4654af348bc7ac47ee54 = L.marker(
+                [23.18402908908294, 79.97550945616956],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7a26bac664674117b2249c0f60710da4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_4d02b2fc2dfc4654af348bc7ac47ee54.setIcon(icon_7a26bac664674117b2249c0f60710da4);
+        
+    
+        var popup_c6ccc5121aa64ded95dc6292b2ae39ef = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fad06896e515499b84609379c8f6e40d = $(`<div id="html_fad06896e515499b84609379c8f6e40d" style="width: 100.0%; height: 100.0%;">Low 2020-07-11</div>`)[0];
+            popup_c6ccc5121aa64ded95dc6292b2ae39ef.setContent(html_fad06896e515499b84609379c8f6e40d);
+        
+
+        marker_4d02b2fc2dfc4654af348bc7ac47ee54.bindPopup(popup_c6ccc5121aa64ded95dc6292b2ae39ef)
+        ;
+
+        
+    
+    
+            var marker_1ccd78ba7eb54f0894bd0949248fb8f4 = L.marker(
+                [23.157957381279715, 79.99508111382171],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ed9129a82cb349e6beaa3f64918b6e6b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_1ccd78ba7eb54f0894bd0949248fb8f4.setIcon(icon_ed9129a82cb349e6beaa3f64918b6e6b);
+        
+    
+        var popup_306eba60757a4732b39006038a8e5be4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c6773e28288c48dc94ea572e2716238a = $(`<div id="html_c6773e28288c48dc94ea572e2716238a" style="width: 100.0%; height: 100.0%;">Medium 2020-07-11</div>`)[0];
+            popup_306eba60757a4732b39006038a8e5be4.setContent(html_c6773e28288c48dc94ea572e2716238a);
+        
+
+        marker_1ccd78ba7eb54f0894bd0949248fb8f4.bindPopup(popup_306eba60757a4732b39006038a8e5be4)
+        ;
+
+        
+    
+    
+            var marker_7f629a1df87447ff874c5168b3343ba1 = L.marker(
+                [23.202958215632485, 79.98615187585436],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9c9a56b794134a36ac08a325ac3d4c4e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_7f629a1df87447ff874c5168b3343ba1.setIcon(icon_9c9a56b794134a36ac08a325ac3d4c4e);
+        
+    
+        var popup_f3e529042d78475a9fda2c9c7e8e8a5c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3a01238bece543fbaf540036e988345b = $(`<div id="html_3a01238bece543fbaf540036e988345b" style="width: 100.0%; height: 100.0%;">Medium 2020-07-11</div>`)[0];
+            popup_f3e529042d78475a9fda2c9c7e8e8a5c.setContent(html_3a01238bece543fbaf540036e988345b);
+        
+
+        marker_7f629a1df87447ff874c5168b3343ba1.bindPopup(popup_f3e529042d78475a9fda2c9c7e8e8a5c)
+        ;
+
+        
+    
+    
+            var marker_cd31cbbbae8c4df89654bbb1cb8648ff = L.marker(
+                [23.196993996987835, 80.00370172677522],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ecf8d5ca533c42e4a75e254b6a3e4dea = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_cd31cbbbae8c4df89654bbb1cb8648ff.setIcon(icon_ecf8d5ca533c42e4a75e254b6a3e4dea);
+        
+    
+        var popup_04adc591fde248ef8a57e1074ffe9bd1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a9788944c8ba4b06b4ee09be875deada = $(`<div id="html_a9788944c8ba4b06b4ee09be875deada" style="width: 100.0%; height: 100.0%;">Low 2020-07-12</div>`)[0];
+            popup_04adc591fde248ef8a57e1074ffe9bd1.setContent(html_a9788944c8ba4b06b4ee09be875deada);
+        
+
+        marker_cd31cbbbae8c4df89654bbb1cb8648ff.bindPopup(popup_04adc591fde248ef8a57e1074ffe9bd1)
+        ;
+
+        
+    
+    
+            var marker_8fd29bd09db14ba6aaf22126b89a38ef = L.marker(
+                [23.191419046974808, 80.00487725169191],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_adcb71175bc14a38b61cfddc7e5fe8ba = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_8fd29bd09db14ba6aaf22126b89a38ef.setIcon(icon_adcb71175bc14a38b61cfddc7e5fe8ba);
+        
+    
+        var popup_76a3b578a48541b48f2c06ff54beda77 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_57a184d632bb431795d6fc6f1d968aec = $(`<div id="html_57a184d632bb431795d6fc6f1d968aec" style="width: 100.0%; height: 100.0%;">Medium 2020-07-12</div>`)[0];
+            popup_76a3b578a48541b48f2c06ff54beda77.setContent(html_57a184d632bb431795d6fc6f1d968aec);
+        
+
+        marker_8fd29bd09db14ba6aaf22126b89a38ef.bindPopup(popup_76a3b578a48541b48f2c06ff54beda77)
+        ;
+
+        
+    
+    
+            var marker_30f67a92dcf74de5b9f69356264be633 = L.marker(
+                [23.176665311457054, 79.97216240120063],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_2516698cf366464c90d5439f1e7b3315 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_30f67a92dcf74de5b9f69356264be633.setIcon(icon_2516698cf366464c90d5439f1e7b3315);
+        
+    
+        var popup_51165978db9748f79604ac75743801f6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_06b62c0ab3a34a01837082e13148d399 = $(`<div id="html_06b62c0ab3a34a01837082e13148d399" style="width: 100.0%; height: 100.0%;">Low 2020-07-12</div>`)[0];
+            popup_51165978db9748f79604ac75743801f6.setContent(html_06b62c0ab3a34a01837082e13148d399);
+        
+
+        marker_30f67a92dcf74de5b9f69356264be633.bindPopup(popup_51165978db9748f79604ac75743801f6)
+        ;
+
+        
+    
+    
+            var marker_e1b9f90db4bf4d03923554c3e6ca6f41 = L.marker(
+                [23.189834927744666, 79.97993701976638],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_d72510f5617842b9b25a56f0b80c2e9c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e1b9f90db4bf4d03923554c3e6ca6f41.setIcon(icon_d72510f5617842b9b25a56f0b80c2e9c);
+        
+    
+        var popup_18ad0134da8345978c55a4e83d3e7671 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6ddf5cd5cd5f47bf994df162299bfa49 = $(`<div id="html_6ddf5cd5cd5f47bf994df162299bfa49" style="width: 100.0%; height: 100.0%;">Medium 2020-07-13</div>`)[0];
+            popup_18ad0134da8345978c55a4e83d3e7671.setContent(html_6ddf5cd5cd5f47bf994df162299bfa49);
+        
+
+        marker_e1b9f90db4bf4d03923554c3e6ca6f41.bindPopup(popup_18ad0134da8345978c55a4e83d3e7671)
+        ;
+
+        
+    
+    
+            var marker_4cc3f4cf879141ab86503270df53d16f = L.marker(
+                [23.192464782546768, 80.00963653608797],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_5f08c6b9c2984e96b5993a4054ab5757 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_4cc3f4cf879141ab86503270df53d16f.setIcon(icon_5f08c6b9c2984e96b5993a4054ab5757);
+        
+    
+        var popup_f9260fea539748c68b07208ee8d84c14 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ae78503edeb5486e84086d33df4b3a4f = $(`<div id="html_ae78503edeb5486e84086d33df4b3a4f" style="width: 100.0%; height: 100.0%;">Medium 2020-07-13</div>`)[0];
+            popup_f9260fea539748c68b07208ee8d84c14.setContent(html_ae78503edeb5486e84086d33df4b3a4f);
+        
+
+        marker_4cc3f4cf879141ab86503270df53d16f.bindPopup(popup_f9260fea539748c68b07208ee8d84c14)
+        ;
+
+        
+    
+    
+            var marker_00bce22dc71f49f78ffb5b10a79fe464 = L.marker(
+                [23.19783335442985, 79.98171152223645],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_81791b695a3e485aab0da534cba96c86 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_00bce22dc71f49f78ffb5b10a79fe464.setIcon(icon_81791b695a3e485aab0da534cba96c86);
+        
+    
+        var popup_facec0e6ee404c59ae96c2f671b4ab18 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_29633f8bb62541fe8823c61eb8c5e4b9 = $(`<div id="html_29633f8bb62541fe8823c61eb8c5e4b9" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_facec0e6ee404c59ae96c2f671b4ab18.setContent(html_29633f8bb62541fe8823c61eb8c5e4b9);
+        
+
+        marker_00bce22dc71f49f78ffb5b10a79fe464.bindPopup(popup_facec0e6ee404c59ae96c2f671b4ab18)
+        ;
+
+        
+    
+    
+            var marker_2a449185312c43b5be32f7808f275b4f = L.marker(
+                [23.17794275562701, 79.9897204186942],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c9ed930176ce45ed8f1c2ba5e392e43e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2a449185312c43b5be32f7808f275b4f.setIcon(icon_c9ed930176ce45ed8f1c2ba5e392e43e);
+        
+    
+        var popup_313b1648c53e44c5bc4ded7f1af0f1f6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c6ca37c275454323ae486deccadc768e = $(`<div id="html_c6ca37c275454323ae486deccadc768e" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_313b1648c53e44c5bc4ded7f1af0f1f6.setContent(html_c6ca37c275454323ae486deccadc768e);
+        
+
+        marker_2a449185312c43b5be32f7808f275b4f.bindPopup(popup_313b1648c53e44c5bc4ded7f1af0f1f6)
+        ;
+
+        
+    
+    
+            var marker_bd9bfff628ea48f99bf5f9fe6a852e41 = L.marker(
+                [23.18261304266425, 80.00530914700707],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_47b6c410b824475c91171d5b479b8f56 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_bd9bfff628ea48f99bf5f9fe6a852e41.setIcon(icon_47b6c410b824475c91171d5b479b8f56);
+        
+    
+        var popup_001da1c8670d4847b4c37dd42c94a6c7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0d9b8aa67f4e4d7f88d760de31133603 = $(`<div id="html_0d9b8aa67f4e4d7f88d760de31133603" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_001da1c8670d4847b4c37dd42c94a6c7.setContent(html_0d9b8aa67f4e4d7f88d760de31133603);
+        
+
+        marker_bd9bfff628ea48f99bf5f9fe6a852e41.bindPopup(popup_001da1c8670d4847b4c37dd42c94a6c7)
+        ;
+
+        
+    
+    
+            var marker_1383e130d3804c32948c391274c141ef = L.marker(
+                [23.183235922753873, 80.00678604647628],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4003044b288c4c3689b7a54208426edf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1383e130d3804c32948c391274c141ef.setIcon(icon_4003044b288c4c3689b7a54208426edf);
+        
+    
+        var popup_2de75a6bd4ca494f85f82f0eea1ada82 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9f44eeca49f64c55bac26f846b33141d = $(`<div id="html_9f44eeca49f64c55bac26f846b33141d" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_2de75a6bd4ca494f85f82f0eea1ada82.setContent(html_9f44eeca49f64c55bac26f846b33141d);
+        
+
+        marker_1383e130d3804c32948c391274c141ef.bindPopup(popup_2de75a6bd4ca494f85f82f0eea1ada82)
+        ;
+
+        
+    
+    
+            var marker_212c1504da55499483677218a5042e03 = L.marker(
+                [23.180769266398638, 80.0065672228267],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6397b6673f2b4ddd8561e140fcc587b2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_212c1504da55499483677218a5042e03.setIcon(icon_6397b6673f2b4ddd8561e140fcc587b2);
+        
+    
+        var popup_0a60a28d5ec147519a07a42c457909a8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_871039ad21774394b4baa865b28f65b8 = $(`<div id="html_871039ad21774394b4baa865b28f65b8" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_0a60a28d5ec147519a07a42c457909a8.setContent(html_871039ad21774394b4baa865b28f65b8);
+        
+
+        marker_212c1504da55499483677218a5042e03.bindPopup(popup_0a60a28d5ec147519a07a42c457909a8)
+        ;
+
+        
+    
+    
+            var marker_6d8fbeb51ef64633a4ddeac17b0b0d8d = L.marker(
+                [23.177179974771786, 79.97689777288606],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_de4dd4d6376445ee9e3d5d6e44477585 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6d8fbeb51ef64633a4ddeac17b0b0d8d.setIcon(icon_de4dd4d6376445ee9e3d5d6e44477585);
+        
+    
+        var popup_2864bd5b4a054c7497df2c50d54c8794 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_49704f937bb4400e831bcc40a701e5c9 = $(`<div id="html_49704f937bb4400e831bcc40a701e5c9" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_2864bd5b4a054c7497df2c50d54c8794.setContent(html_49704f937bb4400e831bcc40a701e5c9);
+        
+
+        marker_6d8fbeb51ef64633a4ddeac17b0b0d8d.bindPopup(popup_2864bd5b4a054c7497df2c50d54c8794)
+        ;
+
+        
+    
+    
+            var marker_078780d011624aa0a3022bae61b782fc = L.marker(
+                [23.167048450768746, 79.99121961129974],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_a86e836a5bfd4ae8b8afda32e1c3f347 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_078780d011624aa0a3022bae61b782fc.setIcon(icon_a86e836a5bfd4ae8b8afda32e1c3f347);
+        
+    
+        var popup_64a08039f1ce421997f6bcad78be3b00 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a28b9747dac64ebbbe29e83b1d11a7d2 = $(`<div id="html_a28b9747dac64ebbbe29e83b1d11a7d2" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_64a08039f1ce421997f6bcad78be3b00.setContent(html_a28b9747dac64ebbbe29e83b1d11a7d2);
+        
+
+        marker_078780d011624aa0a3022bae61b782fc.bindPopup(popup_64a08039f1ce421997f6bcad78be3b00)
+        ;
+
+        
+    
+    
+            var marker_686e6b615e914bb49e3c6a11eac7b957 = L.marker(
+                [23.169785419852985, 79.99286363264875],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_cab64d82edac4afda4f6abb9f9560d4f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_686e6b615e914bb49e3c6a11eac7b957.setIcon(icon_cab64d82edac4afda4f6abb9f9560d4f);
+        
+    
+        var popup_4f8cdc035e3e47f5bbd65ae2577b0bd0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_612031ea1d284e70acb582a1a02ccb2b = $(`<div id="html_612031ea1d284e70acb582a1a02ccb2b" style="width: 100.0%; height: 100.0%;">Low 2020-07-15</div>`)[0];
+            popup_4f8cdc035e3e47f5bbd65ae2577b0bd0.setContent(html_612031ea1d284e70acb582a1a02ccb2b);
+        
+
+        marker_686e6b615e914bb49e3c6a11eac7b957.bindPopup(popup_4f8cdc035e3e47f5bbd65ae2577b0bd0)
+        ;
+
+        
+    
+    
+            var marker_b5d1dffc46a44744a06dbad96ac367b5 = L.marker(
+                [23.18332190272417, 80.00096471998062],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ca3fe34e46864439b16450130132326e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_b5d1dffc46a44744a06dbad96ac367b5.setIcon(icon_ca3fe34e46864439b16450130132326e);
+        
+    
+        var popup_858d485793a544048c4de96779032970 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_75db5dce304145d3a9636ef8f81b8976 = $(`<div id="html_75db5dce304145d3a9636ef8f81b8976" style="width: 100.0%; height: 100.0%;">Medium 2020-07-16</div>`)[0];
+            popup_858d485793a544048c4de96779032970.setContent(html_75db5dce304145d3a9636ef8f81b8976);
+        
+
+        marker_b5d1dffc46a44744a06dbad96ac367b5.bindPopup(popup_858d485793a544048c4de96779032970)
+        ;
+
+        
+    
+    
+            var marker_8b3b1ac416ec45c09c10b83e66ae88fc = L.marker(
+                [23.20277743879149, 79.99766161343044],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c4297cc832b74b38a04b841be2ec26e1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_8b3b1ac416ec45c09c10b83e66ae88fc.setIcon(icon_c4297cc832b74b38a04b841be2ec26e1);
+        
+    
+        var popup_e9adf42c273346e997711e8ae16fcb0a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c8f060b4e48d409f9799655871088dff = $(`<div id="html_c8f060b4e48d409f9799655871088dff" style="width: 100.0%; height: 100.0%;">Medium 2020-07-16</div>`)[0];
+            popup_e9adf42c273346e997711e8ae16fcb0a.setContent(html_c8f060b4e48d409f9799655871088dff);
+        
+
+        marker_8b3b1ac416ec45c09c10b83e66ae88fc.bindPopup(popup_e9adf42c273346e997711e8ae16fcb0a)
+        ;
+
+        
+    
+    
+            var marker_f6d62dad411341e0a06a8bd45b3381a4 = L.marker(
+                [23.188399992033762, 79.98330069262326],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9d0e3bfa37f3474eb8241d90b6af048a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_f6d62dad411341e0a06a8bd45b3381a4.setIcon(icon_9d0e3bfa37f3474eb8241d90b6af048a);
+        
+    
+        var popup_bf353223cd404c8b949fdfb3870d3438 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1e651ca3c96643c398c787d5e96b8df6 = $(`<div id="html_1e651ca3c96643c398c787d5e96b8df6" style="width: 100.0%; height: 100.0%;">Low 2020-07-16</div>`)[0];
+            popup_bf353223cd404c8b949fdfb3870d3438.setContent(html_1e651ca3c96643c398c787d5e96b8df6);
+        
+
+        marker_f6d62dad411341e0a06a8bd45b3381a4.bindPopup(popup_bf353223cd404c8b949fdfb3870d3438)
+        ;
+
+        
+    
+    
+            var marker_90df1991062f48f18b0d598a9f910908 = L.marker(
+                [23.192518644826922, 79.97322580085616],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c65d4818f81c477a81b5041f3685e353 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_90df1991062f48f18b0d598a9f910908.setIcon(icon_c65d4818f81c477a81b5041f3685e353);
+        
+    
+        var popup_d5ed8010e8fa412dac81057ae5423746 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_78979c0a26de417db18e304a183beed9 = $(`<div id="html_78979c0a26de417db18e304a183beed9" style="width: 100.0%; height: 100.0%;">Low 2020-07-16</div>`)[0];
+            popup_d5ed8010e8fa412dac81057ae5423746.setContent(html_78979c0a26de417db18e304a183beed9);
+        
+
+        marker_90df1991062f48f18b0d598a9f910908.bindPopup(popup_d5ed8010e8fa412dac81057ae5423746)
+        ;
+
+        
+    
+    
+            var marker_0685dbd1770b4fe6bfd561d990eb44e6 = L.marker(
+                [23.175226254391127, 79.96305716575966],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_74d7e0590df24329971dcefd6f456191 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_0685dbd1770b4fe6bfd561d990eb44e6.setIcon(icon_74d7e0590df24329971dcefd6f456191);
+        
+    
+        var popup_1c92e37ed7724f14b978e1f56481d619 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c5dd7604d4a046fba06eeb771a08d4e7 = $(`<div id="html_c5dd7604d4a046fba06eeb771a08d4e7" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_1c92e37ed7724f14b978e1f56481d619.setContent(html_c5dd7604d4a046fba06eeb771a08d4e7);
+        
+
+        marker_0685dbd1770b4fe6bfd561d990eb44e6.bindPopup(popup_1c92e37ed7724f14b978e1f56481d619)
+        ;
+
+        
+    
+    
+            var marker_b85622ec805141719bc9203a4c875756 = L.marker(
+                [23.16997876537713, 79.9692842262012],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_833fb9e1d1184247931d9638f3ac1c34 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b85622ec805141719bc9203a4c875756.setIcon(icon_833fb9e1d1184247931d9638f3ac1c34);
+        
+    
+        var popup_e3c9c3886c544354921cca3a470a8ea1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_004cec1047444888a65bb839c15c71ac = $(`<div id="html_004cec1047444888a65bb839c15c71ac" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_e3c9c3886c544354921cca3a470a8ea1.setContent(html_004cec1047444888a65bb839c15c71ac);
+        
+
+        marker_b85622ec805141719bc9203a4c875756.bindPopup(popup_e3c9c3886c544354921cca3a470a8ea1)
+        ;
+
+        
+    
+    
+            var marker_ae35188da2f84e06ace61ac864dc8661 = L.marker(
+                [23.186225007339054, 80.0056137548493],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_5875e2ae447a4f888091e142b25ecb75 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ae35188da2f84e06ace61ac864dc8661.setIcon(icon_5875e2ae447a4f888091e142b25ecb75);
+        
+    
+        var popup_be080fad541e456296d64c7e62df703d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1dc835ad9bdc4b4e9fd4f87ec4d507e7 = $(`<div id="html_1dc835ad9bdc4b4e9fd4f87ec4d507e7" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_be080fad541e456296d64c7e62df703d.setContent(html_1dc835ad9bdc4b4e9fd4f87ec4d507e7);
+        
+
+        marker_ae35188da2f84e06ace61ac864dc8661.bindPopup(popup_be080fad541e456296d64c7e62df703d)
+        ;
+
+        
+    
+    
+            var marker_1e46d2776080444abb51676774d4ccc9 = L.marker(
+                [23.160616113570672, 79.9847252395451],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f687bbb2c6cd4d1e91b5fdb480b506d6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1e46d2776080444abb51676774d4ccc9.setIcon(icon_f687bbb2c6cd4d1e91b5fdb480b506d6);
+        
+    
+        var popup_bd22a3ca8ac44045b16e24a4e6f35cf5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c5b5156b6cdc4df8a2013392f810a947 = $(`<div id="html_c5b5156b6cdc4df8a2013392f810a947" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_bd22a3ca8ac44045b16e24a4e6f35cf5.setContent(html_c5b5156b6cdc4df8a2013392f810a947);
+        
+
+        marker_1e46d2776080444abb51676774d4ccc9.bindPopup(popup_bd22a3ca8ac44045b16e24a4e6f35cf5)
+        ;
+
+        
+    
+    
+            var marker_3a6fa8d2f3b646ffa3cf05d3f9c11e42 = L.marker(
+                [23.187690129211287, 79.969572281778],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_81cf1d3c18e24481af6a6123588c1ba5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_3a6fa8d2f3b646ffa3cf05d3f9c11e42.setIcon(icon_81cf1d3c18e24481af6a6123588c1ba5);
+        
+    
+        var popup_1114ee981ac247d4ad3c33ce528c4a87 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_38aba9093d0e4f939d686ab8cbb9d316 = $(`<div id="html_38aba9093d0e4f939d686ab8cbb9d316" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_1114ee981ac247d4ad3c33ce528c4a87.setContent(html_38aba9093d0e4f939d686ab8cbb9d316);
+        
+
+        marker_3a6fa8d2f3b646ffa3cf05d3f9c11e42.bindPopup(popup_1114ee981ac247d4ad3c33ce528c4a87)
+        ;
+
+        
+    
+    
+            var marker_f2ee5029f847471688f82f7878cdd2bb = L.marker(
+                [23.16476875943541, 79.97235971317512],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ad028fb2699a4064b1e71bad030c4792 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_f2ee5029f847471688f82f7878cdd2bb.setIcon(icon_ad028fb2699a4064b1e71bad030c4792);
+        
+    
+        var popup_aa47feb5c3b74550940c9bd30e2ab1d6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b4b2a8d1154d49d6a6005f89ca417183 = $(`<div id="html_b4b2a8d1154d49d6a6005f89ca417183" style="width: 100.0%; height: 100.0%;">Medium 2020-07-17</div>`)[0];
+            popup_aa47feb5c3b74550940c9bd30e2ab1d6.setContent(html_b4b2a8d1154d49d6a6005f89ca417183);
+        
+
+        marker_f2ee5029f847471688f82f7878cdd2bb.bindPopup(popup_aa47feb5c3b74550940c9bd30e2ab1d6)
+        ;
+
+        
+    
+    
+            var marker_4655e1de87ca400f8b70a89ea90f4ea7 = L.marker(
+                [23.188642281266368, 80.00945309819194],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_aeec9a12a96941099f974fde698cc945 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_4655e1de87ca400f8b70a89ea90f4ea7.setIcon(icon_aeec9a12a96941099f974fde698cc945);
+        
+    
+        var popup_dfb3f8778a214296a2dc1db2d372c6a1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_046bc6d4b5b4407da5dedbed1b7c2996 = $(`<div id="html_046bc6d4b5b4407da5dedbed1b7c2996" style="width: 100.0%; height: 100.0%;">Medium 2020-07-17</div>`)[0];
+            popup_dfb3f8778a214296a2dc1db2d372c6a1.setContent(html_046bc6d4b5b4407da5dedbed1b7c2996);
+        
+
+        marker_4655e1de87ca400f8b70a89ea90f4ea7.bindPopup(popup_dfb3f8778a214296a2dc1db2d372c6a1)
+        ;
+
+        
+    
+    
+            var marker_9b74f147ae0149fb951158f8305180c2 = L.marker(
+                [23.16950131923476, 79.98530264350642],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_58774a57af2e42b6b87ef025338dfc90 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9b74f147ae0149fb951158f8305180c2.setIcon(icon_58774a57af2e42b6b87ef025338dfc90);
+        
+    
+        var popup_8a31c463a7094d3a84abcf0e60870afa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b3a34f7b3cb34c17b6ed04c9d7662a2b = $(`<div id="html_b3a34f7b3cb34c17b6ed04c9d7662a2b" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_8a31c463a7094d3a84abcf0e60870afa.setContent(html_b3a34f7b3cb34c17b6ed04c9d7662a2b);
+        
+
+        marker_9b74f147ae0149fb951158f8305180c2.bindPopup(popup_8a31c463a7094d3a84abcf0e60870afa)
+        ;
+
+        
+    
+    
+            var marker_0632d4c81bd64267aa436fe25d3c02e2 = L.marker(
+                [23.204632348259683, 79.98437452990663],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_914b57965475418a8943b28ba285c28e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_0632d4c81bd64267aa436fe25d3c02e2.setIcon(icon_914b57965475418a8943b28ba285c28e);
+        
+    
+        var popup_d873f66949e34184bcf7e81cc8bdc22f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e7db0428b73641d583dd1fcd66e7319e = $(`<div id="html_e7db0428b73641d583dd1fcd66e7319e" style="width: 100.0%; height: 100.0%;">Low 2020-07-17</div>`)[0];
+            popup_d873f66949e34184bcf7e81cc8bdc22f.setContent(html_e7db0428b73641d583dd1fcd66e7319e);
+        
+
+        marker_0632d4c81bd64267aa436fe25d3c02e2.bindPopup(popup_d873f66949e34184bcf7e81cc8bdc22f)
+        ;
+
+        
+    
+    
+            var marker_5f9c8a62d5b84002b2cd7bbe68d2b224 = L.marker(
+                [23.167650605303674, 80.0049244488437],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_93e60308c6634da688a2873f020a12a1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5f9c8a62d5b84002b2cd7bbe68d2b224.setIcon(icon_93e60308c6634da688a2873f020a12a1);
+        
+    
+        var popup_de0a5fe20d924d48b4c391c94845e870 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6c6cea6b5d0342d0b42d2efe3d39c617 = $(`<div id="html_6c6cea6b5d0342d0b42d2efe3d39c617" style="width: 100.0%; height: 100.0%;">Low 2020-07-18</div>`)[0];
+            popup_de0a5fe20d924d48b4c391c94845e870.setContent(html_6c6cea6b5d0342d0b42d2efe3d39c617);
+        
+
+        marker_5f9c8a62d5b84002b2cd7bbe68d2b224.bindPopup(popup_de0a5fe20d924d48b4c391c94845e870)
+        ;
+
+        
+    
+    
+            var marker_c0906964583a40049774d52881c02eb2 = L.marker(
+                [23.186340257986803, 79.9983884292936],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_fbc67c51fa1147eeae3ea7000a7ef415 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c0906964583a40049774d52881c02eb2.setIcon(icon_fbc67c51fa1147eeae3ea7000a7ef415);
+        
+    
+        var popup_1da18f1e12d5415a9f6cc972f2e1ac35 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_26650975d54243b494dd189deeeaf04e = $(`<div id="html_26650975d54243b494dd189deeeaf04e" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_1da18f1e12d5415a9f6cc972f2e1ac35.setContent(html_26650975d54243b494dd189deeeaf04e);
+        
+
+        marker_c0906964583a40049774d52881c02eb2.bindPopup(popup_1da18f1e12d5415a9f6cc972f2e1ac35)
+        ;
+
+        
+    
+    
+            var marker_19aef64636f345618160526aea711cc7 = L.marker(
+                [23.189166687279748, 80.00332510205881],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_0fed3f0ca9294c8b8f3dc6ab8ea77396 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_19aef64636f345618160526aea711cc7.setIcon(icon_0fed3f0ca9294c8b8f3dc6ab8ea77396);
+        
+    
+        var popup_39cafaa855b74b8484ed979c316239ed = L.popup({"maxWidth": "100%"});
+
+        
+            var html_eca455148dd54f7e9747fa45cf6cb8f1 = $(`<div id="html_eca455148dd54f7e9747fa45cf6cb8f1" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_39cafaa855b74b8484ed979c316239ed.setContent(html_eca455148dd54f7e9747fa45cf6cb8f1);
+        
+
+        marker_19aef64636f345618160526aea711cc7.bindPopup(popup_39cafaa855b74b8484ed979c316239ed)
+        ;
+
+        
+    
+    
+            var marker_b2bbbfc2fe964d89a2d251493dbb081c = L.marker(
+                [23.16572858374333, 80.00551340454977],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f5793edadb9d488c9016397ec2d68731 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b2bbbfc2fe964d89a2d251493dbb081c.setIcon(icon_f5793edadb9d488c9016397ec2d68731);
+        
+    
+        var popup_b6dfe8f74bac4e9da42a16c578d1b5cc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_956e2510d68f4736b1206c4cd21a69eb = $(`<div id="html_956e2510d68f4736b1206c4cd21a69eb" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_b6dfe8f74bac4e9da42a16c578d1b5cc.setContent(html_956e2510d68f4736b1206c4cd21a69eb);
+        
+
+        marker_b2bbbfc2fe964d89a2d251493dbb081c.bindPopup(popup_b6dfe8f74bac4e9da42a16c578d1b5cc)
+        ;
+
+        
+    
+    
+            var marker_32875573eabd4a7c882d27f0d8ae1a28 = L.marker(
+                [23.19083565810396, 79.96381265089137],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_92c0c3e4a1ed46af9a4200176a24bb3f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_32875573eabd4a7c882d27f0d8ae1a28.setIcon(icon_92c0c3e4a1ed46af9a4200176a24bb3f);
+        
+    
+        var popup_698b1db6573d475087cdd08ea44658a9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4775cf5bb3dc4827945b58aa704d1a90 = $(`<div id="html_4775cf5bb3dc4827945b58aa704d1a90" style="width: 100.0%; height: 100.0%;">Medium 2020-07-19</div>`)[0];
+            popup_698b1db6573d475087cdd08ea44658a9.setContent(html_4775cf5bb3dc4827945b58aa704d1a90);
+        
+
+        marker_32875573eabd4a7c882d27f0d8ae1a28.bindPopup(popup_698b1db6573d475087cdd08ea44658a9)
+        ;
+
+        
+    
+    
+            var marker_e22d575bf56f46328141be660a9c5e08 = L.marker(
+                [23.16849671184896, 79.98705200666363],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_d45257306ade44d0a68f51678ae4c8da = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e22d575bf56f46328141be660a9c5e08.setIcon(icon_d45257306ade44d0a68f51678ae4c8da);
+        
+    
+        var popup_4324640793a1493a9f86ffef163414cc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_30f46c9050d04827be0d2dc285d419b1 = $(`<div id="html_30f46c9050d04827be0d2dc285d419b1" style="width: 100.0%; height: 100.0%;">Medium 2020-07-19</div>`)[0];
+            popup_4324640793a1493a9f86ffef163414cc.setContent(html_30f46c9050d04827be0d2dc285d419b1);
+        
+
+        marker_e22d575bf56f46328141be660a9c5e08.bindPopup(popup_4324640793a1493a9f86ffef163414cc)
+        ;
+
+        
+    
+    
+            var marker_b1c08473abae4cdeab94b200b676ae81 = L.marker(
+                [23.198106021142703, 79.98488165861663],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c51c26154d3c498fbbbfd7c44e4b8376 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b1c08473abae4cdeab94b200b676ae81.setIcon(icon_c51c26154d3c498fbbbfd7c44e4b8376);
+        
+    
+        var popup_9fd5ce46910846be9e901d7e52087888 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0119210e488f40389fb9014b8e2290ca = $(`<div id="html_0119210e488f40389fb9014b8e2290ca" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_9fd5ce46910846be9e901d7e52087888.setContent(html_0119210e488f40389fb9014b8e2290ca);
+        
+
+        marker_b1c08473abae4cdeab94b200b676ae81.bindPopup(popup_9fd5ce46910846be9e901d7e52087888)
+        ;
+
+        
+    
+    
+            var marker_8c86226772c14fdfb9ef745efe0d9a54 = L.marker(
+                [23.1692521942708, 79.96495915103635],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7b51d0c70cf5419f89319062b5f225d7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_8c86226772c14fdfb9ef745efe0d9a54.setIcon(icon_7b51d0c70cf5419f89319062b5f225d7);
+        
+    
+        var popup_fccf47e6f11f4d1497ea018f8195fb1d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ffe9461505f74d11a03e124e090d2db0 = $(`<div id="html_ffe9461505f74d11a03e124e090d2db0" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_fccf47e6f11f4d1497ea018f8195fb1d.setContent(html_ffe9461505f74d11a03e124e090d2db0);
+        
+
+        marker_8c86226772c14fdfb9ef745efe0d9a54.bindPopup(popup_fccf47e6f11f4d1497ea018f8195fb1d)
+        ;
+
+        
+    
+    
+            var marker_984f3595d6b24c6e9c53de8b9aaac15f = L.marker(
+                [23.176346230087766, 79.96786597447553],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9947bd99d12244baaf01f7df652e8e44 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_984f3595d6b24c6e9c53de8b9aaac15f.setIcon(icon_9947bd99d12244baaf01f7df652e8e44);
+        
+    
+        var popup_abbd7fb40bac4f2390c82a0e2dd28497 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3ae8ef94e56443fc8379d92ed70d0f15 = $(`<div id="html_3ae8ef94e56443fc8379d92ed70d0f15" style="width: 100.0%; height: 100.0%;">Low 2020-07-19</div>`)[0];
+            popup_abbd7fb40bac4f2390c82a0e2dd28497.setContent(html_3ae8ef94e56443fc8379d92ed70d0f15);
+        
+
+        marker_984f3595d6b24c6e9c53de8b9aaac15f.bindPopup(popup_abbd7fb40bac4f2390c82a0e2dd28497)
+        ;
+
+        
+    
+    
+            var marker_7094219120494e9694ce9fd8e3a6c703 = L.marker(
+                [23.18219284330732, 79.96070169380961],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6d71c9ba1043456c8eb474186f5e62dc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7094219120494e9694ce9fd8e3a6c703.setIcon(icon_6d71c9ba1043456c8eb474186f5e62dc);
+        
+    
+        var popup_dcbc729c5fdf41908f27e3f657bfb861 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d024cf2627c1465d991e4013ebfc0aa8 = $(`<div id="html_d024cf2627c1465d991e4013ebfc0aa8" style="width: 100.0%; height: 100.0%;">Low 2020-07-20</div>`)[0];
+            popup_dcbc729c5fdf41908f27e3f657bfb861.setContent(html_d024cf2627c1465d991e4013ebfc0aa8);
+        
+
+        marker_7094219120494e9694ce9fd8e3a6c703.bindPopup(popup_dcbc729c5fdf41908f27e3f657bfb861)
+        ;
+
+        
+    
+    
+            var marker_6c41d624c03143a6852750274a5c7f22 = L.marker(
+                [23.17421471692129, 80.00446908869223],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_dca9515c8e284ab997576353963db37d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6c41d624c03143a6852750274a5c7f22.setIcon(icon_dca9515c8e284ab997576353963db37d);
+        
+    
+        var popup_bcaf3804e8d74cd4b07a0945effad269 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_693a03224e194658a3b08ca10237a16a = $(`<div id="html_693a03224e194658a3b08ca10237a16a" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_bcaf3804e8d74cd4b07a0945effad269.setContent(html_693a03224e194658a3b08ca10237a16a);
+        
+
+        marker_6c41d624c03143a6852750274a5c7f22.bindPopup(popup_bcaf3804e8d74cd4b07a0945effad269)
+        ;
+
+        
+    
+    
+            var marker_6f1505bfcf58488587f5bb1af67182bb = L.marker(
+                [23.158617696602768, 79.98442201743154],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_45197c176a574970baab343f8b0fd5a3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6f1505bfcf58488587f5bb1af67182bb.setIcon(icon_45197c176a574970baab343f8b0fd5a3);
+        
+    
+        var popup_7a6547b66ff14fad90abec72ddf8932f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4f436f7c98f24b3893861535d6644812 = $(`<div id="html_4f436f7c98f24b3893861535d6644812" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_7a6547b66ff14fad90abec72ddf8932f.setContent(html_4f436f7c98f24b3893861535d6644812);
+        
+
+        marker_6f1505bfcf58488587f5bb1af67182bb.bindPopup(popup_7a6547b66ff14fad90abec72ddf8932f)
+        ;
+
+        
+    
+    
+            var marker_1dbdea4211af4d82a213d03a94e9837c = L.marker(
+                [23.19683030914668, 79.99484783635606],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_5a15d8d6fa764273929dba567ccedcb3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1dbdea4211af4d82a213d03a94e9837c.setIcon(icon_5a15d8d6fa764273929dba567ccedcb3);
+        
+    
+        var popup_623d7039bbc6472e8312b62c7ad3e3e9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_05d42f979d684037a9a3c2760d78e015 = $(`<div id="html_05d42f979d684037a9a3c2760d78e015" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_623d7039bbc6472e8312b62c7ad3e3e9.setContent(html_05d42f979d684037a9a3c2760d78e015);
+        
+
+        marker_1dbdea4211af4d82a213d03a94e9837c.bindPopup(popup_623d7039bbc6472e8312b62c7ad3e3e9)
+        ;
+
+        
+    
+    
+            var marker_1e6c247ddc474d828b35e16e0cf28380 = L.marker(
+                [23.16736315808858, 80.00473369046098],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f2ec841796604043b39a6f108c9bdd6e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_1e6c247ddc474d828b35e16e0cf28380.setIcon(icon_f2ec841796604043b39a6f108c9bdd6e);
+        
+    
+        var popup_dfae9c0816614701ad03e5edc1db6103 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8c46a5b5c71d43f996d238a9cf696299 = $(`<div id="html_8c46a5b5c71d43f996d238a9cf696299" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_dfae9c0816614701ad03e5edc1db6103.setContent(html_8c46a5b5c71d43f996d238a9cf696299);
+        
+
+        marker_1e6c247ddc474d828b35e16e0cf28380.bindPopup(popup_dfae9c0816614701ad03e5edc1db6103)
+        ;
+
+        
+    
+    
+            var marker_2034fe386c734d01929990b49b27c902 = L.marker(
+                [23.17683979021462, 79.96308365180671],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_dbbbe634f9894eebbecf3d50924a6db6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2034fe386c734d01929990b49b27c902.setIcon(icon_dbbbe634f9894eebbecf3d50924a6db6);
+        
+    
+        var popup_c9196e843641469fa7fbe53f2b17257c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b6c1a3a6cf6a44c7b337945c7c7f4e91 = $(`<div id="html_b6c1a3a6cf6a44c7b337945c7c7f4e91" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_c9196e843641469fa7fbe53f2b17257c.setContent(html_b6c1a3a6cf6a44c7b337945c7c7f4e91);
+        
+
+        marker_2034fe386c734d01929990b49b27c902.bindPopup(popup_c9196e843641469fa7fbe53f2b17257c)
+        ;
+
+        
+    
+    
+            var marker_e93b995bad094d2e94f1a4f6fdabbe40 = L.marker(
+                [23.199629084158826, 79.99552875791879],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_36cad197f59844dda9e7d82a1546e553 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_e93b995bad094d2e94f1a4f6fdabbe40.setIcon(icon_36cad197f59844dda9e7d82a1546e553);
+        
+    
+        var popup_6bb9b9c340d14c3181f7223699014364 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bae4c89fcad9407788fd6f8d97558026 = $(`<div id="html_bae4c89fcad9407788fd6f8d97558026" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_6bb9b9c340d14c3181f7223699014364.setContent(html_bae4c89fcad9407788fd6f8d97558026);
+        
+
+        marker_e93b995bad094d2e94f1a4f6fdabbe40.bindPopup(popup_6bb9b9c340d14c3181f7223699014364)
+        ;
+
+        
+    
+    
+            var marker_ed58a3fce55c409393225d5cec3f02a6 = L.marker(
+                [23.15939793094475, 79.99500669019919],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6c39430fdb314dd485130d10a72f2684 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_ed58a3fce55c409393225d5cec3f02a6.setIcon(icon_6c39430fdb314dd485130d10a72f2684);
+        
+    
+        var popup_972996cd941840a298d28921a8dc0f57 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_db95672453d44398a83feb4884829cc6 = $(`<div id="html_db95672453d44398a83feb4884829cc6" style="width: 100.0%; height: 100.0%;">Medium 2020-07-21</div>`)[0];
+            popup_972996cd941840a298d28921a8dc0f57.setContent(html_db95672453d44398a83feb4884829cc6);
+        
+
+        marker_ed58a3fce55c409393225d5cec3f02a6.bindPopup(popup_972996cd941840a298d28921a8dc0f57)
+        ;
+
+        
+    
+    
+            var marker_19cac4200f274e27a1daddb687f9d825 = L.marker(
+                [23.18499258506145, 79.96351002457799],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9b58ce512bbf4ed4ada3d12cd0274adf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_19cac4200f274e27a1daddb687f9d825.setIcon(icon_9b58ce512bbf4ed4ada3d12cd0274adf);
+        
+    
+        var popup_c5929e4ae4b34930a4c9a1f8ceec529d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_25632e706ea14d58a7914b09f7d821dc = $(`<div id="html_25632e706ea14d58a7914b09f7d821dc" style="width: 100.0%; height: 100.0%;">Medium 2020-07-21</div>`)[0];
+            popup_c5929e4ae4b34930a4c9a1f8ceec529d.setContent(html_25632e706ea14d58a7914b09f7d821dc);
+        
+
+        marker_19cac4200f274e27a1daddb687f9d825.bindPopup(popup_c5929e4ae4b34930a4c9a1f8ceec529d)
+        ;
+
+        
+    
+    
+            var marker_4d7ccbe7bde34d308452caf17d17c800 = L.marker(
+                [23.173398927714228, 79.9962883714458],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_2d3d6b7d1b99465da1582431a0aaa9c0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_4d7ccbe7bde34d308452caf17d17c800.setIcon(icon_2d3d6b7d1b99465da1582431a0aaa9c0);
+        
+    
+        var popup_f90ae538708749a1b405e7af6e497c82 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_24898dfec0ed4bef9c032835b0ef5542 = $(`<div id="html_24898dfec0ed4bef9c032835b0ef5542" style="width: 100.0%; height: 100.0%;">Low 2020-07-21</div>`)[0];
+            popup_f90ae538708749a1b405e7af6e497c82.setContent(html_24898dfec0ed4bef9c032835b0ef5542);
+        
+
+        marker_4d7ccbe7bde34d308452caf17d17c800.bindPopup(popup_f90ae538708749a1b405e7af6e497c82)
+        ;
+
+        
+    
+    
+            var marker_f59a0d16c9e2419b8d6cb16883692265 = L.marker(
+                [23.2009683967212, 79.974468074808],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c005e9c0a32e45c691a3ba3e8d1f8289 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_f59a0d16c9e2419b8d6cb16883692265.setIcon(icon_c005e9c0a32e45c691a3ba3e8d1f8289);
+        
+    
+        var popup_688fe4feb9c24de0bba7c6e0c665f86f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_04fd2d33785347d1ad3d36145e643cbe = $(`<div id="html_04fd2d33785347d1ad3d36145e643cbe" style="width: 100.0%; height: 100.0%;">Low 2020-07-22</div>`)[0];
+            popup_688fe4feb9c24de0bba7c6e0c665f86f.setContent(html_04fd2d33785347d1ad3d36145e643cbe);
+        
+
+        marker_f59a0d16c9e2419b8d6cb16883692265.bindPopup(popup_688fe4feb9c24de0bba7c6e0c665f86f)
+        ;
+
+        
+    
+    
+            var marker_6a9db2513af24c26a2b66345d5d0a97b = L.marker(
+                [23.19726961398776, 79.98262708587403],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_87843fae89dd43598d4cbcac82bb6713 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6a9db2513af24c26a2b66345d5d0a97b.setIcon(icon_87843fae89dd43598d4cbcac82bb6713);
+        
+    
+        var popup_cabcb4295f63493490666ed87d10f005 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_506d266b9d4446a2bc79dd0be330a1f8 = $(`<div id="html_506d266b9d4446a2bc79dd0be330a1f8" style="width: 100.0%; height: 100.0%;">Low 2020-07-22</div>`)[0];
+            popup_cabcb4295f63493490666ed87d10f005.setContent(html_506d266b9d4446a2bc79dd0be330a1f8);
+        
+
+        marker_6a9db2513af24c26a2b66345d5d0a97b.bindPopup(popup_cabcb4295f63493490666ed87d10f005)
+        ;
+
+        
+    
+    
+            var marker_818a855df4b04011b882a85588eb880b = L.marker(
+                [23.173703013095928, 79.99606472658016],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7726ecfb6b00450096556444f9879611 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_818a855df4b04011b882a85588eb880b.setIcon(icon_7726ecfb6b00450096556444f9879611);
+        
+    
+        var popup_65dc739725d64e70a57a9405068d6840 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f90138bd34314154b627de3d229f0af9 = $(`<div id="html_f90138bd34314154b627de3d229f0af9" style="width: 100.0%; height: 100.0%;">Medium 2020-07-22</div>`)[0];
+            popup_65dc739725d64e70a57a9405068d6840.setContent(html_f90138bd34314154b627de3d229f0af9);
+        
+
+        marker_818a855df4b04011b882a85588eb880b.bindPopup(popup_65dc739725d64e70a57a9405068d6840)
+        ;
+
+        
+    
+    
+            var marker_e5d5e9b89fba4e4386d907d99267cf10 = L.marker(
+                [23.181534911228823, 79.96492790389095],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9dddd82ef9994b779ffd1c09c7f07814 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e5d5e9b89fba4e4386d907d99267cf10.setIcon(icon_9dddd82ef9994b779ffd1c09c7f07814);
+        
+    
+        var popup_47288abd20e64771a7c5c900f674d7e4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_77a3fa3ce9bb4942a81503448ed19a4f = $(`<div id="html_77a3fa3ce9bb4942a81503448ed19a4f" style="width: 100.0%; height: 100.0%;">Medium 2020-07-22</div>`)[0];
+            popup_47288abd20e64771a7c5c900f674d7e4.setContent(html_77a3fa3ce9bb4942a81503448ed19a4f);
+        
+
+        marker_e5d5e9b89fba4e4386d907d99267cf10.bindPopup(popup_47288abd20e64771a7c5c900f674d7e4)
+        ;
+
+        
+    
+    
+            var marker_71c9cbdfaa424849ab892d2016db241d = L.marker(
+                [23.16065108957243, 79.99807746210324],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_40adc923e6ae44ae9c0254dc3628b2f7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_71c9cbdfaa424849ab892d2016db241d.setIcon(icon_40adc923e6ae44ae9c0254dc3628b2f7);
+        
+    
+        var popup_67a3e95f5c424cb0995bb19bdeb31a2d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f988a286db9e4afc9c910f3e939974db = $(`<div id="html_f988a286db9e4afc9c910f3e939974db" style="width: 100.0%; height: 100.0%;">Low 2020-07-22</div>`)[0];
+            popup_67a3e95f5c424cb0995bb19bdeb31a2d.setContent(html_f988a286db9e4afc9c910f3e939974db);
+        
+
+        marker_71c9cbdfaa424849ab892d2016db241d.bindPopup(popup_67a3e95f5c424cb0995bb19bdeb31a2d)
+        ;
+
+        
+    
+    
+            var marker_6b870415b68d43a98e9ee5736b34ed24 = L.marker(
+                [23.19578503003171, 79.99871821464127],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_b56069ac7f6644e3abd68fd10e6d366d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6b870415b68d43a98e9ee5736b34ed24.setIcon(icon_b56069ac7f6644e3abd68fd10e6d366d);
+        
+    
+        var popup_54c8fef13ed6454cb55892e9b3b0f4f6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_97fe08934e1947ce9b23bc72fabff978 = $(`<div id="html_97fe08934e1947ce9b23bc72fabff978" style="width: 100.0%; height: 100.0%;">Low 2020-07-23</div>`)[0];
+            popup_54c8fef13ed6454cb55892e9b3b0f4f6.setContent(html_97fe08934e1947ce9b23bc72fabff978);
+        
+
+        marker_6b870415b68d43a98e9ee5736b34ed24.bindPopup(popup_54c8fef13ed6454cb55892e9b3b0f4f6)
+        ;
+
+        
+    
+    
+            var marker_757e9e16ca3c44f3a17a298df8817f79 = L.marker(
+                [23.16017316691485, 79.99684309420965],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_5d02573c3a5e44ad93e69f382343134a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_757e9e16ca3c44f3a17a298df8817f79.setIcon(icon_5d02573c3a5e44ad93e69f382343134a);
+        
+    
+        var popup_1f3ec6c5d31549d2ab2d100e580131a5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8145961faf1846578c9f0283ec86629c = $(`<div id="html_8145961faf1846578c9f0283ec86629c" style="width: 100.0%; height: 100.0%;">Low 2020-07-23</div>`)[0];
+            popup_1f3ec6c5d31549d2ab2d100e580131a5.setContent(html_8145961faf1846578c9f0283ec86629c);
+        
+
+        marker_757e9e16ca3c44f3a17a298df8817f79.bindPopup(popup_1f3ec6c5d31549d2ab2d100e580131a5)
+        ;
+
+        
+    
+    
+            var marker_32e450cfa54843eabc6400243f6834d8 = L.marker(
+                [23.16954368536301, 79.97902370709468],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_0cf2cf696b494be78e954efb69736eb8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_32e450cfa54843eabc6400243f6834d8.setIcon(icon_0cf2cf696b494be78e954efb69736eb8);
+        
+    
+        var popup_3ecd06cc4ad74202955132cc349d33a4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2aee58daf9bd4155bb314c0e08ffae3b = $(`<div id="html_2aee58daf9bd4155bb314c0e08ffae3b" style="width: 100.0%; height: 100.0%;">Low 2020-07-23</div>`)[0];
+            popup_3ecd06cc4ad74202955132cc349d33a4.setContent(html_2aee58daf9bd4155bb314c0e08ffae3b);
+        
+
+        marker_32e450cfa54843eabc6400243f6834d8.bindPopup(popup_3ecd06cc4ad74202955132cc349d33a4)
+        ;
+
+        
+    
+    
+            var marker_183febb5db804457883895bf54fecbe0 = L.marker(
+                [23.17995152143991, 80.00343449874916],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_57d64723f2f940549184fc84d401f0f2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_183febb5db804457883895bf54fecbe0.setIcon(icon_57d64723f2f940549184fc84d401f0f2);
+        
+    
+        var popup_38b1b886b0c44488a02216efc01f03cf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_84198814f0374a789b32acf917be866b = $(`<div id="html_84198814f0374a789b32acf917be866b" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_38b1b886b0c44488a02216efc01f03cf.setContent(html_84198814f0374a789b32acf917be866b);
+        
+
+        marker_183febb5db804457883895bf54fecbe0.bindPopup(popup_38b1b886b0c44488a02216efc01f03cf)
+        ;
+
+        
+    
+    
+            var marker_dd7e31d97d3a4f5eababa68fef993e4c = L.marker(
+                [23.17362039155007, 80.00243568756567],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_8b7a166c37794c409a2e6fef46ef88d5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_dd7e31d97d3a4f5eababa68fef993e4c.setIcon(icon_8b7a166c37794c409a2e6fef46ef88d5);
+        
+    
+        var popup_6eccc229dde64d0d8240d92837c61c40 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e2acdf437b7d43fab93c4ec0f8730094 = $(`<div id="html_e2acdf437b7d43fab93c4ec0f8730094" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_6eccc229dde64d0d8240d92837c61c40.setContent(html_e2acdf437b7d43fab93c4ec0f8730094);
+        
+
+        marker_dd7e31d97d3a4f5eababa68fef993e4c.bindPopup(popup_6eccc229dde64d0d8240d92837c61c40)
+        ;
+
+        
+    
+    
+            var marker_ac8856fa67e7442eb6b10c623b15237d = L.marker(
+                [23.193126119856714, 79.97228894777356],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_24418d67f3614174889efeef07162e3d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ac8856fa67e7442eb6b10c623b15237d.setIcon(icon_24418d67f3614174889efeef07162e3d);
+        
+    
+        var popup_b19f8478b041414ab2a7d9cc16691377 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d2e274cb7ff84427bea7fce491ea618f = $(`<div id="html_d2e274cb7ff84427bea7fce491ea618f" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_b19f8478b041414ab2a7d9cc16691377.setContent(html_d2e274cb7ff84427bea7fce491ea618f);
+        
+
+        marker_ac8856fa67e7442eb6b10c623b15237d.bindPopup(popup_b19f8478b041414ab2a7d9cc16691377)
+        ;
+
+        
+    
+    
+            var marker_abdec60fd4f243fab79159651f04d3fe = L.marker(
+                [23.16414060873065, 79.98836129874333],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_85acb7bcf0554b05b13fd8191d6e8539 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_abdec60fd4f243fab79159651f04d3fe.setIcon(icon_85acb7bcf0554b05b13fd8191d6e8539);
+        
+    
+        var popup_7a4b2b138ff4470ba8e23a3e3c540954 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_07456909ce06420e8fb13c86000b1caf = $(`<div id="html_07456909ce06420e8fb13c86000b1caf" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_7a4b2b138ff4470ba8e23a3e3c540954.setContent(html_07456909ce06420e8fb13c86000b1caf);
+        
+
+        marker_abdec60fd4f243fab79159651f04d3fe.bindPopup(popup_7a4b2b138ff4470ba8e23a3e3c540954)
+        ;
+
+        
+    
+    
+            var marker_7796320ad3df4c019eea777748b7ee89 = L.marker(
+                [23.170506721939184, 79.97057756402108],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_442cc6fe819c4180a0b70ef7686cfdb4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7796320ad3df4c019eea777748b7ee89.setIcon(icon_442cc6fe819c4180a0b70ef7686cfdb4);
+        
+    
+        var popup_7c718928506f49b89dc08b3edfffb473 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a8e90038279341928196f911677143ce = $(`<div id="html_a8e90038279341928196f911677143ce" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_7c718928506f49b89dc08b3edfffb473.setContent(html_a8e90038279341928196f911677143ce);
+        
+
+        marker_7796320ad3df4c019eea777748b7ee89.bindPopup(popup_7c718928506f49b89dc08b3edfffb473)
+        ;
+
+        
+    
+    
+            var marker_bd6bc1a5717f41fd8ce81a59947d9444 = L.marker(
+                [23.19978954941329, 79.9959643905774],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4eedb444c90e435fa3ffeb3884627268 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_bd6bc1a5717f41fd8ce81a59947d9444.setIcon(icon_4eedb444c90e435fa3ffeb3884627268);
+        
+    
+        var popup_53fd7cc554d34a1696c2d4e567b7ff74 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d7a7a69dcd1943e181215311b1bc5af4 = $(`<div id="html_d7a7a69dcd1943e181215311b1bc5af4" style="width: 100.0%; height: 100.0%;">Low 2020-07-24</div>`)[0];
+            popup_53fd7cc554d34a1696c2d4e567b7ff74.setContent(html_d7a7a69dcd1943e181215311b1bc5af4);
+        
+
+        marker_bd6bc1a5717f41fd8ce81a59947d9444.bindPopup(popup_53fd7cc554d34a1696c2d4e567b7ff74)
+        ;
+
+        
+    
+    
+            var marker_96ce02025eb04fa6877e7f46a01719e2 = L.marker(
+                [23.18279704032389, 80.00968337783472],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_840d24115940481086285b429741a8d3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_96ce02025eb04fa6877e7f46a01719e2.setIcon(icon_840d24115940481086285b429741a8d3);
+        
+    
+        var popup_5e319c190a714501a0a4a8ea4b047e02 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_67f6785fc2514386ac0067b395b75a8e = $(`<div id="html_67f6785fc2514386ac0067b395b75a8e" style="width: 100.0%; height: 100.0%;">Low 2020-07-26</div>`)[0];
+            popup_5e319c190a714501a0a4a8ea4b047e02.setContent(html_67f6785fc2514386ac0067b395b75a8e);
+        
+
+        marker_96ce02025eb04fa6877e7f46a01719e2.bindPopup(popup_5e319c190a714501a0a4a8ea4b047e02)
+        ;
+
+        
+    
+    
+            var marker_857c21ccd7e94547acb2e75a9adf2c9e = L.marker(
+                [23.183346487560158, 79.97122779531813],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_c1d5f48551ba480b965af242e443799d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_857c21ccd7e94547acb2e75a9adf2c9e.setIcon(icon_c1d5f48551ba480b965af242e443799d);
+        
+    
+        var popup_79e1c0c364a14fd08e8ebb0b11211468 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_df3cbddd87be463185446f48d8dc8e32 = $(`<div id="html_df3cbddd87be463185446f48d8dc8e32" style="width: 100.0%; height: 100.0%;">Low 2020-07-26</div>`)[0];
+            popup_79e1c0c364a14fd08e8ebb0b11211468.setContent(html_df3cbddd87be463185446f48d8dc8e32);
+        
+
+        marker_857c21ccd7e94547acb2e75a9adf2c9e.bindPopup(popup_79e1c0c364a14fd08e8ebb0b11211468)
+        ;
+
+        
+    
+    
+            var marker_54b866062b8b41dc880d8d4e52c9e106 = L.marker(
+                [23.162591476635466, 79.98477042150432],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_89a79f7e39014849955b2e612411a30d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_54b866062b8b41dc880d8d4e52c9e106.setIcon(icon_89a79f7e39014849955b2e612411a30d);
+        
+    
+        var popup_8e248fa8aa324b8b9141984c8e6aac63 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ace4a09a3e4f42e6a030512a2486672a = $(`<div id="html_ace4a09a3e4f42e6a030512a2486672a" style="width: 100.0%; height: 100.0%;">Low 2020-07-27</div>`)[0];
+            popup_8e248fa8aa324b8b9141984c8e6aac63.setContent(html_ace4a09a3e4f42e6a030512a2486672a);
+        
+
+        marker_54b866062b8b41dc880d8d4e52c9e106.bindPopup(popup_8e248fa8aa324b8b9141984c8e6aac63)
+        ;
+
+        
+    
+    
+            var marker_e8a3c1f2cc204b3dae5d662b7b95f41d = L.marker(
+                [23.197953810627478, 80.00313448401144],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f06bc01e970f4a47b6585bc679f854a3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e8a3c1f2cc204b3dae5d662b7b95f41d.setIcon(icon_f06bc01e970f4a47b6585bc679f854a3);
+        
+    
+        var popup_b900e64ee92947619331ddae8f77b63f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0f9b4830d695408798ab95c3529095d9 = $(`<div id="html_0f9b4830d695408798ab95c3529095d9" style="width: 100.0%; height: 100.0%;">Medium 2020-07-27</div>`)[0];
+            popup_b900e64ee92947619331ddae8f77b63f.setContent(html_0f9b4830d695408798ab95c3529095d9);
+        
+
+        marker_e8a3c1f2cc204b3dae5d662b7b95f41d.bindPopup(popup_b900e64ee92947619331ddae8f77b63f)
+        ;
+
+        
+    
+    
+            var marker_5cff68992a3a4f609baf6c92a294e084 = L.marker(
+                [23.163197354747638, 79.99106155491691],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_b13dc9cecc4f4aa1a5caaa24ecc2c8bf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5cff68992a3a4f609baf6c92a294e084.setIcon(icon_b13dc9cecc4f4aa1a5caaa24ecc2c8bf);
+        
+    
+        var popup_fcfbf7a1e8634d39ae15cfdf6afc99a3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_20396f1d6a0e41fd9e537913f0ad9356 = $(`<div id="html_20396f1d6a0e41fd9e537913f0ad9356" style="width: 100.0%; height: 100.0%;">Low 2020-07-27</div>`)[0];
+            popup_fcfbf7a1e8634d39ae15cfdf6afc99a3.setContent(html_20396f1d6a0e41fd9e537913f0ad9356);
+        
+
+        marker_5cff68992a3a4f609baf6c92a294e084.bindPopup(popup_fcfbf7a1e8634d39ae15cfdf6afc99a3)
+        ;
+
+        
+    
+    
+            var marker_18603e5899fb4c539de2886743724bd8 = L.marker(
+                [23.17284886248667, 80.00424940598297],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_b00190fee6404d2bbd9ee0085aab9fd4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_18603e5899fb4c539de2886743724bd8.setIcon(icon_b00190fee6404d2bbd9ee0085aab9fd4);
+        
+    
+        var popup_e20cc9eed2db4570b0fb53559a91aa72 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d7e4c5723c014656a0691f6c33a02f7c = $(`<div id="html_d7e4c5723c014656a0691f6c33a02f7c" style="width: 100.0%; height: 100.0%;">Low 2020-07-27</div>`)[0];
+            popup_e20cc9eed2db4570b0fb53559a91aa72.setContent(html_d7e4c5723c014656a0691f6c33a02f7c);
+        
+
+        marker_18603e5899fb4c539de2886743724bd8.bindPopup(popup_e20cc9eed2db4570b0fb53559a91aa72)
+        ;
+
+        
+    
+    
+            var marker_22c4f5eb55ac4682b7e34c79c420931e = L.marker(
+                [23.16278787998913, 79.98514313206587],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4767a057a90b421cb60d4d9bc5dc0283 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_22c4f5eb55ac4682b7e34c79c420931e.setIcon(icon_4767a057a90b421cb60d4d9bc5dc0283);
+        
+    
+        var popup_47869b229b3146199025749bf4ee2a18 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_28644eedfbc94842a8c9fbc5ff6055d4 = $(`<div id="html_28644eedfbc94842a8c9fbc5ff6055d4" style="width: 100.0%; height: 100.0%;">Medium 2020-07-28</div>`)[0];
+            popup_47869b229b3146199025749bf4ee2a18.setContent(html_28644eedfbc94842a8c9fbc5ff6055d4);
+        
+
+        marker_22c4f5eb55ac4682b7e34c79c420931e.bindPopup(popup_47869b229b3146199025749bf4ee2a18)
+        ;
+
+        
+    
+    
+            var marker_dd5dc567c0cc4d21b0f472481ceae50c = L.marker(
+                [23.191953571804767, 79.96508416079702],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4b379faa53d043608df01845f482d6b8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_dd5dc567c0cc4d21b0f472481ceae50c.setIcon(icon_4b379faa53d043608df01845f482d6b8);
+        
+    
+        var popup_0c0eb2a8e8254702a9af0347fb4cbfa2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6dc7286bcceb407b8710bbcd185eb491 = $(`<div id="html_6dc7286bcceb407b8710bbcd185eb491" style="width: 100.0%; height: 100.0%;">Medium 2020-07-28</div>`)[0];
+            popup_0c0eb2a8e8254702a9af0347fb4cbfa2.setContent(html_6dc7286bcceb407b8710bbcd185eb491);
+        
+
+        marker_dd5dc567c0cc4d21b0f472481ceae50c.bindPopup(popup_0c0eb2a8e8254702a9af0347fb4cbfa2)
+        ;
+
+        
+    
+    
+            var marker_deed21c9a42645789839d120e9d888aa = L.marker(
+                [23.1771314775748, 79.96709556736825],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_a36a22b6b99444ef98483a61071f792c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_deed21c9a42645789839d120e9d888aa.setIcon(icon_a36a22b6b99444ef98483a61071f792c);
+        
+    
+        var popup_9078e8072d2a4376b3c16109acd4323d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6baa06ed0f0e4e979d7821bc720487f4 = $(`<div id="html_6baa06ed0f0e4e979d7821bc720487f4" style="width: 100.0%; height: 100.0%;">Medium 2020-07-28</div>`)[0];
+            popup_9078e8072d2a4376b3c16109acd4323d.setContent(html_6baa06ed0f0e4e979d7821bc720487f4);
+        
+
+        marker_deed21c9a42645789839d120e9d888aa.bindPopup(popup_9078e8072d2a4376b3c16109acd4323d)
+        ;
+
+        
+    
+    
+            var marker_688b32e93555485cba4b10edcc470e2b = L.marker(
+                [23.17620645194861, 79.9752034562725],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_5e4706c2baaa47dd9a7c9c40e39cdeaf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_688b32e93555485cba4b10edcc470e2b.setIcon(icon_5e4706c2baaa47dd9a7c9c40e39cdeaf);
+        
+    
+        var popup_50210c485ad74523a54ba043960878df = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bd09621cd55a4bb9977e3552d20a7339 = $(`<div id="html_bd09621cd55a4bb9977e3552d20a7339" style="width: 100.0%; height: 100.0%;">Low 2020-07-28</div>`)[0];
+            popup_50210c485ad74523a54ba043960878df.setContent(html_bd09621cd55a4bb9977e3552d20a7339);
+        
+
+        marker_688b32e93555485cba4b10edcc470e2b.bindPopup(popup_50210c485ad74523a54ba043960878df)
+        ;
+
+        
+    
+    
+            var marker_5471baa7911749ca86118a822ba5677e = L.marker(
+                [23.189186466373226, 79.99079749454481],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_fdbc0eab92fd4a77ae95095066403e27 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5471baa7911749ca86118a822ba5677e.setIcon(icon_fdbc0eab92fd4a77ae95095066403e27);
+        
+    
+        var popup_1c95f84dbbf6493e9d016933654074b1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8da8ab7287a34a2c880578163cb1976d = $(`<div id="html_8da8ab7287a34a2c880578163cb1976d" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_1c95f84dbbf6493e9d016933654074b1.setContent(html_8da8ab7287a34a2c880578163cb1976d);
+        
+
+        marker_5471baa7911749ca86118a822ba5677e.bindPopup(popup_1c95f84dbbf6493e9d016933654074b1)
+        ;
+
+        
+    
+    
+            var marker_2ce7707610bf4ceea2d53f234364b8f8 = L.marker(
+                [23.190656003596946, 79.99991876451334],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ce7149e4ee27428a8b6315dd74d905ba = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2ce7707610bf4ceea2d53f234364b8f8.setIcon(icon_ce7149e4ee27428a8b6315dd74d905ba);
+        
+    
+        var popup_fb572946bcb744759d2cba4829070cc4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_21afeca1e94e481b8e0c53b246f97da9 = $(`<div id="html_21afeca1e94e481b8e0c53b246f97da9" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_fb572946bcb744759d2cba4829070cc4.setContent(html_21afeca1e94e481b8e0c53b246f97da9);
+        
+
+        marker_2ce7707610bf4ceea2d53f234364b8f8.bindPopup(popup_fb572946bcb744759d2cba4829070cc4)
+        ;
+
+        
+    
+    
+            var marker_cfb324a03bdd4d19b294a164d2541ade = L.marker(
+                [23.17176537020726, 80.00416358313002],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_ee965a7be8e44a6cb27e20b9c587e722 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_cfb324a03bdd4d19b294a164d2541ade.setIcon(icon_ee965a7be8e44a6cb27e20b9c587e722);
+        
+    
+        var popup_ea3609b1295946faabd8dccbe59d0556 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_764ecc4234984bc4a34494bc389b7a61 = $(`<div id="html_764ecc4234984bc4a34494bc389b7a61" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_ea3609b1295946faabd8dccbe59d0556.setContent(html_764ecc4234984bc4a34494bc389b7a61);
+        
+
+        marker_cfb324a03bdd4d19b294a164d2541ade.bindPopup(popup_ea3609b1295946faabd8dccbe59d0556)
+        ;
+
+        
+    
+    
+            var marker_bf34ca8c93594d4fbc1dcbef852aeb85 = L.marker(
+                [23.192667463508396, 79.98059830833769],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_20038eee223b44c6820c269568282755 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_bf34ca8c93594d4fbc1dcbef852aeb85.setIcon(icon_20038eee223b44c6820c269568282755);
+        
+    
+        var popup_ea2b319743ee494287152fab8e831b0e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5d8fe89a6eaa4739b066f686522a36b4 = $(`<div id="html_5d8fe89a6eaa4739b066f686522a36b4" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_ea2b319743ee494287152fab8e831b0e.setContent(html_5d8fe89a6eaa4739b066f686522a36b4);
+        
+
+        marker_bf34ca8c93594d4fbc1dcbef852aeb85.bindPopup(popup_ea2b319743ee494287152fab8e831b0e)
+        ;
+
+        
+    
+    
+            var marker_5314bd8da35643a8809de14d0fffb9aa = L.marker(
+                [23.164494112171468, 79.999370978746],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_d77f535d3d204e7198f8a080231322d7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_5314bd8da35643a8809de14d0fffb9aa.setIcon(icon_d77f535d3d204e7198f8a080231322d7);
+        
+    
+        var popup_747200eca44a470390f6a42b9b67b26b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8f7df4dc400a452883c07e5bc59e7f00 = $(`<div id="html_8f7df4dc400a452883c07e5bc59e7f00" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_747200eca44a470390f6a42b9b67b26b.setContent(html_8f7df4dc400a452883c07e5bc59e7f00);
+        
+
+        marker_5314bd8da35643a8809de14d0fffb9aa.bindPopup(popup_747200eca44a470390f6a42b9b67b26b)
+        ;
+
+        
+    
+    
+            var marker_dccab106c5094ab38bfbebe4dd47b2ec = L.marker(
+                [23.202211732036595, 80.00140682302927],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_88f6a24e35394eda8787e7b0aa4ca6e8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_dccab106c5094ab38bfbebe4dd47b2ec.setIcon(icon_88f6a24e35394eda8787e7b0aa4ca6e8);
+        
+    
+        var popup_4ff81d4b21664bf682f2c148c600c228 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_977e348d66c9487e8dee4dd1431d0f29 = $(`<div id="html_977e348d66c9487e8dee4dd1431d0f29" style="width: 100.0%; height: 100.0%;">Medium 2020-07-29</div>`)[0];
+            popup_4ff81d4b21664bf682f2c148c600c228.setContent(html_977e348d66c9487e8dee4dd1431d0f29);
+        
+
+        marker_dccab106c5094ab38bfbebe4dd47b2ec.bindPopup(popup_4ff81d4b21664bf682f2c148c600c228)
+        ;
+
+        
+    
+    
+            var marker_b306351223234a388e53ea102af85e61 = L.marker(
+                [23.155495898102174, 79.98420219062128],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_93d0286803d7422e8a5bc1369025b781 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b306351223234a388e53ea102af85e61.setIcon(icon_93d0286803d7422e8a5bc1369025b781);
+        
+    
+        var popup_aa03f06144f7418d887afafb7b78e575 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1dd5fba30c364b9eb7770279e8eead21 = $(`<div id="html_1dd5fba30c364b9eb7770279e8eead21" style="width: 100.0%; height: 100.0%;">Low 2020-07-29</div>`)[0];
+            popup_aa03f06144f7418d887afafb7b78e575.setContent(html_1dd5fba30c364b9eb7770279e8eead21);
+        
+
+        marker_b306351223234a388e53ea102af85e61.bindPopup(popup_aa03f06144f7418d887afafb7b78e575)
+        ;
+
+        
+    
+    
+            var marker_9fb52072d1b6479c9e08732380e8971a = L.marker(
+                [23.155922740847746, 79.98070322806707],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_2cdd4c0f95804e3199ed726e0e46b69d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_9fb52072d1b6479c9e08732380e8971a.setIcon(icon_2cdd4c0f95804e3199ed726e0e46b69d);
+        
+    
+        var popup_7ca0a4114280411c87bcf3879787b55c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e85e4a2da7a4485b8d99d66a9802d668 = $(`<div id="html_e85e4a2da7a4485b8d99d66a9802d668" style="width: 100.0%; height: 100.0%;">Medium 2020-07-29</div>`)[0];
+            popup_7ca0a4114280411c87bcf3879787b55c.setContent(html_e85e4a2da7a4485b8d99d66a9802d668);
+        
+
+        marker_9fb52072d1b6479c9e08732380e8971a.bindPopup(popup_7ca0a4114280411c87bcf3879787b55c)
+        ;
+
+        
+    
+    
+            var marker_3ad76280d8e9408da92b8f4b0958ebf7 = L.marker(
+                [23.178452168052768, 79.990916299614],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_6c30c43de560465a906e8173e723ae54 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_3ad76280d8e9408da92b8f4b0958ebf7.setIcon(icon_6c30c43de560465a906e8173e723ae54);
+        
+    
+        var popup_06ec88a2f95448eaa7613f31bf1d1e7e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b8e2a6a1f46e414a9492e4dfbd568ee1 = $(`<div id="html_b8e2a6a1f46e414a9492e4dfbd568ee1" style="width: 100.0%; height: 100.0%;">Medium 2020-07-30</div>`)[0];
+            popup_06ec88a2f95448eaa7613f31bf1d1e7e.setContent(html_b8e2a6a1f46e414a9492e4dfbd568ee1);
+        
+
+        marker_3ad76280d8e9408da92b8f4b0958ebf7.bindPopup(popup_06ec88a2f95448eaa7613f31bf1d1e7e)
+        ;
+
+        
+    
+    
+            var marker_956bf9e9c2734909bef4c906d96c7896 = L.marker(
+                [23.170367558438183, 79.97250345655443],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_da3fb0a477eb4035935130bacd8c7d81 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_956bf9e9c2734909bef4c906d96c7896.setIcon(icon_da3fb0a477eb4035935130bacd8c7d81);
+        
+    
+        var popup_6cb74a6351624f969671589e8643e57f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_519f4df3a4ea432cb5882c791b397f38 = $(`<div id="html_519f4df3a4ea432cb5882c791b397f38" style="width: 100.0%; height: 100.0%;">Medium 2020-07-30</div>`)[0];
+            popup_6cb74a6351624f969671589e8643e57f.setContent(html_519f4df3a4ea432cb5882c791b397f38);
+        
+
+        marker_956bf9e9c2734909bef4c906d96c7896.bindPopup(popup_6cb74a6351624f969671589e8643e57f)
+        ;
+
+        
+    
+    
+            var marker_8be9b6a335f34145943c3554d5d57a43 = L.marker(
+                [23.17997813996765, 79.96124608650085],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_575afc09045846428d28a304046a8c4e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_8be9b6a335f34145943c3554d5d57a43.setIcon(icon_575afc09045846428d28a304046a8c4e);
+        
+    
+        var popup_bf4f5fb995624dcaaf25f73f781504c0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3d2d0d53ed5240ccb5cde06029cb1a98 = $(`<div id="html_3d2d0d53ed5240ccb5cde06029cb1a98" style="width: 100.0%; height: 100.0%;">Medium 2020-07-30</div>`)[0];
+            popup_bf4f5fb995624dcaaf25f73f781504c0.setContent(html_3d2d0d53ed5240ccb5cde06029cb1a98);
+        
+
+        marker_8be9b6a335f34145943c3554d5d57a43.bindPopup(popup_bf4f5fb995624dcaaf25f73f781504c0)
+        ;
+
+        
+    
+    
+            var marker_fd61e22a9c5f47a988d506d05af4ed58 = L.marker(
+                [23.200323539554876, 79.99923113502034],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7205fb17bbda416da5363392ed595d78 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_fd61e22a9c5f47a988d506d05af4ed58.setIcon(icon_7205fb17bbda416da5363392ed595d78);
+        
+    
+        var popup_d2fa2c3a64c14e9099f218fac8225a7a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b431c43aef5a41a7a5319314594df207 = $(`<div id="html_b431c43aef5a41a7a5319314594df207" style="width: 100.0%; height: 100.0%;">Low 2020-07-30</div>`)[0];
+            popup_d2fa2c3a64c14e9099f218fac8225a7a.setContent(html_b431c43aef5a41a7a5319314594df207);
+        
+
+        marker_fd61e22a9c5f47a988d506d05af4ed58.bindPopup(popup_d2fa2c3a64c14e9099f218fac8225a7a)
+        ;
+
+        
+    
+    
+            var marker_6a66c4d4fda14cdbab05ece4ddaa2a53 = L.marker(
+                [23.16554836800313, 79.9720981595071],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f0a8151f6e6940419e2841780097603a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6a66c4d4fda14cdbab05ece4ddaa2a53.setIcon(icon_f0a8151f6e6940419e2841780097603a);
+        
+    
+        var popup_e38632a4835b4cf1aff0c31f21cdec5c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_150b66ad592b48b2824bbc5c9cc3f8eb = $(`<div id="html_150b66ad592b48b2824bbc5c9cc3f8eb" style="width: 100.0%; height: 100.0%;">Low 2020-07-30</div>`)[0];
+            popup_e38632a4835b4cf1aff0c31f21cdec5c.setContent(html_150b66ad592b48b2824bbc5c9cc3f8eb);
+        
+
+        marker_6a66c4d4fda14cdbab05ece4ddaa2a53.bindPopup(popup_e38632a4835b4cf1aff0c31f21cdec5c)
+        ;
+
+        
+    
+    
+            var marker_d23c49e582ac49b494b19c9cb2756da9 = L.marker(
+                [23.19833745628564, 79.98939579324698],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_d6cc91591a7c48a78b0ab9a0d637f55a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d23c49e582ac49b494b19c9cb2756da9.setIcon(icon_d6cc91591a7c48a78b0ab9a0d637f55a);
+        
+    
+        var popup_d14f92bde1d8483e8b24dbd4086bd020 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f18cd6ad803e4349b711117e02d5f6b8 = $(`<div id="html_f18cd6ad803e4349b711117e02d5f6b8" style="width: 100.0%; height: 100.0%;">Low 2020-07-30</div>`)[0];
+            popup_d14f92bde1d8483e8b24dbd4086bd020.setContent(html_f18cd6ad803e4349b711117e02d5f6b8);
+        
+
+        marker_d23c49e582ac49b494b19c9cb2756da9.bindPopup(popup_d14f92bde1d8483e8b24dbd4086bd020)
+        ;
+
+        
+    
+    
+            var marker_e01dc13ce25f4d90a59f1d735cb7691a = L.marker(
+                [23.17556232637488, 79.96621867861413],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_3737a6c6edfd4af8810ba3afc9345145 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_e01dc13ce25f4d90a59f1d735cb7691a.setIcon(icon_3737a6c6edfd4af8810ba3afc9345145);
+        
+    
+        var popup_62c23f005027438cb9748dfd418d63b3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d8909d9f00fd4243aaf8c9ef78656d8c = $(`<div id="html_d8909d9f00fd4243aaf8c9ef78656d8c" style="width: 100.0%; height: 100.0%;">Low 2020-07-30</div>`)[0];
+            popup_62c23f005027438cb9748dfd418d63b3.setContent(html_d8909d9f00fd4243aaf8c9ef78656d8c);
+        
+
+        marker_e01dc13ce25f4d90a59f1d735cb7691a.bindPopup(popup_62c23f005027438cb9748dfd418d63b3)
+        ;
+
+        
+    
+    
+            var marker_eaa897bd93484897b9f31cb3b4d242c3 = L.marker(
+                [23.186658441089467, 79.98479172031828],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_fceaea50a891462fa956d8558426e36e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_eaa897bd93484897b9f31cb3b4d242c3.setIcon(icon_fceaea50a891462fa956d8558426e36e);
+        
+    
+        var popup_7ef52dc40a11489993f4de0b09542dcf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2cce6dfa748a4cd8b8837ede4167d83d = $(`<div id="html_2cce6dfa748a4cd8b8837ede4167d83d" style="width: 100.0%; height: 100.0%;">Low 2020-07-30</div>`)[0];
+            popup_7ef52dc40a11489993f4de0b09542dcf.setContent(html_2cce6dfa748a4cd8b8837ede4167d83d);
+        
+
+        marker_eaa897bd93484897b9f31cb3b4d242c3.bindPopup(popup_7ef52dc40a11489993f4de0b09542dcf)
+        ;
+
+        
+    
+    
+            var marker_8a55a951e1224f43b5b8307ae244118c = L.marker(
+                [23.164011173888092, 79.99476429712355],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_e7d89d300c534f6ca269343a7e3b7d6f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_8a55a951e1224f43b5b8307ae244118c.setIcon(icon_e7d89d300c534f6ca269343a7e3b7d6f);
+        
+    
+        var popup_4a72ada44f724a86b6c331dd4964b1d0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b655c79f95a24c7d9ce2a0ee8fa94a9c = $(`<div id="html_b655c79f95a24c7d9ce2a0ee8fa94a9c" style="width: 100.0%; height: 100.0%;">Medium 2020-07-31</div>`)[0];
+            popup_4a72ada44f724a86b6c331dd4964b1d0.setContent(html_b655c79f95a24c7d9ce2a0ee8fa94a9c);
+        
+
+        marker_8a55a951e1224f43b5b8307ae244118c.bindPopup(popup_4a72ada44f724a86b6c331dd4964b1d0)
+        ;
+
+        
+    
+    
+            var marker_60b76ef44ac34b959aa11aeac2994930 = L.marker(
+                [23.205170967590718, 79.9927348111368],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_034f969434884ae8934590905186a21f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_60b76ef44ac34b959aa11aeac2994930.setIcon(icon_034f969434884ae8934590905186a21f);
+        
+    
+        var popup_b1655690450644cda03f28ebf57ce9a2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_824c7a07c25a41a280c3e6a62737632e = $(`<div id="html_824c7a07c25a41a280c3e6a62737632e" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_b1655690450644cda03f28ebf57ce9a2.setContent(html_824c7a07c25a41a280c3e6a62737632e);
+        
+
+        marker_60b76ef44ac34b959aa11aeac2994930.bindPopup(popup_b1655690450644cda03f28ebf57ce9a2)
+        ;
+
+        
+    
+    
+            var marker_f523b6a0bc8644719089533533540abd = L.marker(
+                [23.179495739347267, 80.00161968259846],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_a8b3885df1724027bcf1401d7262b1ed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_f523b6a0bc8644719089533533540abd.setIcon(icon_a8b3885df1724027bcf1401d7262b1ed);
+        
+    
+        var popup_54ccf5e7a3bc4ffe84a10fad572d9369 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1d6096d6b3004eb698eeb3d1beebb487 = $(`<div id="html_1d6096d6b3004eb698eeb3d1beebb487" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_54ccf5e7a3bc4ffe84a10fad572d9369.setContent(html_1d6096d6b3004eb698eeb3d1beebb487);
+        
+
+        marker_f523b6a0bc8644719089533533540abd.bindPopup(popup_54ccf5e7a3bc4ffe84a10fad572d9369)
+        ;
+
+        
+    
+    
+            var marker_491100dcd7454766a2029c695d0250dd = L.marker(
+                [23.164390241013265, 79.99567582839286],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_f6f5d231865c47e7849bee7d0e12b658 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_491100dcd7454766a2029c695d0250dd.setIcon(icon_f6f5d231865c47e7849bee7d0e12b658);
+        
+    
+        var popup_2f007cf581f64d96bd7c37bc42f5d3f1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5aa5ea4e308d46668da9084a6b661471 = $(`<div id="html_5aa5ea4e308d46668da9084a6b661471" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_2f007cf581f64d96bd7c37bc42f5d3f1.setContent(html_5aa5ea4e308d46668da9084a6b661471);
+        
+
+        marker_491100dcd7454766a2029c695d0250dd.bindPopup(popup_2f007cf581f64d96bd7c37bc42f5d3f1)
+        ;
+
+        
+    
+    
+            var marker_6021a3134cbd4681be0d1c8d3d58cd14 = L.marker(
+                [23.161203601926488, 79.97071224984916],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_26a0c4d3009e458396681da2fd44f6d9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6021a3134cbd4681be0d1c8d3d58cd14.setIcon(icon_26a0c4d3009e458396681da2fd44f6d9);
+        
+    
+        var popup_9581fd23296745a7bcf047694cfab8af = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2010fda75d564f9c99e8166191fc6eac = $(`<div id="html_2010fda75d564f9c99e8166191fc6eac" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_9581fd23296745a7bcf047694cfab8af.setContent(html_2010fda75d564f9c99e8166191fc6eac);
+        
+
+        marker_6021a3134cbd4681be0d1c8d3d58cd14.bindPopup(popup_9581fd23296745a7bcf047694cfab8af)
+        ;
+
+        
+    
+    
+            var marker_91a7a507cfae47429d8e8a7ad813ab1c = L.marker(
+                [23.189273589592272, 79.96548405384877],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_4fa4100ea61f43c7ba9998945a405564 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_91a7a507cfae47429d8e8a7ad813ab1c.setIcon(icon_4fa4100ea61f43c7ba9998945a405564);
+        
+    
+        var popup_b6629c9a928c4e1b8e28eaccf4c6bb54 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8ec9ea1a4ca94749877fb1ce938baaac = $(`<div id="html_8ec9ea1a4ca94749877fb1ce938baaac" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_b6629c9a928c4e1b8e28eaccf4c6bb54.setContent(html_8ec9ea1a4ca94749877fb1ce938baaac);
+        
+
+        marker_91a7a507cfae47429d8e8a7ad813ab1c.bindPopup(popup_b6629c9a928c4e1b8e28eaccf4c6bb54)
+        ;
+
+        
+    
+    
+            var marker_f3e2a0147304463bb2e7fd397c20a332 = L.marker(
+                [23.15989949737606, 79.99615136177711],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_9fae1c9bfdd0482eae066419b8127d8b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_f3e2a0147304463bb2e7fd397c20a332.setIcon(icon_9fae1c9bfdd0482eae066419b8127d8b);
+        
+    
+        var popup_a333df2023b64322bed94084bd9ec6be = L.popup({"maxWidth": "100%"});
+
+        
+            var html_67768dfc603d4c2caded09a36c7e1ad7 = $(`<div id="html_67768dfc603d4c2caded09a36c7e1ad7" style="width: 100.0%; height: 100.0%;">Low 2020-07-31</div>`)[0];
+            popup_a333df2023b64322bed94084bd9ec6be.setContent(html_67768dfc603d4c2caded09a36c7e1ad7);
+        
+
+        marker_f3e2a0147304463bb2e7fd397c20a332.bindPopup(popup_a333df2023b64322bed94084bd9ec6be)
+        ;
+
+        
+    
+    
+            var marker_cd50412996344a7aa95ed296090d058b = L.marker(
+                [23.184170835469022, 80.00691894156017],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_30742768184a46f1b0acb202d026ad3b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_cd50412996344a7aa95ed296090d058b.setIcon(icon_30742768184a46f1b0acb202d026ad3b);
+        
+    
+        var popup_0ae7db3342214056b8c35067edbc967b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7e3b4ff8e33544ad93fcbfd73f3b40f6 = $(`<div id="html_7e3b4ff8e33544ad93fcbfd73f3b40f6" style="width: 100.0%; height: 100.0%;">Medium 2020-08-01</div>`)[0];
+            popup_0ae7db3342214056b8c35067edbc967b.setContent(html_7e3b4ff8e33544ad93fcbfd73f3b40f6);
+        
+
+        marker_cd50412996344a7aa95ed296090d058b.bindPopup(popup_0ae7db3342214056b8c35067edbc967b)
+        ;
+
+        
+    
+    
+            var marker_e8f530d823c64967bcd75bbf2746a957 = L.marker(
+                [23.18158834191976, 79.97238216660251],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_048ebdacc7014958a0f8b2a583aeea72 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_e8f530d823c64967bcd75bbf2746a957.setIcon(icon_048ebdacc7014958a0f8b2a583aeea72);
+        
+    
+        var popup_4cdaa6f2734643daaaf84e7c335288f4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_89cb49de122a4440b1c7a06b802c821f = $(`<div id="html_89cb49de122a4440b1c7a06b802c821f" style="width: 100.0%; height: 100.0%;">Medium 2020-08-01</div>`)[0];
+            popup_4cdaa6f2734643daaaf84e7c335288f4.setContent(html_89cb49de122a4440b1c7a06b802c821f);
+        
+
+        marker_e8f530d823c64967bcd75bbf2746a957.bindPopup(popup_4cdaa6f2734643daaaf84e7c335288f4)
+        ;
+
+        
+    
+    
+            var marker_e03123ef65494a72a0a58f02c4360c55 = L.marker(
+                [23.160848231047268, 80.00253511554202],
+                {}
+            ).addTo(marker_cluster_8a5743283f61485a83fc677222ab5d45);
+        
+    
+            var icon_7497011e6b244d339407e9950452537b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_e03123ef65494a72a0a58f02c4360c55.setIcon(icon_7497011e6b244d339407e9950452537b);
+        
+    
+        var popup_eb1093765a634a4996525fcbf0b6f189 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4161f4d6503a45cf8b88397d5ceee64e = $(`<div id="html_4161f4d6503a45cf8b88397d5ceee64e" style="width: 100.0%; height: 100.0%;">Low 2020-08-02</div>`)[0];
+            popup_eb1093765a634a4996525fcbf0b6f189.setContent(html_4161f4d6503a45cf8b88397d5ceee64e);
+        
+
+        marker_e03123ef65494a72a0a58f02c4360c55.bindPopup(popup_eb1093765a634a4996525fcbf0b6f189)
+        ;
+
+        
+    
+</script>
