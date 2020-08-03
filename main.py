@@ -377,19 +377,15 @@ def heatmapwithtime():
     duration = request.args.get('duration')
     start = request.args.get('start')
     end = request.args.get('end')
-    print(city)
-    print(state)
-    print(duration)
-    print(start)
-    print(end)
+
     # duration can be "week", "month", "3_months", "year" or "date"
     if duration=="all":
         qobj = thedb.MainQuery(state=state, district=city)
         data,time_index=qobj.get_heatmaptime_data()
         if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
     elif duration=="week":
@@ -402,9 +398,9 @@ def heatmapwithtime():
 
         data,time_index=qobj.get_heatmaptime_data()
         if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
 
@@ -416,10 +412,10 @@ def heatmapwithtime():
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
         data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+       if city=="all":
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
     elif duration == '3 months':
@@ -431,9 +427,9 @@ def heatmapwithtime():
 
         data,time_index=qobj.get_heatmaptime_data()
         if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
     elif duration == 'year':
@@ -445,9 +441,9 @@ def heatmapwithtime():
 
         data,time_index=qobj.get_heatmaptime_data()
         if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
 
@@ -455,9 +451,9 @@ def heatmapwithtime():
         qobj = thedb.MainQuery(state,city,start,end)
         data,time_index=qobj.get_heatmaptime_data()
         if city=="all":
-            filename=create_heatmap_with_time(data,time_index,state)
+            filename=create_heatmap_with_time(data,time_index,"state")
         else:
-            filename=create_heatmap_with_time(data,time_index,city)
+            filename=create_heatmap_with_time(data,time_index,"district")
         return render_template(filename)
 
 
@@ -471,19 +467,14 @@ def heatmap():
     duration = request.args.get('duration')
     start = request.args.get('start')
     end = request.args.get('end')
-    print(city)
-    print(state)
-    print(duration)
-    print(start)
-    print(end)
     # duration can be "week", "month", "3_months", "year" or "date"
     if duration=="all":
         qobj = thedb.MainQuery(state=state, district=city)
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
     elif duration=="week":
@@ -496,9 +487,9 @@ def heatmap():
 
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
     elif duration=="month":
@@ -510,9 +501,9 @@ def heatmap():
 
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
     elif duration == '3 months':
@@ -524,9 +515,9 @@ def heatmap():
 
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
     elif duration == 'year':
@@ -538,18 +529,18 @@ def heatmap():
 
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
     elif duration == 'date':
         qobj = thedb.MainQuery(state,city,start,end)
         data=qobj.get_heatmap_data()
         if city=="all":
-            filename=create_heatmap(data,state)
+            filename=create_heatmap(data,"state")
         else:
-            filename=create_heatmap(data,city)
+            filename=create_heatmap(data,"district")
         return render_template(filename)
 
 
