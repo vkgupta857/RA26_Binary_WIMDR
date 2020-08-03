@@ -17,15 +17,16 @@ import sqlalchemy
 import pyrebase
 
 # while deployment uncomment below line
-import the_database as thedb
+#import the_database as thedb
 # while using locally uncomment below line
-# import the_database_local as thedb
+import the_database_local as thedb
 
 import requests as req
 import json
 import string
 import time
 import datetime
+from geopy.distance import geodesic
 
 
 app = Flask(__name__)
@@ -130,6 +131,25 @@ def get_filename():
     result =  'image_'+''.join(random.choice(letters) for i in range(length))+'.jpg'
     return(result)
 
+# function to get anomaly points for a district in last 7 days
+def get_anomaly_points(district,state):
+    end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+    end_date = dt.replace('T',' ').split('.')[0].split(' ')[0]
+    start_date = date_before_n_days(8)
+    qobj = thedb.MainQuery(district=district, state=state, start_date=start_date, end_date=end_date)
+    data, time_index = qobj.get_heatmaptime_data()
+    an = []
+    for i in range(len(data)-2):
+        pts = data[i]+data[i+1]
+        for j in range(len(pts)):
+            for k in range(j+1,len(pts)):
+                l1 = pts[j]
+                l2 = pts[k]
+                if geodesic(l1, l2).km*1000 < 100:
+                    lat = (l1[0]+l2[0])/2
+                    lng = (l1[1]+l2[1])/2
+                    an.append([lat,lng])
+    return(an)
 
 def get_place(lat,lng):
     result = rg.search((lat,lng))
@@ -342,20 +362,195 @@ def map():
         response['points'] = report
         
         #points for anomaly detection
-        anamoly=
-        response['anamoly']=anamoly
+        anamoly=get_anomaly_points(city,state)
+        response['anamoly']= get_anomaly_points(city, state)
         return response
 
     return render_template('map.html',city=city,state=state)
 
 
-@app.route('/clustermap', methods= ['GET', 'POST'])
-def clustermap():
-    return render_template('clustermap.html')
+@app.route('/heatmap_with_time', methods= ['GET', 'POST'])
+def heatmapwithtime():
+    city = request.args.get('city')
+    state = request.args.get('state')
+    duration = request.args.get('duration')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    print(city)
+    print(state)
+    print(duration)
+    print(start)
+    print(end)
+    # duration can be "week", "month", "3_months", "year" or "date"
+    if duration=="all":
+        qobj = thedb.MainQuery(state=state, district=city)
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+    elif duration=="week":
+
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(7)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+
+    elif duration=="month":
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split(' ')[0]
+        start_date = date_before_n_days(30)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+    elif duration == '3 months':
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(90)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+     elif duration == 'year':
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(365)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+
+    elif duration == 'date':
+        qobj = thedb.MainQuery(state,city,start,end)
+        data,time_index=qobj.get_heatmaptime_data()
+        if city=="all":
+            filename=create_heatmap_with_time(data,time_index,state)
+        else:
+            filename=create_heatmap_with_time(data,time_index,city)
+        return render_template(filename)
+
+
+
+
 
 @app.route('/heatmap', methods= ['GET', 'POST'])
 def heatmap():
-    return render_template('heatmap.html')
+    city = request.args.get('city')
+    state = request.args.get('state')
+    duration = request.args.get('duration')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    print(city)
+    print(state)
+    print(duration)
+    print(start)
+    print(end)
+    # duration can be "week", "month", "3_months", "year" or "date"
+    if duration=="all":
+        qobj = thedb.MainQuery(state=state, district=city)
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
+    elif duration=="week":
+
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(7)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
+    elif duration=="month":
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split(' ')[0]
+        start_date = date_before_n_days(30)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
+    elif duration == '3 months':
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(90)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
+    elif duration == 'year':
+        dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+        dt = dt.replace('T',' ').split('.')[0]
+        end_date=dt.split('')[0]
+        start_date = date_before_n_days(365)
+        qobj = thedb.MainQuery(state,city,start_date,end_date)
+
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
+    elif duration == 'date':
+        qobj = thedb.MainQuery(state,city,start,end)
+        data=qobj.get_heatmap_data()
+        if city=="all":
+            filename=create_heatmap(data,state)
+        else:
+            filename=create_heatmap(data,city)
+        return render_template(filename)
+
 
 @app.route('/ClustermapM', methods=['GET', 'POST'])
 def ClustermapM():

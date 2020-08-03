@@ -189,7 +189,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/graphs">
-            Reports
+            Admin Dashboard
           </a>
         </li>
       </ul>
@@ -288,9 +288,9 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <a href="/heatmap"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
+          <a href="/heatmap?state=region&city=country&duration=duration&start=start&end=end"><img src="{{ url_for('static', filename='images/google-map.jpg')}}" width="500px"
               height="315px" class="img-fluid"></a>
-          <a href="/heatmap_with_time"><H6 class="text-center">SHOW HEATMAP WITH TIME</H6></a>
+          <a href="/heatmap_with_time?state=region&city=country&duration=duration&start=start&end=end"><H6 class="text-center">SHOW HEATMAP WITH TIME</H6></a>
         </div>
       </div>
     </div>
