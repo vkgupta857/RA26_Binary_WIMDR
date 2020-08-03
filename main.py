@@ -133,7 +133,7 @@ def get_filename():
 
 # function to get anomaly points for a district in last 7 days
 def get_anomaly_points(district,state):
-    end_date = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
+    dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
     end_date = dt.replace('T',' ').split('.')[0].split(' ')[0]
     start_date = date_before_n_days(8)
     qobj = thedb.MainQuery(district=district, state=state, start_date=start_date, end_date=end_date)
@@ -362,8 +362,9 @@ def map():
         response['points'] = report
         
         #points for anomaly detection
-        anamoly=get_anomaly_points(city,state)
-        response['anamoly']= get_anomaly_points(city, state)
+        anomaly=get_anomaly_points(city,state)
+        print(anomaly)
+        response['anomaly']= anomaly
         return response
 
     return render_template('map.html',city=city,state=state)
@@ -435,7 +436,7 @@ def heatmapwithtime():
             filename=create_heatmap_with_time(data,time_index,city)
         return render_template(filename)
 
-     elif duration == 'year':
+    elif duration == 'year':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
         dt = dt.replace('T',' ').split('.')[0]
         end_date=dt.split('')[0]
