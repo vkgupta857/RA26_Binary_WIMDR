@@ -54,7 +54,7 @@
     </p>
     <div class="card text-center">
         <div class="card-body">
-            <div id="UnusualActivityMap"> <span class="spinner-border text-success"></span> Fetching data...</div>
+            <div id="anomalyMapHolder"> <span class="spinner-border text-success"></span> Fetching data...</div>
         </div>
     </div>
     <br>
@@ -102,11 +102,15 @@
         success: function (res) {
             // console.log(res);
             var pointsToShow = res.points;
+
+            var anomalyPoints = res.anomaly;
+
             console.log(pointsToShow);
 
             if (pointsToShow.length <= 0) {
                 // alert("Voila! No waste in the city.");
                 document.getElementById('mapHolder').innerHTML = "<h3>Yay! No wastes in " + city + "</h3><p>Hence, cannot plot on map</p>";
+                document.getElementById('anomalyMapHolder').style.display = false;
             }
             var lat = pointsToShow[0]['lattitude'];
             var lon = pointsToShow[0]['longitude'];
@@ -146,104 +150,40 @@
 
             var activityPts = [
                 {
-                    position: new google.maps.LatLng(23.1369307508016, 79.9414282743248),
+                    position: [23.1369307508016, 79.9414282743248],
                     type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.1727464960143, 79.9910974486153),
-                    type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.1486192051069, 80.0026714942545),
-                    type: 'Anamoly'
-                }, {
-                    position: new google.maps.LatLng(23.1531149888702, 79.9342859487367),
-                    type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.1167438348741, 79.9520082160492),
-                    type: 'Anamoly'
-                }, {
-                    position: new google.maps.LatLng(23.1889701697534, 79.9194404400441),
-                    type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.2318370186875, 80.0006429944103),
-                    type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.1673166117458, 79.9199472512678),
-                    type: 'Anamolytoday'
-
-                }, {
-                    position: new google.maps.LatLng(23.1598206580546, 79.9530009019027),
-                    type: 'Anamoly'
-                }, {
-                    position: new google.maps.LatLng(23.148966713523, 79.9250629976011),
-                    type: 'Anamolytoday'
-                }, {
-                    position: new google.maps.LatLng(23.1489922123079, 79.9328874032764),
-                    type: 'Anamoly'
-                },
-                {
-                    position: new google.maps.LatLng(23.187380568543, 80.0008778100509),
-                    type: 'Anamoly'
                 }
             ];
 
-            var ActivityMap = document.getElementById("UnusualActivityMap");
-            var Activityicon = {
-                Anamoly: {
-                    icon: '/static/images/darkblue.png'
-                },
-                Anamolytoday: {
-                    icon: '/static/images/blue.png'
-                }
-            };
-            ActivityMap.style.height = '400px';
-            ActivityMap.style.width = '100%';
+            var lat = pointsToShow[0][0];
+            var lon = pointsToShow[0][0];
+            var latlon = new google.maps.LatLng(lat, lon)
+
+            var anomalyMapHolder = document.getElementById("anomalyMapHolder");
+
+            anomalyMapHolder.style.height = '400px';
+            anomalyMapHolder.style.width = '100%';
             var anomalyOptions = {
-                center: new google.maps.LatLng(23.187380568543, 80.0008778100509),
+                center: latlon,
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,
                 navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
             };
 
-            var anomalyMap = new google.maps.Map(document.getElementById('UnusualActivityMap'), anomalyOptions);
+            var anomalyMap = new google.maps.Map(document.getElementById('anomalyMapHolder'), anomalyOptions);
 
-            for (var i = 0; i < activityPts.length; i++) {
+            for (var point of anomalyPoints) {
+                var lat = point[0];
+                var lng = point[1];
+
+                console.log(lat, lng);
+
                 var marker = new google.maps.Marker({
-                    position: activityPts[i].position,
-                    icon: Activityicon[activityPts[i].type].icon,
-                    map: map
+                    position: new google.maps.LatLng(lat, lng),
+                    icon: '/static/images/darkblue.png',
+                    map: anomalyMap
                 });
-                console.log(activityPts[i]);
-                if (activityPts[i].type == 'Anamolytoday') {
-                    var radius = 800;
-                    var position = marker.getPosition();
-                    var circle = new google.maps.Circle({
-                        center: position,
-                        radius: radius,
-                        fillColor: "#00ace6",
-                        fillOpacity: 0.3,
-                        map: map,
-                        strokeColor: "#00ace6",
-                        strokeOpacity: 0.3,
-                        strokeWeight: 2
-                    });
-                }
-
-                if (activityPts[i].type == 'Anamoly') {
-                    var radius = 800;
-                    var position = marker.getPosition();
-                    var circle = new google.maps.Circle({
-                        center: position,
-                        radius: radius,
-                        fillColor: "#000066",
-                        fillOpacity: 0.3,
-                        map: map,
-                        strokeColor: "#000066",
-                        strokeOpacity: 0.3,
-                        strokeWeight: 2
-                    });
-                }
-
             }
         },
         error: function (xhr) {
