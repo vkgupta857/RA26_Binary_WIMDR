@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Upload - Waste Management</title>
+{% endblock %}
+
+{% block body %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/index">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">Home</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link active" href="/upload">
+                        Upload
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header text-center text-primary"><b>Upload</b></div>
+            <div class="card-body">
+                {% if filename %}
+                <img src="https://firebasestorage.googleapis.com/v0/b/sih-db-3b091.appspot.com/o/images%2F{{ filename }}?alt=media&token=14d002e1-5522-4e85-8ac5-729a7826d23c"
+                    alt="Image" class="img-fluid">
+                {% endif %}
+                {% if label %}
+                <div class="alert alert-dark">
+                    <b>Image Waste Type</b>: {{ label }}
+                </div>
+                <p><small>Image waste type represents the type of waste image contains. It can be "Low", "Medium" or
+                        "High".</small></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,492 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    #month {
+        border-radius: 30px 0px 0px 30px;
+    }
+
+    #week {
+        border-radius: 0px 30px 30px 0px;
+    }
+
+    .chart-container {
+        max-height: 600px;
+        overflow: auto;
+    }
+
+    .flex-container {
+        display: flex;
+        margin-left: 35%;
+    }
+</style>
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBIZzJADy9kDwosxnQrILpgK00dZvIPgYM"></script>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script>
+    function enable(dd, custom, end) {
+        if (dd.value == "date") {
+            custom.disabled = false;
+            end.disabled = false;
+        } else {
+            custom.disabled = true;
+            end.disabled = true;
+        }
+    }
+</script>
+{% endblock %}
+{% block body %}
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/index">
+            <img src="/static/images/logo.png" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <br class="my-2">
+    <h4 class="text-center">Category-wise Wastes reported</h4>
+    <p class="text-center">
+        <b>Legends - </b>
+        ALERT: <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" height="20" class="mr-4" />
+        HIGH WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" height="20" class="mr-4" />
+        MEDIUM WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" height="20" class="mr-4" />
+        LOW WASTE:<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" height="20" class="mr-4" />
+    </p>
+    <div class="card text-center">
+        <div class="card-body">
+            <div id="mapHolder"> <span class="spinner-border text-success"></span> Fetching data...</div>
+        </div>
+    </div>
+    <br>
+    <h4 class="text-center">False/Frequent (Anomalies) Reports</h4>
+    <p class="text-center">
+        <b>Legends - </b>
+
+        Reporting daily for 3 days: <img src="/static/images/marker-blue.png" height="20" />
+    </p>
+    <div class="card text-center">
+        <div class="card-body">
+            <div id="anomalyMapHolder"> <span class="spinner-border text-success"></span> Fetching data...</div>
+        </div>
+    </div>
+    <hr class="my-4 bg-success">
+    <form action="/graphs" method="post" onsubmit="addFilters()">
+        <div class="row justify-content-center">
+            <div class="form-group col-md-2">
+                <label for="stateId">STATE</label>
+                <input class="form-control form-control-sm" name="state" id="stateId" value="{{state}}" readonly>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="city">CITY</label>
+                <input class="form-control form-control-sm" name="city" id="city" value="{{city}}" readonly>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="duration">DURATION</label>
+                <select class="form-control form-control-sm" name="duration" onchange="enable(this,custom,end)"
+                    id="duration">
+                    <option value="" selected="selected">-Select Duration-</option>
+                    <option value="week">Last Week</option>
+                    <option value="month">Last Month</option>
+                    <option value="3 months">Last 3 Months</option>
+                    <option value="date">Add custom</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="custom">START DATE</label>
+                <input type="date" id="custom" class="form-control form-control-sm" name="start" disabled="disabled" />
+            </div>
+            <div class="form-group col-md-2">
+                <label for="end">END DATE</label>
+                <input type="date" id="end" class="form-control form-control-sm" name="end" disabled="disabled" />
+            </div>
+            <div class="form-group col-md-2">
+                <br>
+                <button class="btn btn-success btn-sm" style="opacity: 0.9;" onclick="addFilters()">Apply
+                    Filters</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="monthly-chart-container" class="chart-container text-center">
+                        <div class="spinner-border text-sucess text-center"></div>
+                    </div>
+                    <br>
+                    <div class="flex-container">
+                        <div><button class="btn btn-success" id="month" onclick="click2()">Show Daily Reports</button>
+                        </div>
+                        <div> <button class="btn btn-default" id="week" onclick="click1()">Show Weekly Reports</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="text-center">
+        <a href="/ClustermapM?city={{city}}&state={{state}}"><button class="btn btn-success">View Cluster
+                Map</button></a>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<!-- Step 2 - Include the fusion theme -->
+<script type="text/javascript"
+    src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+<script>
+
+const monthlydataSource = {
+        chart: {
+            caption: "Categorical statistics of waste queries reported over the month",
+            yaxisname: "Total waste queries reported",
+            plottooltext:
+                "<b>$dataValue</b> of $seriesName reported on $label",
+            showsum: "0",
+            theme: "fusion"
+        },
+        categories: [
+            {
+                category: []
+            }
+        ],
+        dataset: [
+            {
+                seriesname: "High Waste",
+                data: []
+            },
+            {
+                seriesname: "Medium Waste",
+                data: []
+            },
+
+            {
+                seriesname: "Low Waste",
+                data: []
+            }
+        ]
+    };
+
+    const weeklydataSource = {
+        chart: {
+            caption: "Categorical statistics of waste queries reported over the week",
+            yaxisname: "Total waste queries reported",
+            plottooltext:
+                "<b>$dataValue</b> of $seriesName reported on $label",
+            showsum: "0",
+            theme: "fusion"
+        },
+        categories: [
+            {
+                category: []
+            }
+        ],
+        dataset: [
+            {
+                seriesname: "High Waste",
+                data: []
+            },
+            {
+                seriesname: "Medium Waste",
+                data: []
+            },
+
+            {
+                seriesname: "Low Waste",
+                data: []
+            }
+        ]
+    };
+
+    function plotMonthly() {
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: monthlydataSource
+        }).render();
+    }
+
+    function plotWeekly() {
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: weeklydataSource
+        }).render();
+    }
+
+    function click2() {
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: monthlydataSource
+        }).render();
+
+        document.getElementById('month').className = "btn btn-success";
+        document.getElementById('week').className = "btn btn-default";
+    }
+    function click1() {
+        var weeklyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: weeklydataSource
+        }).render();
+
+        document.getElementById('week').className = "btn btn-success";
+        document.getElementById('month').className = "btn btn-default";
+
+    }
+
+    function addFilters() {
+
+        document.getElementById('monthly-chart-container').innerHTML = '<div class="spinner-border text-success"></div>';
+        if (event) {
+            event.preventDefault();
+        }
+        var state = document.getElementById('stateId').value;
+        var city = document.getElementById('city').value;
+        var duration = document.getElementById('duration').value;
+        var startDate = document.getElementById('custom').value;
+        var endDate = document.getElementById('end').value;
+        if (duration == "") {
+            duration = "month";
+        }
+        if (duration != "date") {
+            startDate = null;
+            endDate = null;
+        } else {
+            if (startDate == null || endDate == null) {
+                alert("Please select Range!");
+            }
+        }
+        console.log(state, city, duration, startDate, endDate);
+        var highWasteList = [];
+        var mediumWasteList = [];
+        var lowWasteList = [];
+        $.ajax({
+            url: '/map',
+            type: 'POST',
+            data: {
+                state: state,
+                city: city,
+                duration: duration,
+                startDate: startDate,
+                endDate: endDate
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.daily && res.weekly) {
+                    var dailyList = res.daily;
+                    var weeklyList = res.weekly;
+                    // console.log(dailyList);
+                    if (dailyList.length == 0 || weeklyList.length == 0) {
+                        console.log("DialyList is empty");
+                        document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                    } else {
+                        var highWasteList = [];
+                        var mediumWasteList = [];
+                        var lowWasteList = [];
+                        var labelList = [];
+                        for (var wasteType of dailyList) {
+                            highWasteList.push({ value: wasteType.High });
+                            mediumWasteList.push({ value: wasteType.Medium });
+                            lowWasteList.push({ value: wasteType.Low });
+                            labelList.push({ label: "" });
+                        }
+                        monthlydataSource.categories[0].category = labelList;
+                        monthlydataSource.dataset[0].data = highWasteList;
+                        monthlydataSource.dataset[1].data = mediumWasteList;
+                        monthlydataSource.dataset[2].data = lowWasteList;
+                        plotMonthly();
+
+                        // Set weeklyDataSource
+                        var weeklyList = res.weekly;
+                        var highWasteListWeekly = [];
+                        var mediumWasteListWeekly = [];
+                        var lowWasteListWeekly = [];
+                        var labelListWeekly = [];
+                        for (var wasteType of weeklyList) {
+                            highWasteListWeekly.push({ value: wasteType.High });
+                            mediumWasteListWeekly.push({ value: wasteType.Medium });
+                            lowWasteListWeekly.push({ value: wasteType.Low });
+                            labelListWeekly.push({ label: "" });
+                        }
+                        weeklydataSource.categories[0].category = labelListWeekly;
+                        weeklydataSource.dataset[0].data = highWasteListWeekly;
+                        weeklydataSource.dataset[1].data = mediumWasteListWeekly;
+                        weeklydataSource.dataset[2].data = lowWasteListWeekly;
+                    }
+                } else {
+                    document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                }
+            },
+            error: function (xhr) {
+                console.log("Error occured:", xhr.status, xhr.statusText);
+            }
+        })
+    }
+
+    // Call addFilters() on page load
+    addFilters();
+
+    var mapholder = document.getElementById('mapHolder');
+
+    var iconBase =
+        'http://maps.google.com/mapfiles/ms/icons/';
+
+    var icons = {
+        Late: {
+            icon: iconBase + 'red-dot.png'
+        },
+        H: {
+            icon: iconBase + 'orange-dot.png'
+        },
+        M: {
+            icon: iconBase + 'yellow-dot.png'
+        },
+        L: {
+            icon: iconBase + 'purple-dot.png'
+        }
+    };
+
+    // var features = Array;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const city = urlParams.get('city');
+    const state = urlParams.get('state');
+
+    $.ajax({
+        url: '/map',
+        type: 'POST',
+        data: {
+            city: city,
+            state: state
+        },
+        success: function (res) {
+            // console.log(res);
+            var pointsToShow = res.points;
+
+            if (pointsToShow.length == 0) {
+                document.getElementById('mapHolder').innerHTML = '<p class="text-success">Yay! No waste reported in ' + city + ".";
+            } else {
+                var lat = pointsToShow[0]['lattitude'];
+                var lon = pointsToShow[0]['longitude'];
+                var latlon = new google.maps.LatLng(lat, lon)
+
+                mapholder.style.height = '400px';
+                mapholder.style.width = '100%';
+                var myOptions = {
+                    center: latlon,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false,
+                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+                };
+
+                var map = new google.maps.Map(document.getElementById('mapHolder'), myOptions);
+
+                for (var point of pointsToShow) {
+                    var lat = point.lattitude;
+                    // lattitude spelling is defined in db. dont change
+                    var lng = point.longitude;
+                    var type = point.status;
+                    // console.log(lat, lng, type);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        icon: icons[type].icon,
+                        map: map,
+                        title: type
+                    });
+
+                    if (type == 'Late') {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                }
+            }
+
+            // AnomalyMap starts here
+
+            var anomalyPoints = res.anomaly;
+            console.log(anomalyPoints);
+
+            if (anomalyPoints.length == 0) {
+                document.getElementById('anomalyMapHolder').innerHTML = "<p>No anomalies detected.</p>";
+                console.log("No anomalies!");
+            } else {
+                var lat = anomalyPoints[0][0];
+                var lon = anomalyPoints[0][1];
+                // console.log("ahc",lat,lon);
+                var latlon = new google.maps.LatLng(lat, lon);
+
+                console.log("mapCenter", latlon);
+
+                var anomalyMapHolder = document.getElementById("anomalyMapHolder");
+
+                anomalyMapHolder.style.height = '400px';
+                anomalyMapHolder.style.width = '100%';
+                var anomalyOptions = {
+                    center: latlon,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    mapTypeControl: false,
+                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+                };
+
+                var anomalyMap = new google.maps.Map(document.getElementById('anomalyMapHolder'), anomalyOptions);
+
+                for (var point of anomalyPoints) {
+                    var lat = point[0];
+                    var lng = point[1];
+
+                    console.log(lat, lng);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        icon: '/static/images/marker-blue.png',
+                        map: anomalyMap,
+                        title: "Anomaly"
+                    });
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+        },
+        error: function (xhr) {
+            console.log("Error", xhr.status, xhr.statusText);
+        }
+    });
+
+</script>
+
+{% endblock %}

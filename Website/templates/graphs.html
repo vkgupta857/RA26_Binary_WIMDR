@@ -1,0 +1,868 @@
+{% extends 'base.html' %}
+{% block head%}
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    var countries = Object();
+
+    countries['Madhya Pradesh'] = 'Agar Malwa|Alirajpur|Anuppur|Ashok Nagar|Balaghat|Barwani|Betul|Bhind|Bhopal|Burhanpur|Chachaura-Binaganj|Chhatarpur|Chhindwara|Damoh|Datia|Dewas|Dhar|Dindori|Guna|Gwalior|Harda|Hoshangabad|Indore|Jabalpur|Jhabua|Katni|Khandwa|Khargone|Maihar|Mandla|Mandsaur|Morena|Narsinghpur|Nagda|Neemuch|Niwari|Panna|Raisen|Rajgarh|Ratlam|Rewa|Sagar|Satna|Sehore|Seon|Shahdol|Shajapur|Sheopur|Shivpuri|Sidhi|Singrauli|Tikamgarh|Ujjain|Umaria|Vidisha';
+
+    countries['Rajasthan'] = 'Ajmer|Alwar|Bikaner|Barmer|Banswara|Bharatpur|Baran|Bundi|Bhilwara|Churu|Chittorgarh|Dausa|Dholpur|Dungarpur|Ganganagar|Hanumangarh|Jhunjhunu|Jalore|Jodhpur|Jaipur|Jaisalmer|Jhalawar|Karauli|Kota|Nagaur|Pali|Pratapgarh|Rajsamand|Sikar|Sawai Madhopur|Sirohi|Tonk|Udaipur';
+
+    countries['Maharashtra'] = 'Ahmednagar|Akola|Amravati|Aurangabad|Beed|Bhandara|Buldhana|Chandrapur|Dhule|Gadchiroli|Gondia|Hingoli|Jalgaon|Jalna|Kolhapur|Latur|Mumbai City|Mumbai suburban|Nanded|Nandurbar|Nagpur|Nashik|Osmanabad|Palghar|Parbhani|Pune|Raigad|Ratnagiri|Sangli|Satara|Sindhudurg|Solapur|Thane|Wardha|Washim|Yavatmal';
+
+    countries['Gujarat'] = 'Ahmedabad|Amreli|Anand|Aravalli|Banaskantha|Bharuch|Bhavnagar|Botad|Chhota Udepur|Dahod|Dang|Devbhoomi Dwarka|Gandhinagar|Gir Somnath|Jamnagar|Junagadh|Kheda|Kutch|Mahisagar|Mehsana|Morbi|Narmada|Navsari|Panchmahal|Patan|Porbandar|Rajkot|Sabarkantha|Surat|Surendranagar|Tapi|Vadodara|Valsad';
+
+    countries['Uttar Pradesh'] = 'Agra|Aligarh|Prayagraj|Ambedkar Nagar|Amethi|Amroha|Auraiya|Azamgarh|Bagpat|Bahraich|Ballia|Balrampur|Banda|Barabanki|Bareilly|Basti|Bhadohi|Bijnor|Budaun|Bulandshahr|Chandauli|Chitrakoot|Deoria|Etah|Etawah|Ayodhya|Farrukhabad|Fatehpur|Firozabad|Gautam Buddh Nagar|Ghaziabad|Ghazipur|Gonda|Gorakhpur|Hamirpur|Hapur|Hardoi|Hathras|Jalaun|Jaunpur|Jhansi|Kannauj|Kanpur Dehat|Kanpur Nagar|Kasganj|Kaushambi|Kushinagar|Lakhimpur Kheri|Lalitpur|Lucknow|Maharajganj|Mahoba|Mainpuri|Mathura|Mau|Meerut|Mirzapur|Moradabad|Muzaffarnagar|Pilibhit|Pratapgarh|Raebareli|Rampur|Saharanpur|Sambhal|Sant Kabir Nagar|Shahjahanpur|Shamli|Shravasti|Siddharthnagar|Sitapur|Sonbhadra|Sultanpur|Unnao|Varanasi';
+
+
+    function setRegions() {
+        for (region in countries)
+            document.write('<option value="' + region + '">' + region + '</option>');
+    }
+
+    function set_country(oRegionSel, oCountrySel) {
+        var countryArr;
+        oCountrySel.length = 0;
+        var region = oRegionSel.options[oRegionSel.selectedIndex].text;
+        if (countries[region]) {
+            oCountrySel.disabled = false;
+            oCountrySel.options[0] = new Option('-Select city-', 'all');
+            countryArr = countries[region].split('|');
+
+            for (var i = 0; i < countryArr.length; i++)
+                oCountrySel.options[i + 1] = new Option(countryArr[i], countryArr[i]);
+        }
+        else oCountrySel.disabled = true;
+    }
+
+    function enable(dd, custom, end) {
+        if (dd.value == "date") {
+            custom.disabled = false;
+            end.disabled = false;
+        }
+        else {
+            document.getElementById("custom").value = "02/07/2020";
+            document.getElementById("end").value = "22/07/2020";
+        }
+    }
+
+
+
+</script>
+<style>
+    .flex-container {
+        display: flex;
+        margin-left: 35%;
+    }
+
+    label {
+        margin-left: 2%;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    select {
+        padding: 10px;
+        width: 190px;
+        background-color: rgb(240, 240, 240);
+
+    }
+
+    table {
+        margin: 0 auto;
+        width: 82%;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid #d4d4d4;
+        font-size: 14px;
+        background: #fff;
+    }
+
+    table th,
+    table tr:nth-child(2n+2) {
+        background: rgb(250, 250, 250);
+    }
+
+    table th,
+    table td {
+        padding: 20px 50px;
+    }
+
+    table th {
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    .chart-container {
+        max-height: 600px;
+        overflow: auto;
+    }
+
+    #month {
+        border-radius: 30px 0px 0px 30px;
+    }
+
+    #week {
+        border-radius: 0px 30px 30px 0px;
+    }
+
+    #fact {
+        padding: 25px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/index">
+            <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" /><a style="color: #4e3914;">
+                <h3>Waste Management</h3>
+            </a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="fas fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">
+                        Upload
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/graphs">
+                        Admin Dashboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="container">
+    <br class="my-4">
+    <br>
+    <form action="/graphs" method="post" onsubmit="addFilters()">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="stateId">STATE</label>
+                <select class="form-control form-control-sm" onchange="set_country(this,country)" size="1" name="region"
+                    id="stateId">
+                    <option value="all" selected="selected">-Select state-</option>
+                    <script type="text/javascript">
+                        setRegions(this);
+                    </script>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="city">CITY</label>
+                <select class="form-control form-control-sm" name="country" size="1" disabled="disabled" onchange=""
+                    id="city"></select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="duration">DURATION</label>
+                <select class="form-control form-control-sm" name="duration" size="1" onchange="enable(this,custom,end)"
+                    id="duration">
+                    <option value="" selected="selected">-Select Duration-</option>
+                    <option value="week">Last Week</option>
+                    <option value="month">Last Month</option>
+                    <option value="3 months">Last 3 Months</option>
+                    <option value="year">Last Year</option>
+                    <option value="date">Add custom</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="custom">START DATE</label>
+                <input type="date" id="custom" class="form-control form-control-sm" name="start" disabled="disabled" />
+            </div>
+            <div class="form-group col-md-2">
+                <label for="end">END DATE</label>
+                <input type="date" id="end" class="form-control form-control-sm" name="end" disabled="disabled" />
+            </div>
+            <div class="form-group col-md-2">
+                <br>
+                <button class="btn btn-success btn-sm" style="opacity: 0.9;" onclick="addFilters()">Apply
+                    Filters</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="monthly-chart-container" class="chart-container">
+                        <div class="spinner-border text-sucess text-center"></div>
+                    </div>
+                    <br>
+                    <div class="flex-container">
+                        <div><button class="btn btn-success" id="month" onclick="click2()">Show Daily Reports</button>
+                        </div>
+                        <div> <button class="btn btn-default" id="week" onclick="click1()">Show Weekly Reports</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="category-chart-container" class="chart-container">
+                        <div class="spinner-border text-sucess text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="resolve-chart-container" class="chart-container">
+                        <div class="spinner-border text-sucess text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-center">Heat Maps</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-center">Normal Heat Map</h6>
+                            <a id="heatMapUrl" href="" title="Heat Map" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ url_for('static', filename='images/google-map.jpg')}}" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-center">Heat Map with Animation</h6>
+                            <a id="heatWithTimeMapUrl" href="" title="Heat Map with Animation" target="_blank"
+                                rel="noopener noreferrer">
+                                <img src="{{ url_for('static', filename='images/google-map.jpg')}}" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="bg-dark my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card bg-light text-center">
+                <div class="card-body">
+                    <h3>127 tonnes</h3>
+                    <p>Waste has been collected till date from the place</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light text-center">
+                <div class="card-body">
+                    <h3>3.235K</h3>
+                    <p>Queries per million have been reported from the place</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light text-center">
+                <div class="card-body">
+                    <h3>4.2 hours</h3>
+                    <p>Average time to resolve a report from this place</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="top5clean-chart-container" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="top5dirty-chart-container" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<!-- Step 2 - Include the fusion theme -->
+<script type="text/javascript"
+    src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+<script type="text/javascript">
+    const monthlydataSource = {
+        chart: {
+            caption: "Categorical statistics of waste queries reported over the month",
+            yaxisname: "Total waste queries reported",
+            plottooltext:
+                "<b>$dataValue</b> of $seriesName reported on $label",
+            showsum: "0",
+            theme: "fusion"
+        },
+        categories: [
+            {
+                category: []
+            }
+        ],
+        dataset: [
+            {
+                seriesname: "High Waste",
+                data: []
+            },
+            {
+                seriesname: "Medium Waste",
+                data: []
+            },
+
+            {
+                seriesname: "Low Waste",
+                data: []
+            }
+        ]
+    };
+
+    const weeklydataSource = {
+        chart: {
+            caption: "Categorical statistics of waste queries reported over the week",
+            yaxisname: "Total waste queries reported",
+            plottooltext:
+                "<b>$dataValue</b> of $seriesName reported on $label",
+            showsum: "0",
+            theme: "fusion"
+        },
+        categories: [
+            {
+                category: []
+            }
+        ],
+        dataset: [
+            {
+                seriesname: "High Waste",
+                data: []
+            },
+            {
+                seriesname: "Medium Waste",
+                data: []
+            },
+
+            {
+                seriesname: "Low Waste",
+                data: []
+            }
+        ]
+    };
+
+    const categoryDataSource = {
+        chart: {
+            caption: "Queries reported category-wise",
+            plottooltext: "<b>$value</b> queries of <b>$label</b> reported",
+            showlegend: "1",
+            showpercentvalues: "1",
+            legendposition: "bottom",
+            usedataplotcolorforlabels: "1",
+            theme: "fusion"
+        },
+        data: [
+            {
+                label: "High Waste",
+                value: ""
+            },
+            {
+                label: "Medium Waste",
+                value: ""
+            },
+            {
+                label: "Low Waste",
+                value: ""
+            }
+        ]
+    };
+
+    const resolveDataSource = {
+        "chart": {
+            "caption": "Waste queries resolved within time vs late",
+            "plotToolText": "$value",
+            "theme": "fusion",
+            "chartBottomMargin": "50",
+            "showValue": "1"
+        },
+        "colorRange": {
+            "color": [{
+                "minValue": "0",
+                "maxValue": "{{params['c_resolve_on_time']}}",
+                "code": "#6baa01"
+            }, {
+                "minValue": "{{params['c_resolve_on_time']}}",
+                "maxValue": "{{params['c_resolve_on_time']}}+{{params['c_resolve_late']}}",
+                "code": "#e44a00"
+            }]
+        },
+        "dials": {
+            "dial": [{
+                "value": ""
+            }]
+        },
+
+        "annotations": {
+            "origw": "450",
+            "origh": "300",
+            "autoscale": "1",
+            "showBelow": "0",
+            "groups": [{
+                "id": "arcs",
+                "items": [{
+                    "id": "national-cs-bg",
+                    "type": "rectangle",
+                    "x": "$chartCenterX+2",
+                    "y": "$chartEndY - 45",
+                    "tox": "$chartCenterX + 80",
+                    "toy": "$chartEndY - 25",
+                    "fillcolor": "#e44a00"
+                },
+                {
+                    "id": "national-cs-text",
+                    "type": "Text",
+                    "color": "#ffffff",
+                    "label": "Resolved late",
+                    "fontSize": "12",
+                    "align": "left",
+                    "x": "$chartCenterX + 7",
+                    "y": "$chartEndY - 35"
+                },
+                {
+                    "id": "state-cs-bg",
+                    "type": "rectangle",
+                    "x": "$chartCenterX-2",
+                    "y": "$chartEndY - 45",
+                    "tox": "$chartCenterX - 110",
+                    "toy": "$chartEndY - 25",
+                    "fillcolor": "#6baa01"
+                },
+                {
+                    "id": "state-cs-text",
+                    "type": "Text",
+                    "color": "#ffffff",
+                    "label": "Resolved within time",
+                    "fontSize": "12",
+                    "align": "right",
+                    "x": "$chartCenterX - 7",
+                    "y": "$chartEndY - 35"
+                }
+                ]
+            }]
+        }
+    };
+    // console.log("=====>", resolveDataSource.colorRange.color[0].minValue);
+    // console.log(monthlydataSource.categories[0].category);
+    // console.log(monthlydataSource.dataset[0].seriesname);
+    // console.log(monthlydataSource.dataset[1].data);
+    // console.log(monthlydataSource.dataset[2].data);
+
+    function addFilters() {
+
+        document.getElementById('monthly-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
+        document.getElementById('category-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
+        document.getElementById('resolve-chart-container').innerHTML = '<div class="spinner-border text-success text-center"></div>';
+        if (event) {
+            event.preventDefault();
+        }
+        var state = document.getElementById('stateId').value;
+        var city = document.getElementById('city').value;
+        var duration = document.getElementById('duration').value;
+        var startDate = document.getElementById('custom').value;
+        var endDate = document.getElementById('end').value;
+        if (state == "") {
+            state = "all";
+        }
+        if (city == "") {
+            city = "all";
+        }
+        if (duration == "") {
+            duration = "all";
+        }
+        if (duration != "date") {
+            startDate = null;
+            endDate = null;
+        } else {
+            if (startDate == null || endDate == null) {
+                alert("Please select Range!");
+            }
+        }
+
+        // Update heat map urls
+        var heatMapBaseUrl = "/heatmap";
+        var heatMapWithTimeBaseUrl = "/heatmap_with_time";
+        // /heatmap_with_time?state=region&city=country&duration=duration&start=start&end=end
+
+        var heatMapUrl = heatMapBaseUrl + "?state=" + state + "&city=" + city + "&duration=" + duration + "&start=" + startDate + "&end=" + endDate;
+        var heatMapWithTimeUrl = heatMapWithTimeBaseUrl + "?state=" + state + "&city=" + city + "&duration=" + duration + "&start=" + startDate + "&end=" + endDate;
+
+        // console.log(heatMapUrl,heatMapWithTimeUrl);
+        document.getElementById('heatMapUrl').href = heatMapUrl;
+        document.getElementById('heatWithTimeMapUrl').href = heatMapWithTimeUrl;
+
+        console.log(state, city, duration, startDate, endDate);
+        // throw Error("this is an error");
+        var highWasteList = [];
+        var mediumWasteList = [];
+        var lowWasteList = [];
+        $.ajax({
+            url: '/graphs',
+            type: 'POST',
+            data: {
+                state: state,
+                //city is sent as district intentionally - Vinod
+                city: city,
+                duration: duration,
+                startDate: startDate,
+                endDate: endDate
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.daily && res.weekly) {
+                    var dailyList = res.daily;
+                    var weeklyList = res.weekly;
+                    // console.log(dailyList);
+                    if (dailyList.length == 0 || weeklyList.length == 0) {
+                        console.log("DialyList is empty");
+                        document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                        document.getElementById('category-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                        document.getElementById('resolve-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                    } else {
+                        var highWasteList = [];
+                        var mediumWasteList = [];
+                        var lowWasteList = [];
+                        var labelList = [];
+                        for (var wasteType of dailyList) {
+                            highWasteList.push({ value: wasteType.High });
+                            mediumWasteList.push({ value: wasteType.Medium });
+                            lowWasteList.push({ value: wasteType.Low });
+                            labelList.push({ label: "" });
+                        }
+                        monthlydataSource.categories[0].category = labelList;
+                        monthlydataSource.dataset[0].data = highWasteList;
+                        monthlydataSource.dataset[1].data = mediumWasteList;
+                        monthlydataSource.dataset[2].data = lowWasteList;
+                        plotMonthly();
+
+                        // Set weeklyDataSource
+                        var weeklyList = res.weekly;
+                        var highWasteListWeekly = [];
+                        var mediumWasteListWeekly = [];
+                        var lowWasteListWeekly = [];
+                        var labelListWeekly = [];
+                        for (var wasteType of weeklyList) {
+                            highWasteListWeekly.push({ value: wasteType.High });
+                            mediumWasteListWeekly.push({ value: wasteType.Medium });
+                            lowWasteListWeekly.push({ value: wasteType.Low });
+                            labelListWeekly.push({ label: "" });
+                        }
+                        weeklydataSource.categories[0].category = labelListWeekly;
+                        weeklydataSource.dataset[0].data = highWasteListWeekly;
+                        weeklydataSource.dataset[1].data = mediumWasteListWeekly;
+                        weeklydataSource.dataset[2].data = lowWasteListWeekly;
+
+                        // Set categoryDataSource
+                        categoryDataSource.data[0].value = res['c_h'];
+                        categoryDataSource.data[1].value = res['c_m'];
+                        categoryDataSource.data[2].value = res['c_l'];
+                        plotCategory();
+
+                        // Set resolveDataSource
+                        resolveDataSource.colorRange.color[0].maxValue = res['c_resolve_on_time'];
+                        resolveDataSource.colorRange.color[1].minValue = res['c_resolve_on_time'];
+                        resolveDataSource.colorRange.color[1].maxValue = res['c_resolve_on_time'] + res['c_resolve_late'];
+                        resolveDataSource.dials.dial[0].value = res['c_resolve_on_time'];
+                        plotResolved();
+                    }
+                } else {
+                    document.getElementById('monthly-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                    document.getElementById('category-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                    document.getElementById('resolve-chart-container').innerHTML = '<p class="text-danger text-center">No data available for selected filters.</p>';
+                }
+            },
+            error: function (xhr) {
+                console.log("Error occured:", xhr.status, xhr.statusText);
+            }
+        })
+    }
+
+    // Call addFilters() on page load
+    addFilters();
+
+    function plotMonthly() {
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: monthlydataSource
+        }).render();
+    }
+
+    function plotWeekly() {
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: weeklydataSource
+        }).render();
+    }
+
+    function plotCategory() {
+        var categoryChart = new FusionCharts({
+            type: "doughnut2d",
+            renderAt: "category-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: categoryDataSource
+        }).render();
+    }
+
+    function plotResolved() {
+        var resolveChart = new FusionCharts({
+            type: "angulargauge",
+            renderAt: "resolve-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: resolveDataSource
+        }).render();
+    }
+
+    const top5cleanDataSource = {
+        chart: {
+            caption: "Top 5 Clean cities",
+            yaxisname: "Points earned by the cities",
+            plottooltext: "<b>$label</b> earned <b>$value</b> points",
+            showvalues: "1",
+            numberprefix: "",
+            theme: "fusion"
+        },
+        data: [
+            {
+                label: "Indore",
+                value: "1500"
+            },
+            {
+                label: "Bhopal",
+                value: "1200"
+            },
+            {
+                label: "Surat",
+                value: "988"
+            },
+            {
+                label: "Vadodara",
+                value: "750"
+            },
+            {
+                label: "Ujjain",
+                value: "700"
+            }
+        ]
+    };
+
+
+
+    const top5dirtyDataSource = {
+        chart: {
+            caption: "Top 5 dirty cities",
+            yaxisname: "Points earned by the cities",
+            plottooltext: "<b>$label</b> earned <b>$value</b> points",
+            showvalues: "1",
+            numberprefix: "",
+            theme: "fusion"
+        },
+        data: [
+            {
+                label: "Kanpur",
+                value: "15"
+            },
+            {
+                label: "Varanasi",
+                value: "18"
+            },
+            {
+                label: "Delhi",
+                value: "23"
+            },
+            {
+                label: "Agra",
+                value: "37"
+            },
+            {
+                label: "Jaipur",
+                value: "45"
+            }
+        ]
+    };
+
+
+
+    FusionCharts.ready(function () {
+
+        var categoryChart = new FusionCharts({
+            type: "doughnut2d",
+            renderAt: "category-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: categoryDataSource
+        }).render();
+
+        var resolveChart = new FusionCharts({
+            type: "angulargauge",
+            renderAt: "resolve-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: resolveDataSource
+        }).render();
+
+        var CleanChart = new FusionCharts({
+            type: "bar2d",
+            renderAt: "top5clean-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: top5cleanDataSource
+        }).render();
+
+        var DirtyChart = new FusionCharts({
+            type: "bar2d",
+            renderAt: "top5dirty-chart-container",
+            width: "100%",
+            height: "500%",
+            dataFormat: "json",
+            dataSource: top5dirtyDataSource
+        }).render();
+
+        var monthlyChart = new FusionCharts({
+            type: "stackedcolumn2d",
+            renderAt: "monthly-chart-container",
+            width: "100%",
+            height: "300%",
+            dataFormat: "json",
+            dataSource: monthlydataSource
+        }).render();
+
+
+
+    });
+
+    function click2() {
+
+        FusionCharts.ready(function () {
+
+            var monthlyChart = new FusionCharts({
+                type: "stackedcolumn2d",
+                renderAt: "monthly-chart-container",
+                width: "100%",
+                height: "300%",
+                dataFormat: "json",
+                dataSource: monthlydataSource
+            }).render();
+
+        });
+
+        document.getElementById('month').className = "btn btn-success";
+        document.getElementById('week').className = "btn btn-default";
+    }
+    function click1() {
+        FusionCharts.ready(function () {
+            var weeklyChart = new FusionCharts({
+                type: "stackedcolumn2d",
+                renderAt: "monthly-chart-container",
+                width: "100%",
+                height: "300%",
+                dataFormat: "json",
+                dataSource: weeklydataSource
+            }).render();
+
+        });
+
+        document.getElementById('week').className = "btn btn-success";
+        document.getElementById('month').className = "btn btn-default";
+
+    }
+
+
+</script>
+
+{% endblock %}
