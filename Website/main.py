@@ -16,10 +16,14 @@ import sqlalchemy
 # for connecting with firestorage
 import pyrebase
 
-# while deployment uncomment below line
-import the_database as thedb
-# while using locally uncomment below line
-#import the_database_local as thedb
+# Change LOCAL_ENV = 1 for local env and LOCAL_ENV = 0 for gcp
+LOCAL_ENV = 1
+if(LOCAL_ENV = 1):
+    import the_database_local as thedb
+    heatmap_folder = 'template/'
+else:
+    import the_database as thedb
+    heatmap_folder = '/tmp'
 
 import requests as req
 import json
