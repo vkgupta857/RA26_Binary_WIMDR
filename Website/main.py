@@ -389,12 +389,12 @@ def heatmapwithtime():
     # duration can be "week", "month", "3_months", "year" or "date"
     if duration=="all":
         qobj = thedb.MainQuery(state=state, district=city)
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+        # data,time_index=qobj.get_heatmaptime_data()
+        # if city=="all":
+        #     filename=create_heatmap_with_time(data,time_index,"state")
+        # else:
+        #     filename=create_heatmap_with_time(data,time_index,"district")
+        # return render_template(filename)
 
     elif duration=="week":
 
@@ -404,12 +404,12 @@ def heatmapwithtime():
         start_date = date_before_n_days(7)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+        # data,time_index=qobj.get_heatmaptime_data()
+        # if city=="all":
+        #     filename=create_heatmap_with_time(data,time_index,"state")
+        # else:
+        #     filename=create_heatmap_with_time(data,time_index,"district")
+        # return render_template(filename)
 
 
     elif duration=="month":
@@ -419,12 +419,12 @@ def heatmapwithtime():
         start_date = date_before_n_days(30)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+        # data,time_index=qobj.get_heatmaptime_data()
+        # if city=="all":
+        #     filename=create_heatmap_with_time(data,time_index,"state")
+        # else:
+        #     filename=create_heatmap_with_time(data,time_index,"district")
+        # return render_template(filename)
 
     elif duration == '3 months':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
@@ -433,12 +433,12 @@ def heatmapwithtime():
         start_date = date_before_n_days(90)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+        # data,time_index=qobj.get_heatmaptime_data()
+        # if city=="all":
+        #     filename=create_heatmap_with_time(data,time_index,"state")
+        # else:
+        #     filename=create_heatmap_with_time(data,time_index,"district")
+        # return render_template(filename)
 
     elif duration == 'year':
         dt = json.loads(req.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata').text)['datetime']
@@ -447,22 +447,26 @@ def heatmapwithtime():
         start_date = date_before_n_days(365)
         qobj = thedb.MainQuery(state,city,start_date,end_date)
 
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+        # data,time_index=qobj.get_heatmaptime_data()
+        # if city=="all":
+        #     filename=create_heatmap_with_time(data,time_index,"state")
+        # else:
+        #     filename=create_heatmap_with_time(data,time_index,"district")
+        # return render_template(filename)
 
 
     elif duration == 'date':
         qobj = thedb.MainQuery(state,city,start,end)
-        data,time_index=qobj.get_heatmaptime_data()
-        if city=="all":
-            filename=create_heatmap_with_time(data,time_index,"state")
-        else:
-            filename=create_heatmap_with_time(data,time_index,"district")
-        return render_template(filename)
+
+    # commented above because those things are same
+    data,time_index=qobj.get_heatmaptime_data()
+    if city=="all":
+        filename=create_heatmap_with_time(data,time_index,"state")
+    else:
+        filename=create_heatmap_with_time(data,time_index,"district")
+    with open(filename) as f:
+        html_content = f.read()
+    return html_content
 
 
 
