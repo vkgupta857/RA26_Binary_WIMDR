@@ -21,10 +21,10 @@ This is an AI based drone software for geo tracking of wastes. The solution soft
 
 ## Team Members
 
- - Mansee Agrawal (leader)
+ - Prashant Jha
  - Anjali Nayak
  - Harshika Urkude
- - Prashant Jha
+ - Mansee Agrawal
  - Snigdha Singh
  - Vinod Kumar Gupta
 
